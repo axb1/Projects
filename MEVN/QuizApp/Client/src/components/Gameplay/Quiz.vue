@@ -1,0 +1,334 @@
+<template>
+    <ion-page>
+        <ion-content>
+            <div id="header">
+                <div id="subheader">
+                    <ion-icon :icon="arrowBackOutline" size="large" id="icon"></ion-icon>
+                    <h1 id="quiz">Quiz</h1>
+                </div>
+                <div id="currentquestionlist">
+                    <li>
+                        <ion-badge id="badge1">1</ion-badge>
+                        <ion-badge id="badge2">2</ion-badge>
+                        <ion-badge id="badge3">3</ion-badge>
+                        <ion-badge id="badge4">4</ion-badge>
+                        <ion-badge id="badge5">5</ion-badge>
+                    </li>
+                </div>
+            </div>
+            <div v-if="currentQuestion.length != 0">
+                <p id="category">{{currentQuestion[0].category}}</p>
+                <p class="description">{{currentQuestion[0].description}}</p>                 
+                <ion-button class="answer1" v-on:click="CheckAnswer(currentQuestion[0].option1)">{{currentQuestion[0].option1}}</ion-button>
+                <ion-button class="answer2" v-on:click="CheckAnswer(currentQuestion[0].option2)">{{currentQuestion[0].option2}}</ion-button>
+                <ion-button class="answer3" v-on:click="CheckAnswer(currentQuestion[0].option3)">{{currentQuestion[0].option3}}</ion-button>
+                <ion-button class="answer4" v-on:click="CheckAnswer(currentQuestion[0].option4)">{{currentQuestion[0].option4}}</ion-button>
+                <ion-button class="next-btn" v-on:click="GoToNextQuestion()">Næste spørgsmål</ion-button>
+            </div>
+        </ion-content>
+    </ion-page>
+</template>
+
+
+
+
+<script>
+import { IonPage, IonContent, IonButton, IonBadge, IonIcon} from '@ionic/vue';
+import QuestionService from '../../api/QuestionService';
+import {arrowBackOutline} from 'ionicons/icons';
+
+
+export default {
+    name: 'quiz',
+    computed: {
+        currentGame() {
+            return this.$store.getters.getCurrentGame;
+        },
+        currentUser() {
+            return this.$store.getters.getCurrentUser;
+        }
+    },
+    props: ['items'],
+    data: function() {
+      return {
+        questions: [],
+        currentQuestion: [],
+        currentQuestionIndex: 0,
+        correctAnswers: 0,
+        error: '',
+        arrowBackOutline
+
+      };  
+    },
+    components: {
+        IonPage,
+        IonContent,
+        IonButton,
+        IonBadge,
+        IonIcon,
+    },
+    methods: {
+        CheckAnswer(answer){
+            let rightAnswer = this.currentQuestion[0].answer;
+            // Set green color on button that contains the right answer
+            if (this.currentQuestion[0].option1 == rightAnswer) {
+                document.getElementsByClassName('answer1')[0].setAttribute("id", "style1");
+                this.DisableAnswers();
+                this.GreyOutOtherAnswers('answer2', 'answer3', 'answer4');
+            } else if (this.currentQuestion[0].option2 == rightAnswer) {
+                document.getElementsByClassName('answer2')[0].setAttribute("id", "style1");
+                this.DisableAnswers();
+                this.GreyOutOtherAnswers('answer1', 'answer3', 'answer4');
+            } else if (this.currentQuestion[0].option3 == rightAnswer) {
+                document.getElementsByClassName('answer3')[0].setAttribute("id", "style1");
+                this.DisableAnswers();
+                this.GreyOutOtherAnswers('answer1', 'answer2', 'answer4');
+            } else if (this.currentQuestion[0].option4 == rightAnswer) {
+                document.getElementsByClassName('answer4')[0].setAttribute("id", "style1");
+                this.DisableAnswers();
+                this.GreyOutOtherAnswers('answer1', 'answer2', 'answer3');
+            }
+
+            if(answer == rightAnswer) {
+                this.correctAnswers = this.correctAnswers + 1;
+            }
+        },
+
+        DisableAnswers() {
+            document.getElementsByClassName('answer1')[0].disabled = true;
+            document.getElementsByClassName('answer2')[0].disabled = true;
+            document.getElementsByClassName('answer3')[0].disabled = true;
+            document.getElementsByClassName('answer4')[0].disabled = true;
+        },
+
+        EnableAnswers() {
+            document.getElementsByClassName('answer1')[0].disabled = false;
+            document.getElementsByClassName('answer2')[0].disabled = false;
+            document.getElementsByClassName('answer3')[0].disabled = false;
+            document.getElementsByClassName('answer4')[0].disabled = false;
+        },
+
+        GreyOutOtherAnswers(button1, button2, button3) {
+            document.getElementsByClassName(button1)[0].style.opacity = "0.7";
+            document.getElementsByClassName(button2)[0].style.opacity = "0.7";
+            document.getElementsByClassName(button3)[0].style.opacity = "0.7";
+        },
+
+        RestoreOpacityOfAnswers() {
+            document.getElementsByClassName('answer1')[0].style.opacity = "1";
+            document.getElementsByClassName('answer2')[0].style.opacity = "1";
+            document.getElementsByClassName('answer3')[0].style.opacity = "1";
+            document.getElementsByClassName('answer4')[0].style.opacity = "1";
+        },
+
+        GoToNextQuestion() {
+            // Remove style (id) from right answer
+            var element = document.getElementById('style1');
+            element.removeAttribute('id');
+
+            // Enable buttons
+            this.EnableAnswers();
+
+            // Set opacity back
+            this.RestoreOpacityOfAnswers();
+
+            var updatedGame = this.currentGame;
+
+            // Check if it was last question. If it was last question go to results page, if no then load next question
+            if (this.currentQuestionIndex < 2) {
+                this.currentQuestionIndex = this.currentQuestionIndex + 1;
+                this.currentQuestion.length = 0;
+                this.currentQuestion.push(this.questions[this.currentQuestionIndex][0]);
+                var questionNumber = this.currentQuestionIndex+1;
+                var badge = "badge" + questionNumber; 
+                document.getElementById(badge).style.background ="#56BE65";
+                for (var i=1; i<6; i++) {
+                    if (i == this.currentQuestionIndex) {
+                        document.getElementById("badge"+i).style.background ="#181A20";
+                    }
+                }
+            }
+
+            else {
+                if (this.currentUser.username == updatedGame.player1.username) {
+                    updatedGame.player1.correctAnswers = updatedGame.player1.correctAnswers + this.correctAnswers;
+                    updatedGame.player1.myTurn = false;
+                    updatedGame.player1.dateOfLastTurn = new Date();
+                    updatedGame.player1.roundsPlayed = updatedGame.player1.roundsPlayed +1;
+                    updatedGame.player2.myTurn = true;
+                }
+                else {
+                    updatedGame.player2.correctAnswers = updatedGame.player2.correctAnswers + this.correctAnswers;
+                    updatedGame.player2.myTurn = false;
+                    updatedGame.player2.dateOfLastTurn = new Date();
+                    updatedGame.player2.roundsPlayed = updatedGame.player2.roundsPlayed +1;
+                    updatedGame.player1.myTurn = true;
+                }
+
+                for(var j=1; j<6; j++) {
+                    document.getElementById("badge"+j).style.background = "#181A20";
+                }
+
+                this.$store.dispatch('updateOngoingGamesAfterRound', updatedGame);
+                this.currentQuestionIndex = 0;
+                this.correctAnswers = 0;
+                this.$router.push({
+                name: 'results',
+                params: {
+                    correctAnswers: this.correctAnswers
+                }
+                })
+            }
+        }
+    },
+
+    async created() {
+        // Read the categories from the "items" prop that is passed from SelectCategories
+        // Get questions from database with corresponding categories
+        // Using this type of for-syntax is required as we can't use async await within a foreach
+        for (const item of this.items) {
+            var questions = await QuestionService.getQuestionsByCategory(item);
+            this.questions.push(questions);
+        }
+        this.currentQuestion.push(this.questions[0][0]);
+        document.getElementById("badge1").style.background = "#56BE65";
+
+  },
+
+  updated(){
+      for(var i=1; i<6; i++) {
+          console.log(this.currentQuestionIndex);
+          if(this.currentQuestionIndex+1 == i) {
+              document.getElementById("badge"+i).style.background = "#56BE65";
+          }
+      }
+  }
+}
+</script>
+<style scoped>
+
+
+ion-button {
+    --background: #262A34;
+    border-radius: 4px;
+    box-shadow: 4px;
+}
+
+ion-icon {
+    color: white;
+}
+
+#quiz {
+    display: inline-block;
+}
+
+#icon {
+    display: inline-block;
+    margin-right: 29%;
+    margin-left: 6%;
+}
+
+li { 
+    list-style-type: none;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+ion-badge {
+    background: #181A20;
+    width: 3vh; 
+    height: 3vh;
+    border-radius: 50%;
+    display: flex; /* or inline-flex */
+    align-items: center; 
+    justify-content: center;
+
+}
+
+
+.next-btn {
+    --background: linear-gradient(to right, #0BA360, #3CBA92);
+    --border-radius: 4px;
+    display: block;
+    margin-left: 12vw;
+    margin-right: 12vw;
+    margin-top: 5vh;
+    height: 6.8vh;
+}
+
+.iconbutton {
+    --background: #181A20;
+}
+
+.answer1, .answer2, .answer3, .answer4 {
+    display: flex;
+    background: #262A34;
+    left: 6.4%;
+    right: 6.4%;
+    margin-bottom: 2vh;
+    margin-left: 7vw;
+    margin-right: 7vw;
+    height: 8vh;
+}
+
+ion-button:disabled,
+ion-button[disabled]{
+    opacity: 1;
+}
+
+.description {
+    color:white;
+    font-size: 1.3rem;
+    margin-left: 6vw;
+    margin-right: 4vw;
+    text-align: center;
+    margin-top: 0;
+    font-weight: bold;
+}
+
+#header {
+    background: #181A20;
+    box-shadow: 0px 1px 25px rgba(68, 68, 68, 0.06);
+    border-radius: 0px 0px 20px 20px;
+    height: 18%;
+}
+
+#subheader {
+    margin-top: 4%;
+}
+
+
+
+#category {
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: left;
+    color: #56BE65;
+    margin-left: 10vw;
+    font-style: normal;
+    margin-top: 2vh;
+    margin-bottom: 1vh;
+}
+
+#currentquestionlist {
+    margin-bottom: 1vh;
+    margin-top: 4%;
+}
+
+h1 {
+    color: white;
+}
+
+#style1{
+    --background: green;
+    border-radius: 4px;
+    box-shadow: 4px;
+}
+
+</style>
+
+
+
+

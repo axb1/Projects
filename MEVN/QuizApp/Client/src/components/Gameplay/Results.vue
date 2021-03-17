@@ -1,0 +1,79 @@
+<template>
+    <ion-page>
+        <ion-content>
+            <h1>Results</h1>
+            <h2>You answered {{correctAnswers}}/3 questions correctly</h2>
+            <ion-button expand="block" @click="GoToMainPage">Go to main page</ion-button>
+        </ion-content>
+    </ion-page>
+</template>
+
+<script>
+import { IonPage, IonContent, IonButton} from '@ionic/vue';
+import { person } from 'ionicons/icons';
+
+export default {
+    name: 'results',
+    props: ['correctAnswers'],
+    data: function() {
+      return {
+          person
+      };  
+    },
+    components: {
+        IonPage,
+        IonContent,
+        IonButton
+    },
+    methods: {
+        GoToMainPage() {
+            this.$router.push("/games");
+        }
+    }
+
+    }
+</script>
+<style scoped>
+ion-icon {
+    color: white;
+    font-size: 2rem;
+    float: right;
+    margin-right: 0.5rem;
+    margin-left: 0;
+}
+
+ion-header {
+    --background: #141A33;
+}
+
+h1 {
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    margin-top: 14vh;
+    margin-bottom: 5vh;
+}
+
+h2 {
+    text-align: center;
+    color: white;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+ion-button {
+    --background: linear-gradient(to right, #0BA360, #3CBA92);
+    --border-radius: 4px;
+    display: block;
+    margin-left: 5vw;
+    margin-right: 5vw;
+    margin-top: 4.5vh;
+    height: 7.4vh;
+}
+
+
+
+</style>
