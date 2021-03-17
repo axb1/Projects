@@ -1,0 +1,63 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "QuizApp API",
+        "description": "Hej kære folk der laver spørgsmål. Tak fordi I laver spørgsmål :)"
+    },
+    "paths": {
+        "/question": {
+            "post": {
+                "tags": [
+                    "Question"
+                ],
+                "summary": "Post a question",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "Question that we want to post",
+                        "schema": {
+                            "$ref":"#/definitions/Question"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "definitions": {
+        "Question":{
+            "type": "object",
+            "properties": {
+                "category": {
+                    "type": "string"
+                },
+                "description": {
+                    "type": "string"
+                },
+                "option1": {
+                    "type": "string"
+                },
+                "option2": {
+                    "type": "string"
+                },
+                "option3": {
+                    "type": "string"
+                },
+                "option4": {
+                    "type": "string"
+                },
+                "answer": {
+                    "type": "string"
+                }
+
+            }
+        }
+    }
+}

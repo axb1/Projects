@@ -1,0 +1,71 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const userSchema = new Schema({
+    username: { type: String, unique: true},
+    email: {type: String, unique: true},
+    allTimeStats: [{
+        amountOfQuestions: Number,
+        amountOfCorrectAnswers: Number,
+        category: String
+    }],
+    ongoingGames: [{
+        player1: {
+            username: String,
+            correctAnswers: Number,
+            goFirst: Boolean,
+            dateOfLastTurn: Date,
+            myTurn: Boolean,
+            img: String,
+            roundsPlayed: Number,
+        },
+        player2: {
+            username: String,
+            correctAnswers: Number,
+            goFirst: Boolean,
+            dateOfLastTurn: Date,
+            myTurn: Boolean,
+            img: String,
+            roundsPlayed: Number,
+        },
+        isFull: Boolean,
+        gameId: String,
+    }],
+    previousGames: [{
+        player1: {
+            username: String,
+            correctAnswers: Number,
+            goFirst: Boolean,
+            dateOfLastTurn: Date,
+            myTurn: Boolean,
+            img: String,
+            roundsPlayed: Number,
+        },
+        player2: {
+            username: String,
+            correctAnswers: Number,
+            goFirst: Boolean,
+            dateOfLastTurn: Date,
+            myTurn: Boolean,
+            img: String,
+            roundsPlayed: Number,
+        },
+        isFull: Boolean,
+        gameId: String,
+    }],
+    searchingForGame: Boolean,
+    img: String,
+    friends: [{
+        username: String,
+        img: String,
+    }],
+    invites: [{
+        username: String,
+        img: String,
+        inviteID: String
+    }]
+    
+});
+
+const User = mongoose.model('User', userSchema);
+module.exports = User;
