@@ -8,7 +8,7 @@ admin.initializeApp({
   });
 
 router.post('/', async (req, res) => {
-    const token = "ezAqNzNUTe-W8XuxKGigJy:APA91bGy8sAPB9wnpzHjOf6BePZ77rYXk_fE76Bll373yWD40FIcQqsvJREQZhK8qZwYKLaP_cLf1PM-kGIvk75I2niAnxeHPd9vk_9O8tgqeUBXSHUQP97X3RW9ux0X3GMuah7wJ7s-";
+    const token = "dGWauRtnToS0COmEB22CIG:APA91bFM_Y1OA2rYVRF87DsTMXabqh8PNBWAXOjBDjZi7-f93E_Il0b09ftSurv3eEPAstecM1qZGcflly4YiML7Enl30xSJUYplF2S6YJBtw1Ny1kQI5dpwMvQQBkZWOdgQsJUL3IDy";
     var message = {
         data: {
           score: '850',
