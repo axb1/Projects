@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="default_web_client_id" translatable="false">82458633884-lb4hso4aqrtfmfnp0bbf96hmsput6d5a.apps.googleusercontent.com</string>
-    <string name="gcm_defaultSenderId" translatable="false">82458633884</string>
-    <string name="google_api_key" translatable="false">AIzaSyDTlkgCffGMFVYp57jjP3BFNn_5oZVZeHs</string>
-    <string name="google_app_id" translatable="false">1:82458633884:android:07d9426eff66808b696f59</string>
-    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDTlkgCffGMFVYp57jjP3BFNn_5oZVZeHs</string>
-    <string name="google_storage_bucket" translatable="false">quiz-app-fadc2.appspot.com</string>
-    <string name="project_id" translatable="false">quiz-app-fadc2</string>
+    <string name="default_web_client_id" translatable="false">1056134553470-2c9b71ok5fm8f454dnaru73k7ebpmsu1.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">1056134553470</string>
+    <string name="google_api_key" translatable="false">AIzaSyAjIreSQVsuM_fFztW37V_VW8vSTmwdGoI</string>
+    <string name="google_app_id" translatable="false">1:1056134553470:android:a0bb4faf63979d62e29d2f</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAjIreSQVsuM_fFztW37V_VW8vSTmwdGoI</string>
+    <string name="google_storage_bucket" translatable="false">quiz-app-3f737.appspot.com</string>
+    <string name="project_id" translatable="false">quiz-app-3f737</string>
 </resources>

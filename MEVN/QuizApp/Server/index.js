@@ -26,13 +26,13 @@ const questionRoutes = require('./api/routes/questions.js');
 const adminRoutes = require('./api/routes/admins.js');
 const userRoutes = require('./api/routes/users.js');
 const gameRoutes = require('./api/routes/games.js');
-const notificationsRoutes = require('./api/routes/notifications.js');
+const notificationRoutes = require('./api/routes/notifications.js');
 
 app.use('/question', questionRoutes);
 app.use('/admin', adminRoutes);
 app.use('/user', userRoutes);
 app.use('/game', gameRoutes);
-app.use('/notification', notificationsRoutes);
+app.use('/notification', notificationRoutes);
 
 // Set to port 5000 and listen on port
 const port = process.env.PORT || 5000;
