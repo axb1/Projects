@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "82458633884",
+    "project_id": "quiz-app-fadc2",
+    "storage_bucket": "quiz-app-fadc2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:82458633884:android:07d9426eff66808b696f59",
+        "android_client_info": {
+          "package_name": "info.arcane"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "82458633884-lb4hso4aqrtfmfnp0bbf96hmsput6d5a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTlkgCffGMFVYp57jjP3BFNn_5oZVZeHs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "82458633884-lb4hso4aqrtfmfnp0bbf96hmsput6d5a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
