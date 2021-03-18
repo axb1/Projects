@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'https://quiz-app-dk.herokuapp.com/question/';
+const url = 'https://arcane-sands-35103.herokuapp.com/question/';
 
 class QuestionService {
     // Get question

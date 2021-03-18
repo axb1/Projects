@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'https://quiz-app-dk.herokuapp.com/user/';
+const url = 'https://arcane-sands-35103.herokuapp.com/user/';
 
 class UserService {
     // Get users
