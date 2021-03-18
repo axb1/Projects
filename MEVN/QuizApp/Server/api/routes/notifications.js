@@ -9,7 +9,7 @@ admin.initializeApp({
 
 
 router.post('/', async (req, res) => {
-    const token = "epvPnYPFTZez8_8o7V7eo2:APA91bGarK8PbgC1vtL-jBtuj6cxySFjSeeXR7W4quGBq51TrllJhOqnxATOUSOgOuLXZWx3HodVbTCIlR1oUgJ2PUMUOrrPm5GrXDRw99qPhqY1_H7Dp5nQF9urBcaWbOeZ41o4XfqZ";
+    const token = "";
     var message = {
         data: {
           score: '850',
