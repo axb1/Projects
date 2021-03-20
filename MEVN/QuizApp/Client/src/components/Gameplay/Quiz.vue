@@ -3,7 +3,7 @@
         <ion-content>
             <div id="header">
                 <div id="subheader">
-                    <ion-icon :icon="arrowBackOutline" size="large" id="icon"></ion-icon>
+                    <ion-icon v-on:click="LeaveGame()" :icon="arrowBackOutline" size="large" id="icon"></ion-icon>
                     <h1 id="quiz">Quiz</h1>
                 </div>
                 <div id="currentquestionlist">
@@ -98,6 +98,9 @@ export default {
             if(answer == rightAnswer) {
                 this.correctAnswers = this.correctAnswers + 1;
             }
+        },
+        LeaveGame() {
+            this.$router.push('/games');
         },
         TimedOut() {
             let rightAnswer = this.currentQuestion[0].answer;

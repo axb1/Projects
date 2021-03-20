@@ -37,6 +37,9 @@ export default {
                 .then(
                     user => {
                         console.log(user);
+                        // Reset input fields
+                        this.email = '';
+                        this.password = '';
                         this.$router.push('/games');
                     }
                 )

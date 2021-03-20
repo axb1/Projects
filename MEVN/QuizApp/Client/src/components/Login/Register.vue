@@ -55,6 +55,12 @@ export default {
             firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
             .then(()=> {
                 this.$router.push('/games');
+
+                // Reset input fields
+                this.email = '';
+                this.password = '';
+                this.accountname = '';
+                this.confirmpassword = '';
             })
             err => {
                 alert(err.message);
