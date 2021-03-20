@@ -59,7 +59,8 @@ export default {
         error: '',
         arrowBackOutline,
         currentPercentage: '1',
-        decrement: '0.0033'
+        decrement: '0.0033',
+        timer: ''
 
       };  
     },
@@ -73,6 +74,7 @@ export default {
     },
     methods: {
         CheckAnswer(answer){
+            clearInterval(this.timer);
             let rightAnswer = this.currentQuestion[0].answer;
             // Set green color on button that contains the right answer
             if (this.currentQuestion[0].option1 == rightAnswer) {
@@ -95,6 +97,27 @@ export default {
 
             if(answer == rightAnswer) {
                 this.correctAnswers = this.correctAnswers + 1;
+            }
+        },
+        TimedOut() {
+            let rightAnswer = this.currentQuestion[0].answer;
+            // Set green color on button that contains the right answer
+            if (this.currentQuestion[0].option1 == rightAnswer) {
+                document.getElementsByClassName('answer1')[0].setAttribute("id", "style1");
+                this.DisableAnswers();
+                this.GreyOutOtherAnswers('answer2', 'answer3', 'answer4');
+            } else if (this.currentQuestion[0].option2 == rightAnswer) {
+                document.getElementsByClassName('answer2')[0].setAttribute("id", "style1");
+                this.DisableAnswers();
+                this.GreyOutOtherAnswers('answer1', 'answer3', 'answer4');
+            } else if (this.currentQuestion[0].option3 == rightAnswer) {
+                document.getElementsByClassName('answer3')[0].setAttribute("id", "style1");
+                this.DisableAnswers();
+                this.GreyOutOtherAnswers('answer1', 'answer2', 'answer4');
+            } else if (this.currentQuestion[0].option4 == rightAnswer) {
+                document.getElementsByClassName('answer4')[0].setAttribute("id", "style1");
+                this.DisableAnswers();
+                this.GreyOutOtherAnswers('answer1', 'answer2', 'answer3');
             }
         },
 
@@ -136,10 +159,19 @@ export default {
             // Set opacity back
             this.RestoreOpacityOfAnswers();
 
+            // Start progress bar
+            this.ProgressBarCountdown();
+
             var updatedGame = this.currentGame;
 
             // Check if it was last question. If it was last question go to results page, if no then load next question
             if (this.currentQuestionIndex < 2) {
+                // Reset progress bar
+                this.currentPercentage = '1';
+                document.getElementById('progress').setAttribute('value', 1);
+                clearInterval(this.timer);
+
+                //
                 this.currentQuestionIndex = this.currentQuestionIndex + 1;
                 this.currentQuestion.length = 0;
                 this.currentQuestion.push(this.questions[this.currentQuestionIndex][0]);
@@ -154,6 +186,11 @@ export default {
             }
 
             else {
+                // Reset progress bar
+                this.currentPercentage = '1';
+                document.getElementById('progress').setAttribute('value', 1);
+                clearInterval(this.timer);
+
                 if (this.currentUser.username == updatedGame.player1.username) {
                     updatedGame.player1.correctAnswers = updatedGame.player1.correctAnswers + this.correctAnswers;
                     updatedGame.player1.myTurn = false;
@@ -184,15 +221,16 @@ export default {
                 })
             }
         },
-        ProgressBarUpdate() {
-            var myTimer = setInterval(() => {
+        ProgressBarCountdown() {
+            this.timer = setInterval(() => {
                 if (this.currentPercentage != '-0.0031999999999971565') {
                     console.log(this.currentPercentage);
                     this.currentPercentage = this.currentPercentage -this.decrement;
                     document.getElementById('progress').setAttribute('value', this.currentPercentage);
                 }
                 else {
-                    clearInterval(myTimer);
+                    clearInterval(this.timer);
+                    this.TimedOut();
                 }
             }, 100)
         }
@@ -210,7 +248,7 @@ export default {
         this.currentQuestion.push(this.questions[0][0]);
         document.getElementById("badge1").style.background = "#56BE65";
 
-        this.ProgressBarUpdate();
+        this.ProgressBarCountdown();
   },
 
   updated(){
