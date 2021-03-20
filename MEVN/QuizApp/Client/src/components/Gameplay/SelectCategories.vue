@@ -49,6 +49,10 @@ export default {
         "Litteratur",
         "Film og TV",
         "Musik",
+        "Kunst",
+        "Erhverv",
+        "Design",
+        "Samfund"
       ],
       randomCategories: [],
       error: "",

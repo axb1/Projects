@@ -2,9 +2,9 @@
     <ion-page>
         <ion-content>
           <div class="header">
-            <ion-icon :icon="settingsOutline"  v-on:click="GoToSettings()" id="settings"></ion-icon>
+            <img src="../../assets/settings.svg" alt="settings" v-on:click="GoToSettings()" id="settings">
             <h1>Games</h1>
-            <ion-icon :icon="addCircleOutline" v-on:click="GoToFindOpponent()" id="newgame"></ion-icon>
+            <img v-on:click="GoToFindOpponent()" id="newgame" src="../../assets/Add.svg" alt="add">
             <ion-badge v-if="currentUser.invites!=undefined && currentUser.invites.length!=0" v-on:click="GoToInvites()">{{currentUser.invites.length}}</ion-badge>
           </div>
           <h1 v-if="lookingForRandomOpponent == true">Searching for opponent</h1>
@@ -25,8 +25,7 @@
 </template>
 
 <script>
-import { IonPage, IonContent, IonIcon, IonBadge, IonList} from '@ionic/vue';
-import { addCircleOutline, settingsOutline } from 'ionicons/icons';
+import { IonPage, IonContent, IonBadge, IonList} from '@ionic/vue';
 import OngoingGame from './OngoingGame';
 import PreviousGame from './PreviousGame';
 import firebase from 'firebase';
@@ -51,14 +50,11 @@ export default {
     },
     data: function() {
       return {
-          addCircleOutline,
-          settingsOutline,
       };  
     },
     components: {
         IonPage,
         IonContent,
-        IonIcon,
         IonBadge,
         IonList,
         OngoingGame,
