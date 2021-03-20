@@ -23,6 +23,7 @@
                 <ion-button class="answer2" v-on:click="CheckAnswer(currentQuestion[0].option2)">{{currentQuestion[0].option2}}</ion-button>
                 <ion-button class="answer3" v-on:click="CheckAnswer(currentQuestion[0].option3)">{{currentQuestion[0].option3}}</ion-button>
                 <ion-button class="answer4" v-on:click="CheckAnswer(currentQuestion[0].option4)">{{currentQuestion[0].option4}}</ion-button>
+                <ion-progress-bar id="progress" value="1"></ion-progress-bar>
                 <ion-button class="next-btn" v-on:click="GoToNextQuestion()">Næste spørgsmål</ion-button>
             </div>
         </ion-content>
@@ -33,7 +34,7 @@
 
 
 <script>
-import { IonPage, IonContent, IonButton, IonBadge, IonIcon} from '@ionic/vue';
+import { IonPage, IonContent, IonButton, IonBadge, IonIcon, IonProgressBar} from '@ionic/vue';
 import QuestionService from '../../api/QuestionService';
 import {arrowBackOutline} from 'ionicons/icons';
 
@@ -56,7 +57,9 @@ export default {
         currentQuestionIndex: 0,
         correctAnswers: 0,
         error: '',
-        arrowBackOutline
+        arrowBackOutline,
+        currentPercentage: '1',
+        decrement: '0.0033'
 
       };  
     },
@@ -66,6 +69,7 @@ export default {
         IonButton,
         IonBadge,
         IonIcon,
+        IonProgressBar
     },
     methods: {
         CheckAnswer(answer){
@@ -179,7 +183,20 @@ export default {
                 }
                 })
             }
+        },
+        ProgressBarUpdate() {
+            var myTimer = setInterval(() => {
+                if (this.currentPercentage != '-0.0031999999999971565') {
+                    console.log(this.currentPercentage);
+                    this.currentPercentage = this.currentPercentage -this.decrement;
+                    document.getElementById('progress').setAttribute('value', this.currentPercentage);
+                }
+                else {
+                    clearInterval(myTimer);
+                }
+            }, 100)
         }
+
     },
 
     async created() {
@@ -193,6 +210,7 @@ export default {
         this.currentQuestion.push(this.questions[0][0]);
         document.getElementById("badge1").style.background = "#56BE65";
 
+        this.ProgressBarUpdate();
   },
 
   updated(){
@@ -254,7 +272,7 @@ ion-badge {
     display: block;
     margin-left: 12vw;
     margin-right: 12vw;
-    margin-top: 5vh;
+    margin-top: 2vh;
     height: 6.8vh;
 }
 
@@ -288,11 +306,24 @@ ion-button[disabled]{
     font-weight: bold;
 }
 
+ion-progress-bar {
+    --background: #262152;
+    --progress-background: #0BA360;
+    width: 90%;
+    border-radius: 14px;
+    height: 1vh;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5vh;
+}
+
 #header {
     background: #181A20;
     box-shadow: 0px 1px 25px rgba(68, 68, 68, 0.06);
     border-radius: 0px 0px 20px 20px;
     height: 18%;
+
 }
 
 #subheader {
