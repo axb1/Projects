@@ -3,21 +3,124 @@
     <ion-content>
       <ion-icon id="arrowback" :icon="arrowBackOutline" size="large" @click="GoBack"></ion-icon>
       <h1>Select 3 categories</h1>
-      <ion-item lines="none" v-for="category in randomCategories" v-bind:key="category">
-        <ion-label color="light">{{category.val}}</ion-label>
-        <ion-icon :icon="americanFootballSharp" id="americanfootball" slot="start"></ion-icon>
-        <ion-checkbox class="categoryCheckbox"
-          @update:modelValue="category.isChecked = $event"
-          :modelValue="category.isChecked">
-        </ion-checkbox>
-      </ion-item>
+      <ion-list v-for="category in randomCategories" v-bind:key="category">
+        <div v-if="category.val == 'Sport'">
+          <ion-item lines="none">
+            <ion-label color="light">{{category.val}}</ion-label>
+            <ion-icon :icon="americanFootballSharp" slot="start"></ion-icon>
+            <ion-checkbox class="categoryCheckbox" @update:modelValue="category.isChecked = $event" :modelValue="category.isChecked"></ion-checkbox>
+          </ion-item>
+        </div>
+        <div v-if="category.val == 'Naturvidenskab'">
+          <ion-item lines="none">
+            <ion-label color="light">{{category.val}}</ion-label>
+            <ion-icon :icon="flaskSharp" slot="start"></ion-icon>
+            <ion-checkbox class="categoryCheckbox" @update:modelValue="category.isChecked = $event" :modelValue="category.isChecked"></ion-checkbox>
+          </ion-item>
+        </div>
+        <div v-if="category.val == 'Teknologi'">
+          <ion-item lines="none">
+            <ion-label color="light">{{category.val}}</ion-label>
+            <ion-icon :icon="gameControllerSharp" slot="start"></ion-icon>
+            <ion-checkbox class="categoryCheckbox" @update:modelValue="category.isChecked = $event" :modelValue="category.isChecked"></ion-checkbox>
+          </ion-item>
+        </div>
+        <div v-if="category.val == 'Sprog'">
+          <ion-item lines="none">
+            <ion-label color="light">{{category.val}}</ion-label>
+            <ion-icon :icon="chatbubbleSharp" slot="start"></ion-icon>
+            <ion-checkbox class="categoryCheckbox" @update:modelValue="category.isChecked = $event" :modelValue="category.isChecked"></ion-checkbox>
+          </ion-item>
+        </div>
+        <div v-if="category.val == 'Kunst'">
+          <ion-item lines="none">
+            <ion-label color="light">{{category.val}}</ion-label>
+            <ion-icon :icon="colorPaletteSharp" slot="start"></ion-icon>
+            <ion-checkbox class="categoryCheckbox" @update:modelValue="category.isChecked = $event" :modelValue="category.isChecked"></ion-checkbox>
+          </ion-item>
+        </div>
+        <div v-if="category.val == 'Litteratur'">
+          <ion-item lines="none">
+            <ion-label color="light">{{category.val}}</ion-label>
+            <ion-icon :icon="bookSharp" slot="start"></ion-icon>
+            <ion-checkbox class="categoryCheckbox" @update:modelValue="category.isChecked = $event" :modelValue="category.isChecked"></ion-checkbox>
+          </ion-item>
+        </div>
+        <div v-if="category.val == 'Film og TV'">
+          <ion-item lines="none">
+            <ion-label color="light">{{category.val}}</ion-label>
+            <ion-icon :icon="videocamSharp" slot="start"></ion-icon>
+            <ion-checkbox class="categoryCheckbox" @update:modelValue="category.isChecked = $event" :modelValue="category.isChecked"></ion-checkbox>
+          </ion-item>
+        </div>
+        <div v-if="category.val == 'Mad'">
+          <ion-item lines="none">
+            <ion-label color="light">{{category.val}}</ion-label>
+            <ion-icon :icon="restaurantSharp" slot="start"></ion-icon>
+            <ion-checkbox class="categoryCheckbox" @update:modelValue="category.isChecked = $event" :modelValue="category.isChecked"></ion-checkbox>
+          </ion-item>
+        </div>
+        <div v-if="category.val == 'Medicin'">
+          <ion-item lines="none">
+            <ion-label color="light">{{category.val}}</ion-label>
+            <ion-icon :icon="medkitSharp" slot="start"></ion-icon>
+            <ion-checkbox class="categoryCheckbox" @update:modelValue="category.isChecked = $event" :modelValue="category.isChecked"></ion-checkbox>
+          </ion-item>
+        </div>
+        <div v-if="category.val == 'Politik'">
+          <ion-item lines="none">
+            <ion-label color="light">{{category.val}}</ion-label>
+            <ion-icon :icon="idCardSharp" slot="start"></ion-icon>
+            <ion-checkbox class="categoryCheckbox" @update:modelValue="category.isChecked = $event" :modelValue="category.isChecked"></ion-checkbox>
+          </ion-item>
+        </div>
+        <div v-if="category.val == 'Religion'">
+          <ion-item lines="none">
+            <ion-label color="light">{{category.val}}</ion-label>
+            <ion-icon :icon="handRightSharp" slot="start"></ion-icon>
+            <ion-checkbox class="categoryCheckbox" @update:modelValue="category.isChecked = $event" :modelValue="category.isChecked"></ion-checkbox>
+          </ion-item>
+        </div>
+        <div v-if="category.val == 'Geografi'">
+          <ion-item lines="none">
+            <ion-label color="light">{{category.val}}</ion-label>
+            <ion-icon :icon="earthSharp" slot="start"></ion-icon>
+            <ion-checkbox class="categoryCheckbox" @update:modelValue="category.isChecked = $event" :modelValue="category.isChecked"></ion-checkbox>
+          </ion-item>
+        </div>
+        <div v-if="category.val == 'Historie'">
+          <ion-item lines="none">
+            <ion-label color="light">{{category.val}}</ion-label>
+            <ion-icon :icon="hourglassSharp" slot="start"></ion-icon>
+            <ion-checkbox class="categoryCheckbox" @update:modelValue="category.isChecked = $event" :modelValue="category.isChecked"></ion-checkbox>
+          </ion-item>
+        </div>
+        <div v-if="category.val == 'Natur'">
+          <ion-item lines="none">
+            <ion-label color="light">{{category.val}}</ion-label>
+            <ion-icon :icon="fishSharp" slot="start"></ion-icon>
+            <ion-checkbox class="categoryCheckbox" @update:modelValue="category.isChecked = $event" :modelValue="category.isChecked"></ion-checkbox>
+          </ion-item>
+        </div>
+        <div v-if="category.val == 'Erhverv'">
+          <ion-item lines="none">
+            <ion-label color="light">{{category.val}}</ion-label>
+            <ion-icon :icon="logoAmazon" slot="start"></ion-icon>
+            <ion-checkbox class="categoryCheckbox" @update:modelValue="category.isChecked = $event" :modelValue="category.isChecked"></ion-checkbox>
+          </ion-item>
+        </div>
+        <div v-if="category.val == 'Design'">
+          <ion-item lines="none">
+            <ion-label color="light">{{category.val}}</ion-label>
+            <ion-icon :icon="shirtSharp" slot="start"></ion-icon>
+            <ion-checkbox class="categoryCheckbox" @update:modelValue="category.isChecked = $event" :modelValue="category.isChecked"></ion-checkbox>
+          </ion-item>
+        </div>
+      </ion-list>
       <ion-button v-on:click="StartTheGame()">Confirm categories</ion-button>
     </ion-content>
   </ion-page>
 </template>
-
-
-
 
 <script>
 import {
@@ -26,9 +129,11 @@ import {
   IonItem,
   IonLabel,
   IonCheckbox,
-  IonButton
+  IonButton,
+  IonList
 } from "@ionic/vue";
-import { arrowBackOutline, americanFootballSharp } from 'ionicons/icons';
+import { arrowBackOutline, americanFootballSharp, flaskSharp, musicalNotesSharp, gameControllerSharp, chatbubbleSharp, colorPaletteSharp, bookSharp, videocamSharp, restaurantSharp,
+      medkitSharp, idCardSharp, handRightSharp, earthSharp, hourglassSharp, fishSharp, logoAmazon, shirtSharp } from 'ionicons/icons';
 
 
 export default {
@@ -52,12 +157,29 @@ export default {
         "Kunst",
         "Erhverv",
         "Design",
-        "Samfund"
+        "Medicin"
       ],
       randomCategories: [],
       error: "",
       arrowBackOutline,
-      americanFootballSharp,
+      flaskSharp,
+      musicalNotesSharp,
+      gameControllerSharp,
+      chatbubbleSharp,
+      colorPaletteSharp,
+      bookSharp,
+      videocamSharp,
+      restaurantSharp,
+      medkitSharp,
+      idCardSharp,
+      handRightSharp,
+      earthSharp,
+      hourglassSharp,
+      fishSharp,
+      logoAmazon,
+      shirtSharp,
+      americanFootballSharp
+
     };
   },
   components: {
@@ -66,7 +188,8 @@ export default {
     IonItem,
     IonLabel,
     IonCheckbox,
-    IonButton
+    IonButton,
+    IonList
   },
 
   mounted() {
@@ -137,10 +260,9 @@ export default {
 #arrowback {
     margin-top: 4vh;
     margin-left: 4vw;
-    color: white;
 }
 
-#americanfootball {
+ion-icon {
   color: white;
 }
 
@@ -171,6 +293,14 @@ h1 {
   text-align: center;
   margin-top: 2vh;
   margin-bottom: 4vh;
+}
+
+div {
+  background-color: #181A20;
+}
+
+ion-list {
+  background-color: #181A20;
 }
 
 

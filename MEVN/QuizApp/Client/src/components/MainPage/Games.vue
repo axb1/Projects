@@ -4,7 +4,7 @@
           <div class="header">
             <img src="../../assets/settings.svg" alt="settings" v-on:click="GoToSettings()" id="settings">
             <h1>Games</h1>
-            <img v-on:click="GoToFindOpponent()" id="newgame" src="../../assets/Add.svg" alt="add">
+            <img v-on:click="GoToFindOpponent()" src="../../assets/plus.png" alt="add" id="add">
             <ion-badge v-if="currentUser.invites!=undefined && currentUser.invites.length!=0" v-on:click="GoToInvites()">{{currentUser.invites.length}}</ion-badge>
           </div>
           <h1 v-if="lookingForRandomOpponent == true">Searching for opponent</h1>
@@ -159,10 +159,6 @@ h1 {
   text-align: center;
 }
 
-ion-icon {
-  color: white;
-  font-size: 4.5vh;
-}
 
 ion-list {
   display: flex;
@@ -182,8 +178,17 @@ ion-badge {
   margin: 0;
 }
 
-#newgame {
-  color: #56BE65;
+#add {
+  margin: 0;
+  padding: 0;
+  height: 4vh;
 }
+
+#settings {
+  margin: 0;
+  padding: 0;
+  height: 4vh;
+}
+
 
 </style>
