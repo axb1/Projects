@@ -292,7 +292,7 @@ h1 {
   color:white;
   text-align: center;
   margin-top: 2vh;
-  margin-bottom: 4vh;
+  margin-bottom: 2vh;
 }
 
 div {

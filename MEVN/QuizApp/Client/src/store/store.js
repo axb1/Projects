@@ -175,7 +175,7 @@ export default createStore({
                 ongoingGames.push(availableGame);
                 await UserService.updateOngoingGames(user[0].username, ongoingGames);
 
-                // No longer looking for opponen
+                // No longer looking for opponent
                 await UserService.setSearchingForGame(user[0].username, false);
                 
                 // Updating ongoing games in app
@@ -210,7 +210,7 @@ export default createStore({
                 await GameService.createGame(newGame);
                 state.commit('setLookingForRandomOpponent', true);
 
-                // Look to see if game has been updated every 5 seconds for a total of 30 seconds
+                // Look to see if game has been updated every 5 seconds for a total of 60 seconds
                 var timesRun = 0;
                 var interval = setInterval(async function(){
                     var game = await GameService.getGameByGameId(gameId);
@@ -234,9 +234,33 @@ export default createStore({
                         // Stop running
                         clearInterval(interval);
                     }
-                    if(timesRun === 10) {
+                    if(timesRun === 12) {
+                        // If no opponent found, set admin as opponent
+                        var player2 = {username: "QuizNordTeamet", correctAnswers: 0, goFirst: false, dateOfLastTurn: date, myTurn: false, img: 'https://cdn.bulbagarden.net/upload/0/02/009Blastoise.png', roundsPlayed: 0};
+                        var update = {player2: player2, isFull: true};
+                        await GameService.updateGame(gameId, update);
+                        game.player2 = player2;
+                        game.isFull = true;
+        
+                        // Add game to users ongoing games
+                        var ongoingGames = user[0].ongoingGames;
+                        ongoingGames.push(game);
+                        await UserService.updateOngoingGames(user[0].username, ongoingGames);
+        
+                        // No longer looking for opponent
+                        await UserService.setSearchingForGame(user[0].username, false);
+
+
+                        // Add game to opponent ongoing games
+                        var opponent = await UserService.getUserByUsername('QuizNordTeamet');
+                        var opponentOngoingGames = opponent[0].ongoingGames;
+                        opponentOngoingGames.push(game);
+                        await UserService.updateOngoingGames(opponent[0].username, opponentOngoingGames);
+                        
+                        // Updating ongoing games in app
+                        state.commit('setOngoingGames', ongoingGames);
+                        state.commit('setLookingForRandomOpponent', false);
                         clearInterval(interval);
-                        state.commit('setLookingForRandomOpponent', false)
                     }
                 }, 5000);
             }
