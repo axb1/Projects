@@ -1,4 +1,3 @@
-import firebase from 'firebase';
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import Login from '../components/Login/Login.vue';
 import Register from '../components/Login/Register.vue';
@@ -137,25 +136,5 @@ const router = createRouter({
 
 
 
-let firebaseUser = firebase.auth().currentUser;
-firebase.auth().onAuthStateChanged(function(user) {
-  console.log(user);
-  firebaseUser = user;
-});
-
-firebase.auth().onAuthStateChanged(newUserState => {
-  firebaseUser = newUserState;
-  if(firebaseUser) {
-    router.push('/games');
-  }
-})
-
-router.beforeEach((to, from, next) => {
-  if (!firebaseUser && to.meta.requiresAuth) {
-    next('login');
-  } else {
-    next();
-  }
-})
 
 export default router

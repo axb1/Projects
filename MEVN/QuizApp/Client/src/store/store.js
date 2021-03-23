@@ -220,7 +220,6 @@ export default createStore({
                     if(game[0].player2.username != "") {
 
                         // Add game to users ongoing games
-                        var ongoingGames = user[0].ongoingGames;
                         ongoingGames.push(game[0]);
                         await UserService.updateOngoingGames(user[0].username, ongoingGames);
 
@@ -234,19 +233,19 @@ export default createStore({
                         // Stop running
                         clearInterval(interval);
                     }
-                    if(timesRun === 12) {
+                    if(timesRun === 6) {
                         // If no opponent found, set admin as opponent
                         var player2 = {username: "QuizNordTeamet", correctAnswers: 0, goFirst: false, dateOfLastTurn: date, myTurn: false, img: 'https://cdn.bulbagarden.net/upload/0/02/009Blastoise.png', roundsPlayed: 0};
                         var update = {player2: player2, isFull: true};
                         await GameService.updateGame(gameId, update);
-                        game.player2 = player2;
-                        game.isFull = true;
-        
-                        // Add game to users ongoing games
+
+
+                        // Update and ddd game to users ongoing games
                         var ongoingGames = user[0].ongoingGames;
-                        ongoingGames.push(game);
+                        game[0].player2 = player2;
+                        game[0].isFull = true;
+                        ongoingGames.push(game[0]);
                         await UserService.updateOngoingGames(user[0].username, ongoingGames);
-        
                         // No longer looking for opponent
                         await UserService.setSearchingForGame(user[0].username, false);
 
@@ -254,7 +253,8 @@ export default createStore({
                         // Add game to opponent ongoing games
                         var opponent = await UserService.getUserByUsername('QuizNordTeamet');
                         var opponentOngoingGames = opponent[0].ongoingGames;
-                        opponentOngoingGames.push(game);
+                        opponentOngoingGames.push(game[0]);
+
                         await UserService.updateOngoingGames(opponent[0].username, opponentOngoingGames);
                         
                         // Updating ongoing games in app

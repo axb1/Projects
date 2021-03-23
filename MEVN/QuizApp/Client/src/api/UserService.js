@@ -85,6 +85,7 @@ class UserService {
             email: email,
             allTimeStats: [],
             ongoingGames: [],
+            previousGames: [],
             searchingForGame: false,
             img: img
         });
@@ -92,6 +93,7 @@ class UserService {
 
     // Update ongoing games
     static updateOngoingGames(username, ongoingGames) {
+        console.log(ongoingGames);
         return axios.put(url + 'ongoinggames', {
             username: username,
             ongoingGames: ongoingGames

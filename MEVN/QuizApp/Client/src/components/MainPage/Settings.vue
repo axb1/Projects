@@ -11,6 +11,8 @@
 <script>
 import { IonPage, IonContent, IonButton} from '@ionic/vue';
 import { arrowBackOutline } from 'ionicons/icons';
+import { Plugins, } from '@capacitor/core';
+const { PushNotifications } = Plugins;
 import firebase from 'firebase';
 
 export default {
@@ -50,7 +52,16 @@ export default {
         } else {
         console.log("No user is signed in");
         }
-        }
+        },
+    mounted() {
+            // Show us the notification payload if the app is open on our device
+    PushNotifications.addListener('pushNotificationReceived',
+      (notification) => {
+          this.$router.push('games');
+        alert('Push received: ' + JSON.stringify(notification));
+      }
+    );
+    }
     }
 </script>
 <style scoped>

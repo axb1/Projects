@@ -3,11 +3,10 @@
         <ion-content>
           <div class="header">
             <img src="../../assets/settings.svg" alt="settings" v-on:click="GoToSettings()" id="settings">
-            <h1>Games</h1>
+            <h1>QuizNord</h1>
             <img v-on:click="GoToFindOpponent()" src="../../assets/plus.png" alt="add" id="add">
             <ion-badge v-if="currentUser.invites!=undefined && currentUser.invites.length!=0" v-on:click="GoToInvites()">{{currentUser.invites.length}}</ion-badge>
           </div>
-          <h1 v-if="lookingForRandomOpponent == true">Searching for opponent</h1>
           <h1>Current games</h1>
             <div v-if="ongoingGames != undefined">
               <ion-list v-for="ongoingGame in ongoingGames" :key="ongoingGame._id">
@@ -80,10 +79,9 @@ export default {
       this.$store.dispatch('setPreviousGames');
 
       window.setInterval(() => {
-        console.log("Updating games");
         this.$store.dispatch('setOngoingGames');
         this.$store.dispatch('setPreviousGames');
-      }, 30000)
+      }, 300000)
         // Request permission to use push notifications
     // iOS will prompt user and return if they granted permission or not
     // Android will just grant without prompting

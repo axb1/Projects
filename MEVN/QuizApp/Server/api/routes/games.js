@@ -74,8 +74,10 @@ router.post('/', async (req, res) => {
 
 // Update game
 router.put('/', async (req, res) => {
-    const filter = {_id: req.body.id};
+    const filter = {gameId: req.body.id};
     const update = {player2: req.body.player2, isFull: req.body.isFull};
+    console.log(filter);
+    console.log(update);
     try {
         const updatedGame = await Game.findOneAndUpdate(filter, update);
         res.json(updatedGame);
