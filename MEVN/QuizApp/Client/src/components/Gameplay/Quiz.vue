@@ -162,8 +162,6 @@ export default {
             // Set opacity back
             this.RestoreOpacityOfAnswers();
 
-            // Start progress bar
-            this.ProgressBarCountdown();
 
             var updatedGame = this.currentGame;
 
@@ -173,6 +171,9 @@ export default {
                 this.currentPercentage = '1';
                 document.getElementById('progress').setAttribute('value', 1);
                 clearInterval(this.timer);
+                
+                // Start progress bar
+                this.ProgressBarCountdown();
 
                 //
                 this.currentQuestionIndex = this.currentQuestionIndex + 1;
@@ -227,7 +228,6 @@ export default {
         ProgressBarCountdown() {
             this.timer = setInterval(() => {
                 if (this.currentPercentage != '-0.0031999999999971565') {
-                    console.log(this.currentPercentage);
                     this.currentPercentage = this.currentPercentage -this.decrement;
                     document.getElementById('progress').setAttribute('value', this.currentPercentage);
                 }
@@ -251,6 +251,10 @@ export default {
         this.currentQuestion.push(this.questions[0][0]);
         document.getElementById("badge1").style.background = "#56BE65";
 
+  },
+
+  mounted() {
+        // Start progress bar
         this.ProgressBarCountdown();
   },
 

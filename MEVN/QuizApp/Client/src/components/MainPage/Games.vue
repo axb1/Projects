@@ -7,18 +7,20 @@
             <img v-on:click="GoToFindOpponent()" src="../../assets/plus.png" alt="add" id="add">
             <ion-badge v-if="currentUser.invites!=undefined && currentUser.invites.length!=0" v-on:click="GoToInvites()">{{currentUser.invites.length}}</ion-badge>
           </div>
-          <h1>Current games</h1>
+          <h1>Din tur</h1>
             <div v-if="ongoingGames != undefined">
               <ion-list v-for="ongoingGame in ongoingGames" :key="ongoingGame._id">
-                <OngoingGame v-bind:ongoingGame="ongoingGame"></OngoingGame>
+                <OngoingGame v-if="(ongoingGame.player2.myTurn == true && ongoingGame.player2.username == currentUser.username)" v-bind:ongoingGame="ongoingGame"></OngoingGame>
+                <OngoingGame v-if="(ongoingGame.player1.myTurn == true && ongoingGame.player1.username == currentUser.username)" v-bind:ongoingGame="ongoingGame"></OngoingGame>
               </ion-list>
             </div>
-          <h1>Previous games</h1>
-            <div v-if="previousGames != undefined">
-              <ion-list v-for="previousGame in previousGames" :key="previousGame._id">
-                <PreviousGame v-bind:previousGame="previousGame"></PreviousGame>
-              </ion-list>
-            </div>
+          <h1>Deres tur</h1>
+          <div v-if="ongoingGames != undefined">
+            <ion-list v-for="ongoingGame in ongoingGames" :key="ongoingGame._id">
+              <OngoingGame v-if="(ongoingGame.player2.myTurn == false && ongoingGame.player2.username == currentUser.username)" v-bind:ongoingGame="ongoingGame"></OngoingGame>
+              <OngoingGame v-if="(ongoingGame.player1.myTurn == false && ongoingGame.player1.username == currentUser.username)" v-bind:ongoingGame="ongoingGame"></OngoingGame>
+            </ion-list>
+          </div>
         </ion-content>
     </ion-page>
 </template>
@@ -26,7 +28,6 @@
 <script>
 import { IonPage, IonContent, IonBadge, IonList} from '@ionic/vue';
 import OngoingGame from './OngoingGame';
-import PreviousGame from './PreviousGame';
 import firebase from 'firebase';
 import { Plugins, } from '@capacitor/core';
 const { PushNotifications } = Plugins;
@@ -57,7 +58,6 @@ export default {
         IonBadge,
         IonList,
         OngoingGame,
-        PreviousGame,
     },
     methods: {
         GoToInvites() {
@@ -147,7 +147,7 @@ export default {
   flex-direction: row;     
   justify-content: space-around; 
   align-items: center; 
-  height: 10vh;
+  height: 14vh;
   background-color: #181A20;
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }

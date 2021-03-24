@@ -60,6 +60,7 @@ button  {
     justify-content: space-evenly;
     align-items: center;
     border-radius: 6px;
+    margin-bottom: 1.5vh;
 }
 
 img {

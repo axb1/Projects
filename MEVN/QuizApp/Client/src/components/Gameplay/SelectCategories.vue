@@ -283,7 +283,6 @@ ion-item {
   --padding-top: 1.5vh;
   --padding-bottom: 1.5vh;
   --border-radius: 6px;
-  margin-top: 1.5vh;
   margin-left: 5vw;
   margin-right: 5vw;
 }
@@ -297,6 +296,7 @@ h1 {
 
 div {
   background-color: #181A20;
+  margin-bottom: 1.5vh;
 }
 
 ion-list {
