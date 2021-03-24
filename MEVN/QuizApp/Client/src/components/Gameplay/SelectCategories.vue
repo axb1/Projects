@@ -296,7 +296,6 @@ h1 {
 
 div {
   background-color: #181A20;
-  margin-bottom: 1.5vh;
 }
 
 ion-list {

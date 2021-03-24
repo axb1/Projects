@@ -7,7 +7,7 @@
             <img v-on:click="GoToFindOpponent()" src="../../assets/plus.png" alt="add" id="add">
             <ion-badge v-if="currentUser.invites!=undefined && currentUser.invites.length!=0" v-on:click="GoToInvites()">{{currentUser.invites.length}}</ion-badge>
           </div>
-          <h1>Din tur</h1>
+          <h1 id="yourturn">Din tur</h1>
             <div v-if="ongoingGames != undefined">
               <ion-list v-for="ongoingGame in ongoingGames" :key="ongoingGame._id">
                 <OngoingGame v-if="(ongoingGame.player2.myTurn == true && ongoingGame.player2.username == currentUser.username)" v-bind:ongoingGame="ongoingGame"></OngoingGame>
@@ -174,6 +174,10 @@ ion-badge {
   align-items: center; 
   justify-content: center;
   margin: 0;
+}
+
+#yourturn {
+  margin-top: 1.5vh;
 }
 
 #add {

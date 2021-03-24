@@ -51,12 +51,16 @@ h1 {
     text-align: center;
     color: white;
     margin-top: 14vh;
-    margin-bottom: 5vh;
+    margin-bottom: 1vh;
+
 }
 
 h2 {
     text-align: center;
     color: white;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    margin-top: 1vh;
 }
 
 a {

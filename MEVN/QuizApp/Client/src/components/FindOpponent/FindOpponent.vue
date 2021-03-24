@@ -75,6 +75,8 @@ export default {
 ion-title {
     font-weight: bolder;
     text-align: center;
+    margin-right: 5vh;
+    margin-left: 5vh;
     font-size: 1.2rem;
     color: white;
 }
@@ -94,6 +96,9 @@ ion-icon {
     color: white;
 }
 
+ion-label {
+  color: white;
+}
 ion-button {
   --background: #262A34;
   --padding-top: 1.5vh;
@@ -113,6 +118,8 @@ h1 {
     text-align: center;
     margin-top: 10vh;
     margin-bottom: 4vh;
+    margin-left: 5vw;
+    margin-right: 5vw;
 }
 
 a {

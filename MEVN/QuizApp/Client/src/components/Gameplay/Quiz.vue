@@ -254,8 +254,10 @@ export default {
   },
 
   mounted() {
+              console.log("I was called;");
         // Start progress bar
         this.ProgressBarCountdown();
+
   },
 
   updated(){
@@ -343,13 +345,26 @@ ion-button[disabled]{
 
 .description {
     color:white;
-    font-size: 1.3rem;
-    margin-left: 6vw;
-    margin-right: 4vw;
-    text-align: center;
+    font-size: 1.2rem;
+    margin-left: 10vw;
+    margin-right: 6vw;
     margin-top: 0;
     font-weight: bold;
 }
+
+
+
+#category {
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: left;
+    color: #56BE65;
+    margin-left: 10vw;
+    font-style: normal;
+    margin-top: 2vh;
+    margin-bottom: 1vh;
+}
+
 
 ion-progress-bar {
     --background: #262152;
@@ -365,9 +380,10 @@ ion-progress-bar {
 
 #header {
     background: #181A20;
-    box-shadow: 0px 1px 25px rgba(68, 68, 68, 0.06);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
     border-radius: 0px 0px 20px 20px;
     height: 18%;
+    
 
 }
 
@@ -375,18 +391,6 @@ ion-progress-bar {
     margin-top: 4%;
 }
 
-
-
-#category {
-    font-weight: bold;
-    text-transform: uppercase;
-    text-align: left;
-    color: #56BE65;
-    margin-left: 10vw;
-    font-style: normal;
-    margin-top: 2vh;
-    margin-bottom: 1vh;
-}
 
 #currentquestionlist {
     margin-bottom: 1vh;

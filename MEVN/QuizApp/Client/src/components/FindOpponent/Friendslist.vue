@@ -96,7 +96,7 @@ h1 {
 
 ion-header {
     position: relative;
-    height: 10vh;
+    height: 14vh;
 }
 
 ion-toolbar {

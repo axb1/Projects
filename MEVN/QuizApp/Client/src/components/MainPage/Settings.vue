@@ -73,14 +73,16 @@ ion-icon {
 }
 
 ion-button {
-    color: white;
-    margin: 0;
-    position: absolute;
-    top: 90%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
     --background: linear-gradient(to right, #0BA360, #3CBA92);
+    --border-radius: 4px;
+    display: block;
+    margin-left: 12vw;
+    margin-right: 12vw;
+    margin-top: 2vh;
+    height: 6.8vh;
+    border-radius: 4px;
+    box-shadow: 4px;
+    margin-top: 60vh;
 }
 
 h1 {
