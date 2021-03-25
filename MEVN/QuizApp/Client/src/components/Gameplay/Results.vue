@@ -3,18 +3,27 @@
         <ion-content>
             <h1>Resultat</h1>
             <h2>Du svarede rigtigt på {{correctAnswers}}/3 spørgsmål</h2>
+            <h1>Stillingen er</h1>
+            <h2>{{currentUser}}: {{scoreCurrentUser}}</h2>
+            <h2>{{opponent}}: {{scoreOpponent}}</h2>
             <ion-button expand="block" @click="GoToMainPage">Gå tilbage</ion-button>
         </ion-content>
     </ion-page>
 </template>
 
 <script>
-import { IonPage, IonContent, IonButton} from '@ionic/vue';
+import { IonPage, IonContent, IonButton,} from '@ionic/vue';
 import { person } from 'ionicons/icons';
 
 export default {
     name: 'results',
-    props: ['correctAnswers'],
+    props: {
+        scoreCurrentUser: Number,
+        scoreOpponent: Number,
+        correctAnswers: Number,
+        currentUser: String,
+        opponent: String
+    },
     data: function() {
       return {
           person
@@ -29,7 +38,7 @@ export default {
         GoToMainPage() {
             this.$router.push("/games");
         }
-    }
+    },
 
     }
 </script>

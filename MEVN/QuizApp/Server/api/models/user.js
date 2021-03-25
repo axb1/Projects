@@ -7,7 +7,7 @@ const userSchema = new Schema({
     ongoingGames: [{
         player1: {
             username: String,
-            Answers: Array,
+            correctAnswers: Array,
             goFirst: Boolean,
             dateOfLastTurn: Date,
             myTurn: Boolean,

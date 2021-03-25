@@ -81,7 +81,7 @@ export default {
       window.setInterval(() => {
         this.$store.dispatch('setOngoingGames');
         this.$store.dispatch('setPreviousGames');
-      }, 300000)
+      }, 30000)
         // Request permission to use push notifications
     // iOS will prompt user and return if they granted permission or not
     // Android will just grant without prompting

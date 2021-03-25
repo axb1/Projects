@@ -93,7 +93,6 @@ class UserService {
 
     // Update ongoing games
     static updateOngoingGames(username, ongoingGames) {
-        console.log(ongoingGames);
         return axios.put(url + 'ongoinggames', {
             username: username,
             ongoingGames: ongoingGames

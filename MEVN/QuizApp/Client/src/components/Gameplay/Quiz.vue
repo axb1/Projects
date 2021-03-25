@@ -60,7 +60,7 @@ export default {
         arrowBackOutline,
         currentPercentage: '1',
         decrement: '0.0033',
-        timer: ''
+        timer: '',
 
       };  
     },
@@ -213,15 +213,41 @@ export default {
                 for(var j=1; j<6; j++) {
                     document.getElementById("badge"+j).style.background = "#181A20";
                 }
+                // Set current score
+                var scoreCurrentUser = 0;
+                var scoreOpponent = 0;
+                var opponent = '';
+
+                if (updatedGame.player1.username != this.currentUser.username) {
+                    opponent = updatedGame.player1.username;
+                    updatedGame.player1.correctAnswers.forEach(element => {
+                        scoreOpponent = scoreOpponent + element;
+                    });
+                    updatedGame.player2.correctAnswers.forEach(element => {
+                        scoreCurrentUser = scoreCurrentUser + element;
+                    });
+                }
+                else {
+                    opponent = updatedGame.player2.username;
+                    updatedGame.player2.correctAnswers.forEach(element => {
+                        scoreOpponent = scoreOpponent + element;
+                    });
+                    updatedGame.player1.correctAnswers.forEach(element => {
+                        scoreCurrentUser = scoreCurrentUser + element;
+                    });
+                }
+
 
                 this.$store.dispatch('updateOngoingGamesAfterRound', updatedGame);
-                this.currentQuestionIndex = 0;
-                this.correctAnswers = 0;
                 this.$router.push({
-                name: 'results',
-                params: {
-                    correctAnswers: this.correctAnswers
-                }
+                    name: 'results',
+                    params: {
+                        correctAnswers: this.correctAnswers,
+                        scoreCurrentUser: scoreCurrentUser,
+                        scoreOpponent: scoreOpponent,
+                        currentUser: this.currentUser.username,
+                        opponent: opponent
+                    }
                 })
             }
         },
@@ -254,12 +280,13 @@ export default {
   },
 
   ionViewDidEnter() {
-      this.ProgressBarCountdown();
+    this.currentQuestionIndex = 0;
+    this.correctAnswers = 0;
+    this.ProgressBarCountdown();
   },
 
   updated(){
       for(var i=1; i<6; i++) {
-          console.log(this.currentQuestionIndex);
           if(this.currentQuestionIndex+1 == i) {
               document.getElementById("badge"+i).style.background = "#56BE65";
           }
