@@ -128,6 +128,12 @@ const routes = [
   },
 ]
 
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
+  routes,
+  Store
+})
+
 
 let firebaseUser = firebase.auth().currentUser;
 firebase.auth().onAuthStateChanged(function(user) {
@@ -150,14 +156,6 @@ router.beforeEach((to, from, next) => {
     next();
   }
 })
-
-const router = createRouter({
-  history: createWebHistory(process.env.BASE_URL),
-  routes,
-  Store
-})
-
-
 
 
 
