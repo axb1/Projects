@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
+import firebase from 'firebase';
 import Login from '../components/Login/Login.vue';
 import Register from '../components/Login/Register.vue';
 import ForgotPassword from '../components/Login/ForgotPassword.vue';
@@ -126,6 +127,29 @@ const routes = [
     props: true
   },
 ]
+
+
+let firebaseUser = firebase.auth().currentUser;
+firebase.auth().onAuthStateChanged(function(user) {
+  console.log(user);
+  firebaseUser = user;
+});
+
+firebase.auth().onAuthStateChanged(newUserState => {
+  firebaseUser = newUserState;
+  if(firebaseUser) {
+    router.push('/games');
+  }
+})
+
+router.beforeEach((to, from, next) => {
+  console.log(firebaseUser);
+  if (!firebaseUser && to.meta.requiresAuth) {
+    next('login');
+  } else {
+    next();
+  }
+})
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
