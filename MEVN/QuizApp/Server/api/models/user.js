@@ -4,15 +4,10 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     username: { type: String, unique: true},
     email: {type: String, unique: true},
-    allTimeStats: [{
-        amountOfQuestions: Number,
-        amountOfCorrectAnswers: Number,
-        category: String
-    }],
     ongoingGames: [{
         player1: {
             username: String,
-            correctAnswers: Number,
+            Answers: Array,
             goFirst: Boolean,
             dateOfLastTurn: Date,
             myTurn: Boolean,
@@ -21,7 +16,7 @@ const userSchema = new Schema({
         },
         player2: {
             username: String,
-            correctAnswers: Number,
+            correctAnswers: Array,
             goFirst: Boolean,
             dateOfLastTurn: Date,
             myTurn: Boolean,
@@ -34,7 +29,7 @@ const userSchema = new Schema({
     previousGames: [{
         player1: {
             username: String,
-            correctAnswers: Number,
+            correctAnswers: Array,
             goFirst: Boolean,
             dateOfLastTurn: Date,
             myTurn: Boolean,
@@ -43,7 +38,7 @@ const userSchema = new Schema({
         },
         player2: {
             username: String,
-            correctAnswers: Number,
+            correctAnswers: Array,
             goFirst: Boolean,
             dateOfLastTurn: Date,
             myTurn: Boolean,

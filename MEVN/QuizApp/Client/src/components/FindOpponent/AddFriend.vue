@@ -8,15 +8,15 @@
                             <ion-icon :icon="arrowBackOutline" size="large"></ion-icon>
                         </ion-button>
                     </ion-buttons>
-                    <ion-title>Add friend</ion-title>
+                    <ion-title>Tilføj ven</ion-title>
                 </ion-toolbar>
             </ion-header>
                 <div>
                     <form action="/action_page.php">
-                        <input type="text" id="searchinput" name="searchinput" placeholder="Email/username">
+                        <input type="text" id="searchinput" name="searchinput" placeholder="Email/brugernavn">
                     </form>
                 </div>
-                <ion-button @click="SearchForFriend">Search for friend</ion-button>
+                <ion-button @click="SearchForFriend">Søg efter ven</ion-button>
                 <ConfirmAddFriendAlert v-if="friendSearchResult.length !=0" v-bind:friend="friendSearchResult[0]"></ConfirmAddFriendAlert>
 
 

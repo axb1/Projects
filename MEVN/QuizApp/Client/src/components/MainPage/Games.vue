@@ -154,7 +154,7 @@ export default {
 
 h1 {
   color: white;
-  text-align: center;
+  margin-left: 5vw;
 }
 
 

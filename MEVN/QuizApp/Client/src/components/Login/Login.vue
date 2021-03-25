@@ -1,19 +1,19 @@
 <template>
     <ion-page>
         <ion-content>
-            <h1>Welcome to QuizApp</h1>
+            <h1>Velkommen til QuizNord</h1>
             <form action="/action_page.php">
                 <label for="Email" id="emailtxt">Email</label>
-                <input type="text" id="email" name="email" placeholder="Your email.." v-model="email">
+                <input type="text" id="email" name="email" placeholder="Din email.." v-model="email">
 
                 <label for="password" id="passwordtxt">Password</label>
-                <input type="password" id="password" name="password" placeholder="Your password.." v-model="password">
+                <input type="password" id="password" name="password" placeholder="Dit password.." v-model="password">
             </form>
-            <h3 class="forgot-txt"><router-link to="/forgotpassword">Forgot password?</router-link></h3>
+            <h3 class="forgot-txt"><router-link to="/forgotpassword">Glemt password?</router-link></h3>
 
             <ion-button v-on:click="login">Login</ion-button>
-            <h2 id="noaccount">Don't have an account?</h2>
-            <h2 id="signup"><router-link to="/register">Sign up</router-link></h2>
+            <h2 id="noaccount">Har du ikke en konto?</h2>
+            <h2 id="signup"><router-link to="/register">Opret konto</router-link></h2>
         </ion-content>
     </ion-page>
 </template>

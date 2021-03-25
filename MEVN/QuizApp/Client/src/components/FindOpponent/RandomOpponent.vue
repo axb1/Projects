@@ -2,12 +2,14 @@
     <ion-page>
         <ion-content>
           <ion-icon :icon="arrowBackOutline" size="large" @click="GoBack" id="arrow"></ion-icon>
-          <h1>Please select language</h1>
+          <h1>Vælg sprog</h1>
           <ion-item>
-                <ion-label>Language</ion-label>
+                <ion-label>Sprog</ion-label>
                 <ion-select interface="popover">
-                    <ion-select-option value="danish">Danish</ion-select-option>
-                    <ion-select-option value="english">English</ion-select-option>
+                    <ion-select-option value="danish">Dansk</ion-select-option>
+                    <ion-select-option value="english">Svensk</ion-select-option>
+                    <ion-select-option value="english">Norsk</ion-select-option>
+                    <ion-select-option value="english">Engelsk</ion-select-option>
                 </ion-select>
           </ion-item>
           <div>

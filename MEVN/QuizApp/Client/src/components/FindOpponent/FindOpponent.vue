@@ -2,21 +2,21 @@
     <ion-page>
         <ion-content>
           <ion-icon :icon="arrowBackOutline" size="large" @click="GoBack" id="arrow"></ion-icon>
-          <h1>Who would you like to play against?</h1>
+          <h1>Hvem vil du spille mod?</h1>
             <ion-item lines="none">
-              <ion-label color="light" @click="GoToRandomOpponent">Random opponent</ion-label>
+              <ion-label color="light" @click="GoToRandomOpponent">Tilfældig modstander</ion-label>
               <ion-icon :icon="helpOutline" slot="start"></ion-icon>
             </ion-item>
             <ion-item lines="none">
-              <ion-label color="light" @click="GoToFriendslist">QuizApp friend</ion-label>
+              <ion-label color="light" @click="GoToFriendslist">QuizNordven</ion-label>
               <ion-icon :icon="personSharp" slot="start"></ion-icon>
             </ion-item>
             <ion-item lines="none">
-              <ion-label color="light">Facebook friend</ion-label>
+              <ion-label color="light">Facebookven</ion-label>
               <ion-icon :icon="logoFacebook" slot="start"></ion-icon>
             </ion-item>
             <ion-item lines="none">
-              <ion-label color="light" @click="GoToFindPlayer">Find player</ion-label>
+              <ion-label color="light" @click="GoToFindPlayer">Find modstander</ion-label>
               <ion-icon :icon="search" slot="start"></ion-icon>
             </ion-item>
         </ion-content>
@@ -97,7 +97,7 @@ ion-icon {
 }
 
 ion-label {
-  color: white;
+  --color: white;
 }
 ion-button {
   --background: #262A34;

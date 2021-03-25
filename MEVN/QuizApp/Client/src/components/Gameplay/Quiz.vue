@@ -196,14 +196,14 @@ export default {
                 clearInterval(this.timer);
 
                 if (this.currentUser.username == updatedGame.player1.username) {
-                    updatedGame.player1.correctAnswers = updatedGame.player1.correctAnswers + this.correctAnswers;
+                    updatedGame.player1.correctAnswers.push(this.correctAnswers);
                     updatedGame.player1.myTurn = false;
                     updatedGame.player1.dateOfLastTurn = new Date();
                     updatedGame.player1.roundsPlayed = updatedGame.player1.roundsPlayed +1;
                     updatedGame.player2.myTurn = true;
                 }
                 else {
-                    updatedGame.player2.correctAnswers = updatedGame.player2.correctAnswers + this.correctAnswers;
+                    updatedGame.player2.correctAnswers.push(this.correctAnswers);
                     updatedGame.player2.myTurn = false;
                     updatedGame.player2.dateOfLastTurn = new Date();
                     updatedGame.player2.roundsPlayed = updatedGame.player2.roundsPlayed +1;
@@ -253,11 +253,8 @@ export default {
 
   },
 
-  mounted() {
-              console.log("I was called;");
-        // Start progress bar
-        this.ProgressBarCountdown();
-
+  ionViewDidEnter() {
+      this.ProgressBarCountdown();
   },
 
   updated(){

@@ -6,17 +6,16 @@
                     <ion-buttons slot="start">
                         <ion-icon :icon="arrowBackOutline" size="large" @click="GoBack"></ion-icon>
                     </ion-buttons>
-                    <ion-title>Find player</ion-title>
+                    <ion-title>Find modstander</ion-title>
                 </ion-toolbar>
           </ion-header>
                 <div>
-                    <h1>Search for player</h1>
                     <form action="/action_page.php">
-                        <input type="text" id="searchinput" name="searchinput" placeholder="Email/username">
+                        <input type="text" id="searchinput" name="searchinput" placeholder="Email/brugernavn">
                     </form>
                 </div>
                 <div class="container">
-                    <ion-button id="search" @click="SearchForOpponent">Search for player</ion-button>
+                    <ion-button id="search" @click="SearchForOpponent">Søg efter modstander</ion-button>
                 </div>
                 <InviteToGameAlert v-if="playerSearchResult.length !=0" v-bind:player="playerSearchResult[0]"></InviteToGameAlert>
         </ion-content>

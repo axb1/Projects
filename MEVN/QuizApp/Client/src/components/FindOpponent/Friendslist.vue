@@ -13,10 +13,9 @@
                             <ion-icon :icon="addCircleOutline" size="large"></ion-icon>
                         </ion-button>
                     </ion-buttons>
-                    <ion-title>Select Friend</ion-title>
+                    <ion-title>Vælg ven at spille mod</ion-title>
                 </ion-toolbar>
           </ion-header>
-          <h1>Select a friend to play against</h1>
           <ion-list v-for="friend in friends" :key="friend._id">
               <InviteToGameAlert v-bind:player="friend"></InviteToGameAlert>
           </ion-list>

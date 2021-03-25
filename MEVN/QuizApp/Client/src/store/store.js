@@ -164,7 +164,7 @@ export default createStore({
             if (games.length != 0) {
                 // Find and update available game
                 var availableGame = games[0];
-                var player2 = {username: user[0].username, correctAnswers: 0, goFirst: false, dateOfLastTurn: date, myTurn: false, img: user[0].img, roundsPlayed: 0};
+                var player2 = {username: user[0].username, correctAnswers: [], goFirst: false, dateOfLastTurn: date, myTurn: false, img: user[0].img, roundsPlayed: 0};
                 var update = {player2: player2, isFull: true};
                 await GameService.updateGame(availableGame._id, update);
                 availableGame.player2 = player2;
@@ -186,7 +186,7 @@ export default createStore({
             else {
                 var player1 = {
                     username: user[0].username,
-                    correctAnswers: 0,
+                    correctAnswers: [],
                     goFirst: true,
                     dateOfLastTurn: date,
                     myTurn: true,
@@ -196,7 +196,7 @@ export default createStore({
 
                 var emptyPlayer2 = {
                     username: "",
-                    correctAnswers: 0,
+                    correctAnswers: [],
                     goFirst: false,
                     dateOfLastTurn: date,
                     myTurn: false,
@@ -235,7 +235,7 @@ export default createStore({
                     }
                     if(timesRun === 6) {
                         // If no opponent found, set admin as opponent
-                        var player2 = {username: "QuizNordTeamet", correctAnswers: 0, goFirst: false, dateOfLastTurn: date, myTurn: false, img: 'https://cdn.bulbagarden.net/upload/0/02/009Blastoise.png', roundsPlayed: 0};
+                        var player2 = {username: "QuizNordTeamet", correctAnswers: [], goFirst: false, dateOfLastTurn: date, myTurn: false, img: 'https://cdn.bulbagarden.net/upload/0/02/009Blastoise.png', roundsPlayed: 0};
                         var update = {player2: player2, isFull: true};
                         await GameService.updateGame(gameId, update);
 
@@ -274,7 +274,7 @@ export default createStore({
             // Create players
             var player1 = {
                 username: user[0].username,
-                correctAnswers: 0,
+                correctAnswers: [],
                 goFirst: true,
                 dateOfLastTurn: date,
                 myTurn: true,
@@ -284,7 +284,7 @@ export default createStore({
 
             var player2 = {
                 username: invite.username,
-                correctAnswers: 0,
+                correctAnswers: [],
                 goFirst: false,
                 dateOfLastTurn: date,
                 myTurn: false,

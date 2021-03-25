@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const gameSchema = mongoose.Schema({
     player1: {
         username: String,
-        correctAnswers: Number,
+        correctAnswers: Array,
         goFirst: Boolean,
         dateOfLastTurn: Date,
         myTurn: Boolean,
@@ -13,7 +13,7 @@ const gameSchema = mongoose.Schema({
     },
     player2: {
         username: String,
-        correctAnswers: Number,
+        correctAnswers: Array,
         goFirst: Boolean,
         dateOfLastTurn: Date,
         myTurn: Boolean,

@@ -1,9 +1,9 @@
 <template>
     <ion-page>
         <ion-content>
-            <h1>Results</h1>
-            <h2>You answered {{correctAnswers}}/3 questions correctly</h2>
-            <ion-button expand="block" @click="GoToMainPage">Go to main page</ion-button>
+            <h1>Resultat</h1>
+            <h2>Du svarede rigtigt på {{correctAnswers}}/3 spørgsmål</h2>
+            <ion-button expand="block" @click="GoToMainPage">Gå tilbage</ion-button>
         </ion-content>
     </ion-page>
 </template>

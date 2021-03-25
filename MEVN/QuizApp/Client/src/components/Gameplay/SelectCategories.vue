@@ -2,7 +2,7 @@
   <ion-page>
     <ion-content>
       <ion-icon id="arrowback" :icon="arrowBackOutline" size="large" @click="GoBack"></ion-icon>
-      <h1>Select 3 categories</h1>
+      <h1>Vælg 3 kategorier</h1>
       <ion-list v-for="category in randomCategories" v-bind:key="category">
         <div v-if="category.val == 'Sport'">
           <ion-item lines="none">
@@ -117,7 +117,7 @@
           </ion-item>
         </div>
       </ion-list>
-      <ion-button v-on:click="StartTheGame()">Confirm categories</ion-button>
+      <ion-button v-on:click="StartTheGame()">Bekræft kategorier</ion-button>
     </ion-content>
   </ion-page>
 </template>
@@ -296,6 +296,7 @@ h1 {
 
 div {
   background-color: #181A20;
+  margin-bottom: 1.2vh;
 }
 
 ion-list {

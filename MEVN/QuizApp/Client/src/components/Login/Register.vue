@@ -2,21 +2,21 @@
     <ion-page>
         <ion-content>
             <ion-icon :icon="arrowBackOutline" size="large" @click="GoBack"></ion-icon>
-            <h3 class="login-txt">Create an account to continue</h3>
+            <h3 class="login-txt">Opret en konto for at spille</h3>
             <form action="/action_page.php">
-                <label for="accountname" >Account Name</label>
-                <input type="text" id="accountname" name="accountname" placeholder="Your account name.." v-model="accountname">
+                <label for="accountname" >Brugernavn</label>
+                <input type="text" id="accountname" name="accountname" placeholder="Dit brugernavn.." v-model="accountname">
 
                 <label for="Email">Email</label>
-                <input type="text" id="email" name="email" placeholder="Your email.." v-model="email">
+                <input type="text" id="email" name="email" placeholder="Din email.." v-model="email">
 
                 <label for="password" >Password</label>
-                <input type="password" id="password" name="password" placeholder="Your password.." v-model="password">
+                <input type="password" id="password" name="password" placeholder="Dit password.." v-model="password">
 
-                <label for="confirmpassword">Confirm Password</label>
-                <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Your password.." v-model="confirmpassword">
+                <label for="confirmpassword">Bekræft password</label>
+                <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Dit password.." v-model="confirmpassword">
             </form>
-            <ion-button v-on:click="Register">Register</ion-button>
+            <ion-button v-on:click="Register">Opret bruger</ion-button>
         </ion-content>
     </ion-page>
 </template>
@@ -87,7 +87,10 @@ export default {
     font-size: 1.9rem;
     margin-top: 5vh;
     margin-bottom: 5vh;
+    margin-right: 10vw;
+    margin-left: 10vw;
 }
+
 
 .forgot-txt {
     color: #E91E63;

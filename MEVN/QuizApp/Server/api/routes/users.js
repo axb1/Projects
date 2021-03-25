@@ -6,7 +6,6 @@ router.post('/', async (req, res) => {
     const user = new User({
         username: req.body.username,
         email: req.body.email,
-        allTimeStats: req.body.allTimeStats,
         ongoingGames: req.body.ongoingGames,
         previousGames: req.body.previousGames,
         searchingForGame: req.body.searchingForGame,

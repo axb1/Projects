@@ -2,8 +2,8 @@
     <ion-page>
         <ion-content>
             <ion-icon :icon="arrowBackOutline" size="large" @click="GoBack"></ion-icon>
-            <h1>Settings</h1>
-            <ion-button @click="SignOut" expand="full">Sign out</ion-button>
+            <h1>Indstillinger</h1>
+            <ion-button @click="SignOut" expand="full">Log ud</ion-button>
         </ion-content>
     </ion-page>
 </template>

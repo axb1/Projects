@@ -1,5 +1,5 @@
 <template>
-  <ion-button @click="presentAlert">Search for game
+  <ion-button @click="presentAlert">Søg efter modstander
   </ion-button>
 </template>
 
@@ -15,7 +15,7 @@ export default defineComponent({
       const alert = await alertController
         .create({
           cssClass: 'my-custom-class',
-          header: 'We are searching for a game. This may take a few minutes',
+          header: 'Vi leder efter et spil. Det kan tage lidt tid',
           buttons: [{
             text: 'Ok',
             handler: blah => {
