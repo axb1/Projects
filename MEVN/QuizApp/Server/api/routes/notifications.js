@@ -9,14 +9,13 @@ admin.initializeApp({
 
 
 router.post('/', async (req, res) => {
-    const token = "eECL9qgcS2Oj_hb_qyDoU4:APA91bFo4ivH9d20QnM7WMw9Jq3jgFVN6hcpVX1IiubUYYIecKcP-60awF95SZJwjqGdWSwSi4ytkqAIbq-pSskkqfqmj_lU14d0fUJ-juretM0Al3iq9qf2LKb115Wc4_MznKYdgB5_";
-    var message = {
-        data: {
-          score: '850',
-          time: '2:45'
-        },
-        token: token
-      };
+  var message = {
+    notification: {
+      title: req.body.title,
+      body: req.body.body
+    },
+    token: req.body.token
+  };
 
     try {
         admin.messaging().send(message)
