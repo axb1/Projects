@@ -14,7 +14,8 @@ export default createStore({
         friends: [],
         friendSearchResult: String,
         playerSearchResult: String,
-        invites: []
+        invites: [],
+        token: String
     },
     mutations: {
         setOngoingGames(state, payload) {
@@ -44,6 +45,9 @@ export default createStore({
         setInvites(state, payload) {
             state.invites = payload;
         },
+        setToken(state, payload) {
+            state.token = payload;
+        }
     },
     actions: {
         async setOngoingGames(state) {
@@ -114,6 +118,10 @@ export default createStore({
             var user = await UserService.getUserByEmail(firebaseUser.email);
             var actualUser = user[0];
             state.commit('setInvites', actualUser.invites);
+        },
+
+        async setToken(state, token) {
+            state.commit('setToken', token);
         },
 
         async addFriendToFriendslist(state, friend) {
@@ -406,7 +414,8 @@ export default createStore({
         getCurrentGame: state => state.currentGame,
         getFriends: state => state.friends,
         getFriendSearchResult: state => state.friendSearchResult,
-        getPlayerSearchResult: state => state.playerSearchResult
+        getPlayerSearchResult: state => state.playerSearchResult,
+        getToken: state => state.token
     }
 })
 

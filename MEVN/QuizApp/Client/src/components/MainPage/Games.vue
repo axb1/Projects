@@ -97,7 +97,7 @@ export default {
     // On success, we should be able to receive notifications
     PushNotifications.addListener('registration',
       (token) => {
-        console.log(token.value);
+        this.$store.dispatch('setToken', token.value);
         alert('Push registration success, token: ' + token.value);
       }
     );

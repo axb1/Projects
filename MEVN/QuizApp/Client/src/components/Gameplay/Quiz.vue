@@ -36,6 +36,7 @@
 <script>
 import { IonPage, IonContent, IonButton, IonBadge, IonIcon, IonProgressBar} from '@ionic/vue';
 import QuestionService from '../../api/QuestionService';
+import NotificationService from '../../api/NotificationService';
 import {arrowBackOutline} from 'ionicons/icons';
 
 
@@ -47,6 +48,9 @@ export default {
         },
         currentUser() {
             return this.$store.getters.getCurrentUser;
+        },
+        token() {
+            return this.$store.getters.getToken;
         }
     },
     props: ['items'],
@@ -151,6 +155,15 @@ export default {
             document.getElementsByClassName('answer4')[0].style.opacity = "1";
         },
 
+        async SendNotification() {
+            var username = this.currentUser.username;
+            var title = 'QuizNord';
+            var body = username + "svarede rigtigt på " + this.correctAnswers + "spørgsmål";
+            var token = "eECL9qgcS2Oj_hb_qyDoU4:APA91bFo4ivH9d20QnM7WMw9Jq3jgFVN6hcpVX1IiubUYYIecKcP-60awF95SZJwjqGdWSwSi4ytkqAIbq-pSskkqfqmj_lU14d0fUJ-juretM0Al3iq9qf2LKb115Wc4_MznKYdgB5_";
+            await NotificationService.sendNotification(title, body, token);
+            
+        },
+
         GoToNextQuestion() {
             // Remove style (id) from right answer
             var element = document.getElementById('style1');
@@ -236,6 +249,9 @@ export default {
                         scoreCurrentUser = scoreCurrentUser + element;
                     });
                 }
+                
+                // Send notification
+                this.SendNotification();
 
 
                 this.$store.dispatch('updateOngoingGamesAfterRound', updatedGame);
