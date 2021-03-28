@@ -3,26 +3,21 @@
         <ion-content>
             <ion-icon :icon="arrowBackOutline" size="large" @click="GoBack"></ion-icon>
             <h3 class="login-txt">Opret en konto for at spille</h3>
-            <form action="/action_page.php">
-                <label for="accountname" >Brugernavn</label>
-                <input type="text" id="accountname" name="accountname" placeholder="Dit brugernavn.." v-model="accountname">
-
-                <label for="Email">Email</label>
-                <input type="text" id="email" name="email" placeholder="Din email.." v-model="email">
-
-                <label for="password" >Password</label>
-                <input type="password" id="password" name="password" placeholder="Dit password.." v-model="password">
-
-                <label for="confirmpassword">Bekræft password</label>
-                <input type="password" id="confirmpassword" name="confirmpassword" placeholder="Dit password.." v-model="confirmpassword">
-            </form>
+            <ion-label>Brugernavn</ion-label>
+            <ion-input v-model="accountname" required=true placeholder="Dit brugernavn.."></ion-input>
+            <ion-label>Email</ion-label>
+            <ion-input v-model="email" required=true placeholder="Din email.."></ion-input>
+            <ion-label>Password</ion-label>
+            <ion-input v-model="password" type="password" required=true placeholder="Dit password.."></ion-input>
+            <ion-label>Bekræft password</ion-label>
+            <ion-input v-model="confirmpassword" type="password" required=true placeholder="Dit password.."></ion-input>
             <ion-button v-on:click="Register">Opret bruger</ion-button>
         </ion-content>
     </ion-page>
 </template>
 
 <script>
-import { IonPage, IonContent, IonButton, IonIcon} from '@ionic/vue';
+import { IonPage, IonContent, IonButton, IonIcon, IonLabel, IonInput} from '@ionic/vue';
 import firebase from 'firebase';
 import { arrowBackOutline } from 'ionicons/icons';
 import UserService from '../../api/UserService';
@@ -76,7 +71,9 @@ export default {
         IonPage,
         IonContent,
         IonButton,
-        IonIcon
+        IonIcon,
+        IonLabel,
+        IonInput
     }
 }
 </script>
@@ -92,28 +89,10 @@ export default {
 }
 
 
-.forgot-txt {
-    color: #E91E63;
-    text-align: right;
-    font-size: 1rem;
-    margin-right: 1rem;
-    font-weight: bold;
-}
-
 ion-icon {
     margin-top: 4vh;
     margin-left: 5vw;
     color: white;
-}
-
-ion-title {
-    font-weight: bolder;
-    font-size: 1.2rem;
-    color: white;
-}
-
-ion-label {
-    font-weight: bold;
 }
 
 ion-button {
@@ -126,41 +105,25 @@ ion-button {
     height: 7.4vh;
 }
 
-input[type=text], select {
-  width: 86vw;
-  padding: 12px 20px;
-  display: inline-block;
-  border: 1px solid #262A34;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-left: 7vw;
-  margin-right: 7vw;
-  margin-bottom: 2vh;
-  margin-top: 2vh;
-  background-color: #262A34;
-  height: 6vh;
-  color: white;
+ion-label {
+    color: white;
+    margin-left: 7vw;
 }
 
-input[type=password], select {
-  width: 86vw;
-  padding: 12px 20px;
-  display: inline-block;
-  border: 1px solid #262A34;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-right: 7vw;
-  margin-left: 7vw;
-  margin-bottom: 2vh;
-  margin-top: 2vh;
-  background-color: #262A34;
-  height: 6vh;
-  color: white;
-}
-
-label {
-    color:white;
-    margin-left: 8vw;
+ion-input {
+    --padding-top: 1.8vh;
+    --padding-bottom: 1.8vh;
+    --padding-start: 1.5vh;
+    --padding-end: 1.5vh;
+    width: 86vw;
+    border: 1px solid #262A34;
+    border-radius: 4px;
+    margin-left: 7vw;
+    margin-right: 7vw;
+    margin-bottom: 2vh;
+    margin-top: 2vh;
+    background-color: #262A34;
+    color: white;
 }
 
 

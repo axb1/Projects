@@ -4,24 +4,22 @@
             <ion-icon :icon="arrowBackOutline" size="large" @click="GoBack"></ion-icon>
             <h1>Forgot password?</h1>
             <h3>Confirm your email and we'll send the instructions.</h3>
-            <form action="/action_page.php">
-                <label for="Email">Email</label>
-                <input type="text" id="email" name="email" placeholder="Your email.." v-model="email">
-            </form>
+            <ion-input v-model="email" required=true placeholder="Din email.."></ion-input>
             <ion-button v-on:click="SendPasswordResetEmail(email)">Reset Password</ion-button>
         </ion-content>
     </ion-page>
 </template>
 
 <script>
-import { IonPage, IonContent, IonButton, IonIcon} from '@ionic/vue';
+import { IonPage, IonContent, IonButton, IonIcon, IonInput} from '@ionic/vue';
 import { arrowBackOutline } from 'ionicons/icons';
 import firebase from 'firebase';
 export default {
     name: 'forgotPassword',
     data: function() {
       return {
-          arrowBackOutline
+          arrowBackOutline,
+          email: '',
       };  
     },
     components: {
@@ -29,6 +27,7 @@ export default {
         IonContent,
         IonButton,
         IonIcon,
+        IonInput
     },
     methods: {
         SendPasswordResetEmail(emailAddress) {
@@ -65,12 +64,25 @@ h3 {
     font-size: 0.9rem;
     text-align: center;
     color: #A3A3A6;
-    margin-bottom: 5.5vh;
+    margin-bottom: 5vh;
 }
 
 
-ion-label {
-    font-weight: bold;
+
+ion-input {
+    --padding-top: 1.8vh;
+    --padding-bottom: 1.8vh;
+    --padding-start: 1.5vh;
+    --padding-end: 1.5vh;
+    width: 86vw;
+    border: 1px solid #262A34;
+    border-radius: 4px;
+    margin-left: 7vw;
+    margin-right: 7vw;
+    margin-bottom: 2vh;
+    margin-top: 1vh;
+    background-color: #262A34;
+    color: white;
 }
 
 ion-button {
@@ -83,21 +95,6 @@ ion-button {
     height: 7.5vh;
 }
 
-
-input[type=text], select {
-  width: 86%;
-  padding: 12px 20px;
-  display: inline-block;
-  border: 1px solid #262A34;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-left: 7vw;
-  margin-right: 7vw;
-  margin-bottom: 2vh;
-  margin-top: 2vh;
-  background-color: #262A34;
-  color: white;
-}
 
 label {
     color:white;

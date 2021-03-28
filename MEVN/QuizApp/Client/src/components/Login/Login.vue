@@ -2,13 +2,10 @@
     <ion-page>
         <ion-content>
             <h1>Velkommen til QuizNord</h1>
-            <form action="/action_page.php">
-                <label for="Email" id="emailtxt">Email</label>
-                <input type="text" id="email" name="email" placeholder="Din email.." v-model="email">
-
-                <label for="password" id="passwordtxt">Password</label>
-                <input type="password" id="password" name="password" placeholder="Dit password.." v-model="password">
-            </form>
+            <ion-label>Email</ion-label>
+            <ion-input v-model="email" required=true placeholder="Din email.."></ion-input>
+            <ion-label>Password</ion-label>
+            <ion-input v-model="password" type="password" required=true placeholder="Dit password.."></ion-input>
             <h3 class="forgot-txt"><router-link to="/forgotpassword">Glemt password?</router-link></h3>
 
             <ion-button v-on:click="login">Login</ion-button>
@@ -19,7 +16,7 @@
 </template>
 
 <script>
-import { IonPage, IonContent} from '@ionic/vue';
+import { IonPage, IonContent, IonInput, IonLabel} from '@ionic/vue';
 import firebase from 'firebase';
 export default {
     name: 'login',
@@ -50,6 +47,8 @@ export default {
     components: {
         IonPage,
         IonContent,
+        IonInput,
+        IonLabel
     }
 }
 </script>
@@ -119,35 +118,28 @@ ion-button {
     height: 7.4vh;
 }
 
-input[type=text], select {
-  width: 86vw;
-  padding: 12px 20px;
-  display: inline-block;
-  border: 1px solid #262A34;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-left: 7vw;
-  margin-right: 7vw;
-  margin-bottom: 2vh;
-  margin-top: 2vh;
-  background-color: #262A34;
-  color: white;
+
+ion-label {
+    color: white;
+    margin-left: 7vw;
 }
 
-input[type=password], select {
-  width: 86vw;
-  padding: 12px 20px;
-  display: inline-block;
-  border: 1px solid #262A34;
-  border-radius: 4px;
-  box-sizing: border-box;
-  margin-left: 7vw;
-  margin-right: 7vw;
-  margin-bottom: 1vh;
-  margin-top: 2vh;
-  background-color: #262A34;
-  color: white;
+ion-input {
+    --padding-top: 1.8vh;
+    --padding-bottom: 1.8vh;
+    --padding-start: 1.5vh;
+    --padding-end: 1.5vh;
+    width: 86vw;
+    border: 1px solid #262A34;
+    border-radius: 4px;
+    margin-left: 7vw;
+    margin-right: 7vw;
+    margin-bottom: 2vh;
+    margin-top: 2vh;
+    background-color: #262A34;
+    color: white;
 }
+
 
 h1 {
     font-weight: bold;

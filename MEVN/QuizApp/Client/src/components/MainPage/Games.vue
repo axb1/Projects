@@ -3,23 +3,34 @@
         <ion-content>
           <div class="header">
             <img src="../../assets/settings.svg" alt="settings" v-on:click="GoToSettings()" id="settings">
-            <h1>QuizNord</h1>
+            <h1 id="title">QuizNord</h1>
             <img v-on:click="GoToFindOpponent()" src="../../assets/plus.png" alt="add" id="add">
             <ion-badge v-if="currentUser.invites!=undefined && currentUser.invites.length!=0" v-on:click="GoToInvites()">{{currentUser.invites.length}}</ion-badge>
           </div>
-          <h1 id="yourturn">Din tur</h1>
             <div v-if="ongoingGames != undefined">
+              <div v-if="ongoingGames.length != 0">
+                <div id="yourturn">
+                <div class="square"></div>
+                <h1 id="turn">Din tur</h1>
+                </div>
               <ion-list v-for="ongoingGame in ongoingGames" :key="ongoingGame._id">
                 <OngoingGame v-if="(ongoingGame.player2.myTurn == true && ongoingGame.player2.username == currentUser.username)" v-bind:ongoingGame="ongoingGame"></OngoingGame>
                 <OngoingGame v-if="(ongoingGame.player1.myTurn == true && ongoingGame.player1.username == currentUser.username)" v-bind:ongoingGame="ongoingGame"></OngoingGame>
               </ion-list>
+              </div>
+
             </div>
-          <h1>Deres tur</h1>
           <div v-if="ongoingGames != undefined">
-            <ion-list v-for="ongoingGame in ongoingGames" :key="ongoingGame._id">
+            <div v-if="ongoingGames.length != 0">
+              <div id="theirturn">
+              <div class="square"></div>
+              <h1 id="turn">Deres tur</h1>
+              </div>
+              <ion-list v-for="ongoingGame in ongoingGames" :key="ongoingGame._id">
               <OngoingGame v-if="(ongoingGame.player2.myTurn == false && ongoingGame.player2.username == currentUser.username)" v-bind:ongoingGame="ongoingGame"></OngoingGame>
               <OngoingGame v-if="(ongoingGame.player1.myTurn == false && ongoingGame.player1.username == currentUser.username)" v-bind:ongoingGame="ongoingGame"></OngoingGame>
-            </ion-list>
+              </ion-list>
+            </div>
           </div>
         </ion-content>
     </ion-page>
@@ -162,9 +173,24 @@ export default {
   box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
 }
 
-h1 {
+.square {
+    background: #43B15B;
+    width: 5vw;
+    height: 16vw;
+    border-radius: 0 1vh 1vh 0;
+}
+
+
+
+#turn {
   color: white;
   margin-left: 5vw;
+  font-size: 1.3rem;
+}
+
+#title {
+  color: white;
+  font-size: 1.6rem;
 }
 
 
@@ -187,19 +213,29 @@ ion-badge {
 }
 
 #yourturn {
-  margin-top: 1.5vh;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  display: flex;
+  align-items: center;
+}
+
+#theirturn {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  display: flex;
+  align-items: center;
 }
 
 #add {
   margin: 0;
   padding: 0;
-  height: 4vh;
+  height: 4.2vh;
 }
 
 #settings {
   margin: 0;
   padding: 0;
-  height: 4vh;
+  height: 4.2vh;
 }
 
 

@@ -36,19 +36,19 @@ button {
     background: #262A34;
     color: white;
     height: 8.6vh;
-    width: 90%;
+    width: 80vw;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: center;
-    border-radius: 6px;
-    margin-bottom: 1vh;
+    border-radius: 1vw;
+    margin-bottom: 1.5vh;
 }
 
 img {
-    height: 40px;
-    width: 40px;
-    margin-left: 15vw;
+    height: auto;
+    max-width: 15%;
+    border-radius: 50%;
 }
 
 p {
