@@ -74,7 +74,6 @@ export default {
         },
         async CheckForToken() {
           var user = await UserService.getUserByUsername(this.currentUser.username);
-          console.log(user[0]);
           if (user[0].token == "") {
             this.RegisterPushNotifications();
           }
@@ -129,12 +128,9 @@ export default {
         this.$store.dispatch('setPreviousGames');
       }, 30000)
     },
-
-    ionViewDidEnter() {
-      console.log("Did enter");
+    mounted() {
       this.CheckForToken();
     },
-
     created() {
       firebase.auth().onAuthStateChanged(user => {
         if(user) {
