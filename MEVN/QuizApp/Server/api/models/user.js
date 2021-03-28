@@ -58,7 +58,8 @@ const userSchema = new Schema({
         username: String,
         img: String,
         inviteID: String
-    }]
+    }],
+    token: String
     
 });
 

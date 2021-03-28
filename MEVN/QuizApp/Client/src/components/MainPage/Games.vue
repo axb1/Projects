@@ -30,6 +30,7 @@ import { IonPage, IonContent, IonBadge, IonList} from '@ionic/vue';
 import OngoingGame from './OngoingGame';
 import firebase from 'firebase';
 import { Plugins, } from '@capacitor/core';
+import UserService from '@/api/UserService';
 const { PushNotifications } = Plugins;
 
 export default {
@@ -71,58 +72,67 @@ export default {
         GoToSettings() {
           this.$router.push('/settings');
         },
+        async CheckForToken() {
+          var user = await UserService.getUserByUsername(this.currentUser.username);
+          console.log(user[0]);
+          if (user[0].token == "") {
+            this.RegisterPushNotifications();
+          }
+        },
+        async RegisterPushNotifications() {
+          console.log("I was here");
+          // Request permission to use push notifications
+          // iOS will prompt user and return if they granted permission or not
+          // Android will just grant without prompting
+          PushNotifications.requestPermission().then(result => {
+            if (result.granted) {
+            // Register with Apple / Google to receive push via APNS/FCM
+            PushNotifications.register();
+            } else {
+            // Show some error
+            }
+          });
+          // On success, we should be able to receive notifications
+          PushNotifications.addListener('registration',
+            async (token) => {
+              console.log(token.value);
+              await UserService.updateToken(this.currentUser.username, token.value);
+            }
+          );
+          // Some issue with our setup and push will not work
+          PushNotifications.addListener('registrationError',
+            (error) => {
+            alert('Error on registration: ' + JSON.stringify(error));
+            }
+          );
+          // Show us the notification payload if the app is open on our device
+          PushNotifications.addListener('pushNotificationReceived',
+          (notification) => {
+            alert('Push received: ' + JSON.stringify(notification));
+            }
+          );
+          // Method called when tapping on a notification
+          PushNotifications.addListener('pushNotificationActionPerformed',
+          (notification) => {
+            alert('Push action performed: ' + JSON.stringify(notification));
+            }
+          );
+        }
     },
 
-    async mounted() {
+    async ionViewWillEnter() {
       this.$store.dispatch('setCurrentUser');
       this.$store.dispatch('setOngoingGames');
       this.$store.dispatch('setPreviousGames');
-
       window.setInterval(() => {
         this.$store.dispatch('setOngoingGames');
         this.$store.dispatch('setPreviousGames');
       }, 30000)
-        // Request permission to use push notifications
-    // iOS will prompt user and return if they granted permission or not
-    // Android will just grant without prompting
-    PushNotifications.requestPermission().then( result => {
-      if (result.granted) {
-        // Register with Apple / Google to receive push via APNS/FCM
-        PushNotifications.register();
-      } else {
-        // Show some error
-      }
-    });
+    },
 
-    // On success, we should be able to receive notifications
-    PushNotifications.addListener('registration',
-      (token) => {
-        this.$store.dispatch('setToken', token.value);
-        alert('Push registration success, token: ' + token.value);
-      }
-    );
-
-    // Some issue with our setup and push will not work
-    PushNotifications.addListener('registrationError',
-      (error) => {
-        alert('Error on registration: ' + JSON.stringify(error));
-      }
-    );
-
-    // Show us the notification payload if the app is open on our device
-    PushNotifications.addListener('pushNotificationReceived',
-      (notification) => {
-        alert('Push received: ' + JSON.stringify(notification));
-      }
-    );
-
-    // Method called when tapping on a notification
-    PushNotifications.addListener('pushNotificationActionPerformed',
-      (notification) => {
-        alert('Push action performed: ' + JSON.stringify(notification));
-      }
-    );
-    
+    ionViewDidEnter() {
+      console.log("Did enter");
+      this.CheckForToken();
     },
 
     created() {

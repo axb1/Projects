@@ -87,7 +87,8 @@ class UserService {
             ongoingGames: [],
             previousGames: [],
             searchingForGame: false,
-            img: img
+            img: img,
+            token: ""
         });
     }
 
@@ -120,6 +121,14 @@ class UserService {
         return axios.put(url + 'invites', {
             username: username,
             invites: invites
+        })
+    }
+
+    // Update invites
+    static updateToken(username, token) {
+        return axios.put(url + 'token', {
+            username: username,
+            token: token
         })
     }
     

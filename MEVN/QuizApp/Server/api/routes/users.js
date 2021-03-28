@@ -11,7 +11,8 @@ router.post('/', async (req, res) => {
         searchingForGame: req.body.searchingForGame,
         img: req.body.img,
         friends: req.body.friends,
-        invites: req.body.invites
+        invites: req.body.invites,
+        token: req.body.token,
     });
 
     try {
@@ -75,6 +76,18 @@ router.put('/friends', async (req, res) => {
 router.put('/invites', async (req, res) => {
     const filter = {username: req.body.username};
     const update = {invites: req.body.invites};
+    try {
+        const updatedUser = await User.findOneAndUpdate(filter, update);
+        res.json(updatedUser);
+    } catch(err){
+        res.json({message: err})
+    }
+});
+
+// Update user (add token)
+router.put('/token', async (req, res) => {
+    const filter = {username: req.body.username};
+    const update = {token: req.body.token};
     try {
         const updatedUser = await User.findOneAndUpdate(filter, update);
         res.json(updatedUser);
