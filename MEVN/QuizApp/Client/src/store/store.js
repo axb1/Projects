@@ -181,7 +181,7 @@ export default createStore({
             if (games.length != 0) {
                 // Find and update available game
                 var availableGame = games[0];
-                var player2 = {username: user[0].username, correctAnswers: [], goFirst: false, dateOfLastTurn: date, myTurn: false, img: user[0].img, roundsPlayed: 0};
+                var player2 = {username: user[0].username, correctAnswers: [], goFirst: false, dateOfLastTurn: date, myTurn: false, img: user[0].img, roundsPlayed: 0, token: user[0].token};
                 var update = {player2: player2, isFull: true};
                 availableGame.player2 = player2;
                 availableGame.isFull = true;
@@ -208,7 +208,8 @@ export default createStore({
                     dateOfLastTurn: date,
                     myTurn: true,
                     img: user[0].img,
-                    roundsPlayed: 0
+                    roundsPlayed: 0,
+                    token: user[0].token
                 }
 
                 var emptyPlayer2 = {
@@ -218,7 +219,8 @@ export default createStore({
                     dateOfLastTurn: date,
                     myTurn: false,
                     img: "",
-                    roundsPlayed: 0
+                    roundsPlayed: 0,
+                    token: ""
                 }
 
                 // Create the new game
@@ -230,6 +232,7 @@ export default createStore({
                 // Look to see if game has been updated every 5 seconds for a total of 60 seconds
                 var timesRun = 0;
                 var interval = setInterval(async function(){
+                    // I don't know why this is needed. Something to do with scope of setInterval?
                     var ongoingGames2 = user[0].ongoingGames;
                     var game = await GameService.getGameByGameId(gameId);
                     timesRun +=1;
@@ -238,7 +241,6 @@ export default createStore({
                     if(game[0].player2.username != "") {
                         
                         // Add game to users ongoing games
-                        // I don't know why this is needed. Something to do with setInterval?
                         ongoingGames2.push(game[0]);
                         await UserService.updateOngoingGames(user[0].username, ongoingGames2);
 
@@ -298,7 +300,8 @@ export default createStore({
                 dateOfLastTurn: date,
                 myTurn: true,
                 img: user[0].img,
-                roundsPlayed: 0
+                roundsPlayed: 0,
+                token: user[0].token
             }
 
             var player2 = {
@@ -308,7 +311,8 @@ export default createStore({
                 dateOfLastTurn: date,
                 myTurn: false,
                 img: invite.img,
-                roundsPlayed: 0
+                roundsPlayed: 0,
+                token: ""
             }
 
             // Create the new game

@@ -159,6 +159,7 @@ export default {
             var username = this.currentUser.username;
             var title = 'QuizNord';
             var body = username + " svarede rigtigt på " + this.correctAnswers + " spørgsmål";
+            console.log(token);
             await NotificationService.sendNotification(title, body, token);
             
         },
@@ -253,6 +254,7 @@ export default {
                 }
                 
                 // Send notification
+                console.log(opponentToken);
                 this.SendNotification(opponentToken);
 
 

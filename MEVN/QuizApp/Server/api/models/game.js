@@ -10,6 +10,7 @@ const gameSchema = mongoose.Schema({
         myTurn: Boolean,
         img: String,
         roundsPlayed: Number,
+        token: String
     },
     player2: {
         username: String,
@@ -19,6 +20,7 @@ const gameSchema = mongoose.Schema({
         myTurn: Boolean,
         img: String,
         roundsPlayed: Number,
+        token: String
     },
     gameIsOver: Boolean,
     isFull: Boolean,
