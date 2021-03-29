@@ -175,6 +175,7 @@ export default createStore({
             // Get user
             var firebaseUser = firebase.auth().currentUser;
             var user = await UserService.getUserByEmail(firebaseUser.email);
+            var ongoingGames = user[0].ongoingGames;
             var date = new Date();
             // If there is a game, set player2 and update game
             if (games.length != 0) {
@@ -182,12 +183,12 @@ export default createStore({
                 var availableGame = games[0];
                 var player2 = {username: user[0].username, correctAnswers: [], goFirst: false, dateOfLastTurn: date, myTurn: false, img: user[0].img, roundsPlayed: 0};
                 var update = {player2: player2, isFull: true};
-                await GameService.updateGame(availableGame._id, update);
                 availableGame.player2 = player2;
                 availableGame.isFull = true;
+                await GameService.updateGame(availableGame.gameId, update);
+                
 
                 // Add game to users ongoing games
-                var ongoingGames = user[0].ongoingGames;
                 ongoingGames.push(availableGame);
                 await UserService.updateOngoingGames(user[0].username, ongoingGames);
 
@@ -229,21 +230,23 @@ export default createStore({
                 // Look to see if game has been updated every 5 seconds for a total of 60 seconds
                 var timesRun = 0;
                 var interval = setInterval(async function(){
+                    var ongoingGames2 = user[0].ongoingGames;
                     var game = await GameService.getGameByGameId(gameId);
                     timesRun +=1;
                     
                     // If the game has been updated (ie an opponent has joined)
                     if(game[0].player2.username != "") {
-
+                        
                         // Add game to users ongoing games
-                        ongoingGames.push(game[0]);
-                        await UserService.updateOngoingGames(user[0].username, ongoingGames);
+                        // I don't know why this is needed. Something to do with setInterval?
+                        ongoingGames2.push(game[0]);
+                        await UserService.updateOngoingGames(user[0].username, ongoingGames2);
 
                         // No longer looking for opponent
                         await UserService.setSearchingForGame(user[0].username, false);
                 
                         // Updating ongoing games in app
-                        state.commit('setOngoingGames', ongoingGames);
+                        state.commit('setOngoingGames', ongoingGames2);
                         state.commit('setLookingForRandomOpponent', false)
 
                         // Stop running
