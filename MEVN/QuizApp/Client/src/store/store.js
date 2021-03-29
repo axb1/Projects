@@ -15,7 +15,8 @@ export default createStore({
         friendSearchResult: String,
         playerSearchResult: String,
         invites: [],
-        token: String
+        token: String,
+        didRegisterForNotifications: false
     },
     mutations: {
         setOngoingGames(state, payload) {
@@ -47,6 +48,9 @@ export default createStore({
         },
         setToken(state, payload) {
             state.token = payload;
+        },
+        setDidRegisterForNotifications(state, payload) {
+            state.didRegisterForNotifications = payload;
         }
     },
     actions: {
@@ -122,6 +126,10 @@ export default createStore({
 
         async setToken(state, token) {
             state.commit('setToken', token);
+        },
+
+        async setDidRegisterForNotifications(state, didRegisterForNotifications) {
+            state.commit('setDidRegisterForNotifications', didRegisterForNotifications);
         },
 
         async addFriendToFriendslist(state, friend) {
@@ -415,7 +423,8 @@ export default createStore({
         getFriends: state => state.friends,
         getFriendSearchResult: state => state.friendSearchResult,
         getPlayerSearchResult: state => state.playerSearchResult,
-        getToken: state => state.token
+        getToken: state => state.token,
+        getDidRegisterForNotifications: state => state.didRegisterForNotifications
     }
 })
 

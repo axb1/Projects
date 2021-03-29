@@ -59,6 +59,9 @@ export default {
         currentUser() {
           return this.$store.getters.getCurrentUser;
         },
+        didRegisterForNotifications() {
+          return this.$store.getters.getDidRegisterForNotifications;
+        }
     },
     data: function() {
       return {
@@ -101,6 +104,8 @@ export default {
           PushNotifications.addListener('registration',
             async (token) => {
               await UserService.updateToken(this.currentUser.username, token.value);
+              this.$store.dispatch('setDidRegisterForNotifications', true);
+              
             }
           );
 
@@ -138,13 +143,19 @@ export default {
       }, 30000)
     
     },
-    async mounted() {
+
+    async ionViewDidEnter() {
       // This is SUPER sketchy
       var user = await UserService.getUserByUsername(this.currentUser.username);
-      while(user.length == 0) {
+      var counter = 0;
+      while(user.length == 0 && this.didRegisterForNotifications == false) {
         user = await UserService.getUserByUsername(this.currentUser.username);
+        counter = counter + 1;
+        console.log(counter);
       }
-      this.RegisterForPushNotifications();
+      if (user[0].token == "") {
+         this.RegisterForPushNotifications();
+      }
     },
     created() {
       firebase.auth().onAuthStateChanged(user => {
@@ -199,6 +210,7 @@ ion-list {
   align-items: center;
   justify-content: center;
   background: #181A20;
+  padding: 0;
 }
 
 ion-badge {

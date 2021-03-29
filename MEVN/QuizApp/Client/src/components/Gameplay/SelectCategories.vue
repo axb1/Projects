@@ -266,6 +266,9 @@ ion-icon {
   color: white;
 }
 
+ion-list {
+  padding: 0;
+}
 
 ion-button {
     --background: linear-gradient(to right, #0BA360, #3CBA92);
@@ -296,7 +299,7 @@ h1 {
 
 div {
   background-color: #181A20;
-  margin-bottom: 1.2vh;
+  margin-bottom: 1.5vh;
 }
 
 ion-list {
