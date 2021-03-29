@@ -10,7 +10,7 @@
             <ion-label>Password</ion-label>
             <ion-input v-model="password" type="password" required=true placeholder="Dit password.."></ion-input>
             <ion-label>Bekræft password</ion-label>
-            <ion-input v-model="confirmpassword" type="password" required=true placeholder="Dit password.."></ion-input>
+            <ion-input v-model="confirmpassword" type="password" required=true placeholder="Dit password.." v-on:keyup.enter="Register"></ion-input>
             <ion-button v-on:click="Register">Opret bruger</ion-button>
         </ion-content>
     </ion-page>

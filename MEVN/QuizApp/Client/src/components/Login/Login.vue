@@ -5,7 +5,7 @@
             <ion-label>Email</ion-label>
             <ion-input v-model="email" required=true placeholder="Din email.."></ion-input>
             <ion-label>Password</ion-label>
-            <ion-input v-model="password" type="password" required=true placeholder="Dit password.."></ion-input>
+            <ion-input v-model="password" type="password" required=true placeholder="Dit password.." v-on:keyup.enter="login"></ion-input>
             <h3 class="forgot-txt"><router-link to="/forgotpassword">Glemt password?</router-link></h3>
 
             <ion-button v-on:click="login">Login</ion-button>
