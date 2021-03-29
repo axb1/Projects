@@ -155,11 +155,10 @@ export default {
             document.getElementsByClassName('answer4')[0].style.opacity = "1";
         },
 
-        async SendNotification() {
+        async SendNotification(token) {
             var username = this.currentUser.username;
             var title = 'QuizNord';
             var body = username + " svarede rigtigt på " + this.correctAnswers + " spørgsmål";
-            var token = "eECL9qgcS2Oj_hb_qyDoU4:APA91bFo4ivH9d20QnM7WMw9Jq3jgFVN6hcpVX1IiubUYYIecKcP-60awF95SZJwjqGdWSwSi4ytkqAIbq-pSskkqfqmj_lU14d0fUJ-juretM0Al3iq9qf2LKb115Wc4_MznKYdgB5_";
             await NotificationService.sendNotification(title, body, token);
             
         },
@@ -230,9 +229,11 @@ export default {
                 var scoreCurrentUser = 0;
                 var scoreOpponent = 0;
                 var opponent = '';
+                var opponentToken = '';
 
                 if (updatedGame.player1.username != this.currentUser.username) {
                     opponent = updatedGame.player1.username;
+                    opponentToken = updatedGame.player1.token;
                     updatedGame.player1.correctAnswers.forEach(element => {
                         scoreOpponent = scoreOpponent + element;
                     });
@@ -242,6 +243,7 @@ export default {
                 }
                 else {
                     opponent = updatedGame.player2.username;
+                    opponentToken = updatedGame.player2.token;
                     updatedGame.player2.correctAnswers.forEach(element => {
                         scoreOpponent = scoreOpponent + element;
                     });
@@ -251,7 +253,7 @@ export default {
                 }
                 
                 // Send notification
-                this.SendNotification();
+                this.SendNotification(opponentToken);
 
 
                 this.$store.dispatch('updateOngoingGamesAfterRound', updatedGame);
