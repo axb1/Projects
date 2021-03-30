@@ -66,7 +66,7 @@ export default {
           this.$router.push('/findplayer');
         }
     },
-        created() {
+        ionViewWillEnter() {
         this.$store.dispatch('setPlayerSearchResult', "");
     }
 }

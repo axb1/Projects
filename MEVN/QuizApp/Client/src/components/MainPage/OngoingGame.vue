@@ -43,7 +43,7 @@ export default {
             this.$router.push('/selectcategories');
         }
     },
-    created() {
+    ionViewDidEnter() {
         this.today = new Date();
     }
 }

@@ -65,6 +65,7 @@ export default {
     },
     data: function() {
       return {
+        timer: '',
       };  
     },
     components: {
@@ -137,14 +138,28 @@ export default {
       this.$store.dispatch('setOngoingGames');
       this.$store.dispatch('setPreviousGames');
 
-      window.setInterval(() => {
+      this.timer = setInterval(() => {
+        console.log("I was here");
         this.$store.dispatch('setOngoingGames');
         this.$store.dispatch('setPreviousGames');
       }, 30000)
     
     },
+    ionViewDidLeave() {
+      clearInterval(this.timer);
+    },
 
     async ionViewDidEnter() {
+
+      firebase.auth().onAuthStateChanged(user => {
+        if(user) {
+          console.log("Logged in");
+        }
+        else {
+          console.log("Not logged in");
+        }
+      })
+
       // This is SUPER sketchy
       var user = await UserService.getUserByUsername(this.currentUser.username);
       var counter = 0;
@@ -156,16 +171,6 @@ export default {
       if (user[0].token == "") {
          this.RegisterForPushNotifications();
       }
-    },
-    created() {
-      firebase.auth().onAuthStateChanged(user => {
-        if(user) {
-          console.log("Logged in");
-        }
-        else {
-          console.log("Not logged in");
-        }
-      })
     },
     
     beforeUnmount() {

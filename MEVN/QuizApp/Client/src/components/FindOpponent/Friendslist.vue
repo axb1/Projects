@@ -59,7 +59,7 @@ export default {
             this.$router.push('/addfriend');
         }
     },
-    created() {
+    ionViewWillEnter() {
         this.$store.dispatch('setFriendSearchResult', "");
         this.$store.dispatch('setFriends');
     }

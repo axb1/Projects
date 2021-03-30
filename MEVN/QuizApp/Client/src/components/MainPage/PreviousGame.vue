@@ -25,7 +25,7 @@ export default {
           return this.$store.getters.getCurrentUser;
         },
     },
-    created() {
+    ionViewDidEnter() {
         this.today = new Date();
     }
     }

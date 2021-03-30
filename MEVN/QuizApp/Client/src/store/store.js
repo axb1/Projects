@@ -114,6 +114,8 @@ export default createStore({
         },
 
         setCurrentGame(state, game) {
+            console.log("Current game was set");
+            console.log(game.player1.username);
             state.commit('setCurrentGame', game)
         },
 

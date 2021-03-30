@@ -159,7 +159,6 @@ export default {
             var username = this.currentUser.username;
             var title = 'QuizNord';
             var body = username + " svarede rigtigt på " + this.correctAnswers + " spørgsmål";
-            console.log(token);
             await NotificationService.sendNotification(title, body, token);
             
         },
@@ -188,18 +187,19 @@ export default {
                 // Start progress bar
                 this.ProgressBarCountdown();
 
+                
+                // Remove badge style from last question
+                var badge = "badge"+ String(this.currentQuestionIndex+1);
+                console.log(badge);
+                document.getElementById(badge).style.background = "#181A20";
+
                 //
                 this.currentQuestionIndex = this.currentQuestionIndex + 1;
                 this.currentQuestion.length = 0;
                 this.currentQuestion.push(this.questions[this.currentQuestionIndex][0]);
-                var questionNumber = this.currentQuestionIndex+1;
-                var badge = "badge" + questionNumber; 
-                document.getElementById(badge).style.background ="#56BE65";
-                for (var i=1; i<6; i++) {
-                    if (i == this.currentQuestionIndex) {
-                        document.getElementById("badge"+i).style.background ="#181A20";
-                    }
-                }
+
+                var badgeNext = "badge" + String(this.currentQuestionIndex+1);
+                document.getElementById(badgeNext).style.background = "#56BE65";
             }
 
             else {
@@ -207,6 +207,7 @@ export default {
                 this.currentPercentage = '1';
                 document.getElementById('progress').setAttribute('value', 1);
                 clearInterval(this.timer);
+
 
                 if (this.currentUser.username == updatedGame.player1.username) {
                     updatedGame.player1.correctAnswers.push(this.correctAnswers);
@@ -223,15 +224,11 @@ export default {
                     updatedGame.player1.myTurn = true;
                 }
 
-                for(var j=1; j<6; j++) {
-                    document.getElementById("badge"+j).style.background = "#181A20";
-                }
                 // Set current score
                 var scoreCurrentUser = 0;
                 var scoreOpponent = 0;
                 var opponent = '';
                 var opponentToken = '';
-
                 if (updatedGame.player1.username != this.currentUser.username) {
                     opponent = updatedGame.player1.username;
                     opponentToken = updatedGame.player1.token;
@@ -254,7 +251,6 @@ export default {
                 }
                 
                 // Send notification
-                console.log(opponentToken);
                 this.SendNotification(opponentToken);
 
 
@@ -286,7 +282,17 @@ export default {
 
     },
 
-    async created() {
+  ionViewDidEnter() {
+    console.log(this.currentGame.player1.username);
+    console.log(this.currentGame.player2.username);
+    this.currentQuestionIndex = 0;
+    this.correctAnswers = 0;
+    this.ProgressBarCountdown();
+    console.log(this.currentGame.player1.token);
+    console.log(this.currentGame.player2.token);
+  },
+
+  async ionViewWillEnter() {
         // Read the categories from the "items" prop that is passed from SelectCategories
         // Get questions from database with corresponding categories
         // Using this type of for-syntax is required as we can't use async await within a foreach
@@ -295,22 +301,16 @@ export default {
             this.questions.push(questions);
         }
         this.currentQuestion.push(this.questions[0][0]);
-        document.getElementById("badge1").style.background = "#56BE65";
 
+        // Set styling on first badge
+        document.getElementById("badge1").style.background = "#56BE65";
   },
 
-  ionViewDidEnter() {
-    this.currentQuestionIndex = 0;
-    this.correctAnswers = 0;
-    this.ProgressBarCountdown();
+  ionViewDidLeave() {
+      document.getElementById("badge3").style.background = "#181A20";
   },
 
   updated(){
-      for(var i=1; i<6; i++) {
-          if(this.currentQuestionIndex+1 == i) {
-              document.getElementById("badge"+i).style.background = "#56BE65";
-          }
-      }
   }
 }
 </script>

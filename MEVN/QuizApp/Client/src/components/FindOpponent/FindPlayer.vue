@@ -56,7 +56,7 @@ export default {
             this.$store.dispatch('setPlayerSearchResult', document.getElementById('searchinput').value);
         },
     },
-    created() {
+    ionViewWillEnter() {
         this.$store.dispatch('setPlayerSearchResult', "");
     }
 }

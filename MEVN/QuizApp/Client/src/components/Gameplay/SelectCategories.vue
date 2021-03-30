@@ -192,8 +192,12 @@ export default {
     IonList
   },
 
-  mounted() {
+  ionViewWillEnter() {
     this.AssignRandomCategories();
+  },
+
+  ionViewDidLeave() {
+    this.randomCategories = [];
   },
 
 
@@ -210,7 +214,6 @@ export default {
       randomNumbers.forEach(element => {
         var category = {val: this.allCategories[element], isChecked: false};
         this.randomCategories.push(category);
-        console.log(category);
       });
     },
 
