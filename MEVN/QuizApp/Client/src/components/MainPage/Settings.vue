@@ -56,8 +56,8 @@ export default {
 <style scoped>
 
 ion-icon {
-    margin-top: 4vh;
-    margin-left: 4vw;
+    margin-top: 5.6vh;
+    margin-left: 5vw;
     color: white;
 }
 

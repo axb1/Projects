@@ -1,16 +1,16 @@
 <template>
     <ion-page>
+        <ion-header>
+            <ion-toolbar>
+                <ion-buttons slot="start">
+                    <ion-button class="iconbutton" @click="GoBack">
+                        <ion-icon :icon="arrowBackOutline" size="large"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+                <ion-title>Tilføj ven</ion-title>
+            </ion-toolbar>
+        </ion-header>
         <ion-content>
-            <ion-header>
-                <ion-toolbar>
-                    <ion-buttons slot="start">
-                        <ion-button class="iconbutton" @click="GoBack">
-                            <ion-icon :icon="arrowBackOutline" size="large"></ion-icon>
-                        </ion-button>
-                    </ion-buttons>
-                    <ion-title>Tilføj ven</ion-title>
-                </ion-toolbar>
-            </ion-header>
                 <div>
                     <form action="/action_page.php">
                         <input type="text" id="searchinput" name="searchinput" placeholder="Email/brugernavn">
@@ -83,30 +83,10 @@ ion-buttons {
     --background: #181A20;
 }
 
-h1 {
-    color:white;
-    text-align: center;
-    margin-top: 5vh;
-    margin-bottom: 4vh;
-}
-
-ion-header {
-    position: relative;
-    height: 10vh;
-}
-
-ion-toolbar {
-    --background: #181A20;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-}
-
 ion-title {
-       --background: #141A33;
-       color: white;
+    --background: #141A33;
+    color: white;
+    text-align: center;
 }
 
 input[type=text], select {
@@ -121,6 +101,23 @@ input[type=text], select {
   background-color: #262A34;
   color: white;
 }
+
+ion-header {
+    background: #181A20;
+    position: relative;
+    height: 16vh;
+    
+}
+
+ion-toolbar {
+  --background: #181A20;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
 
 
 </style>

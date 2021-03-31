@@ -67,7 +67,7 @@ div {
 }
 
 #arrow {
-    margin-top: 4vh;
+    margin-top: 5.6vh;
     margin-left: 5vw;
     color: white;
 }

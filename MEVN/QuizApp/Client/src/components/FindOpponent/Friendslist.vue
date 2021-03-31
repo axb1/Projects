@@ -1,21 +1,21 @@
 <template>
     <ion-page>
+        <ion-header>
+            <ion-toolbar>
+                <ion-buttons slot="start">
+                    <ion-button class="iconbutton" @click="GoBack">
+                        <ion-icon :icon="arrowBackOutline" size="large"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+                <ion-buttons slot="primary">
+                    <ion-button class="iconbutton" @click="GoToAddFriend">
+                        <ion-icon :icon="addCircleOutline" size="large"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+                <ion-title>Vælg ven at spille mod</ion-title>
+            </ion-toolbar>
+        </ion-header>
         <ion-content>
-            <ion-header>
-                <ion-toolbar>
-                    <ion-buttons slot="start">
-                        <ion-button class="iconbutton" @click="GoBack">
-                            <ion-icon :icon="arrowBackOutline" size="large"></ion-icon>
-                        </ion-button>
-                    </ion-buttons>
-                    <ion-buttons slot="primary">
-                        <ion-button class="iconbutton" @click="GoToAddFriend">
-                            <ion-icon :icon="addCircleOutline" size="large"></ion-icon>
-                        </ion-button>
-                    </ion-buttons>
-                    <ion-title>Vælg ven at spille mod</ion-title>
-                </ion-toolbar>
-          </ion-header>
           <ion-list v-for="friend in friends" :key="friend._id">
               <InviteToGameAlert v-bind:player="friend"></InviteToGameAlert>
           </ion-list>
@@ -93,19 +93,6 @@ h1 {
     margin-bottom: 4vh;
 }
 
-ion-header {
-    position: relative;
-    height: 14vh;
-}
-
-ion-toolbar {
-    --background: #181A20;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-}
 
 ion-title {
        --background: #141A33;
@@ -118,6 +105,21 @@ ion-list {
   justify-content: center;
   flex-wrap: wrap;
   background: #181A20;
+}
+
+ion-header {
+    background: #181A20;
+    position: relative;
+    height: 16vh;
+}
+
+ion-toolbar {
+  --background: #181A20;
+  margin: 0;
+  position: absolute;
+  top: 55%;
+  -ms-transform: translateY(-45%);
+  transform: translateY(-45%);
 }
 
 

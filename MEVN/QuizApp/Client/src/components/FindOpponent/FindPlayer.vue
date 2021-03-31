@@ -1,29 +1,31 @@
 <template>
     <ion-page>
+        <ion-header>
+            <ion-toolbar>
+                <ion-buttons slot="start">
+                    <ion-button class="iconbutton" @click="GoBack">
+                        <ion-icon :icon="arrowBackOutline" size="large"></ion-icon>
+                    </ion-button>
+                </ion-buttons>
+                <ion-title>Find modstander</ion-title>
+            </ion-toolbar>
+        </ion-header>
         <ion-content>
-            <ion-header>
-                <ion-toolbar>
-                    <ion-buttons slot="start">
-                        <ion-icon :icon="arrowBackOutline" size="large" @click="GoBack"></ion-icon>
-                    </ion-buttons>
-                    <ion-title>Find modstander</ion-title>
-                </ion-toolbar>
-          </ion-header>
-                <div>
-                    <form action="/action_page.php">
-                        <input type="text" id="searchinput" name="searchinput" placeholder="Email/brugernavn">
-                    </form>
-                </div>
-                <div class="container">
-                    <ion-button id="search" @click="SearchForOpponent">Søg efter modstander</ion-button>
-                </div>
-                <InviteToGameAlert v-if="playerSearchResult.length !=0" v-bind:player="playerSearchResult[0]"></InviteToGameAlert>
+            <div>
+                <form action="/action_page.php">
+                    <input type="text" id="searchinput" name="searchinput" placeholder="Email/brugernavn">
+                 </form>
+            </div>
+            <div class="container">
+                <ion-button id="search" @click="SearchForOpponent">Søg efter modstander</ion-button>
+            </div>
+            <InviteToGameAlert v-if="playerSearchResult.length !=0" v-bind:player="playerSearchResult[0]"></InviteToGameAlert>
         </ion-content>
     </ion-page>
 </template>
 
 <script>
-import { IonPage, IonContent, IonIcon, IonButton, IonButtons, IonTitle} from '@ionic/vue';
+import { IonPage, IonContent, IonHeader, IonToolbar, IonIcon, IonButton, IonButtons, IonTitle} from '@ionic/vue';
 import {arrowBackOutline} from 'ionicons/icons';
 import InviteToGameAlert from '../FindOpponent/InviteToGameAlert.vue';
 
@@ -37,6 +39,8 @@ export default {
     components: {
         IonPage,
         IonContent,
+        IonHeader,
+        IonToolbar,
         IonIcon,
         IonButton,
         IonButtons,
@@ -69,11 +73,7 @@ ion-icon {
 
 ion-title {
     color: white;
-}
-
-h1 {
     text-align: center;
-    color: white
 }
 
 input[type=text], select {
@@ -105,25 +105,20 @@ ion-buttons {
 }
 
 ion-header {
+    background: #181A20;
     position: relative;
-    height: 14vh;
+    height: 16vh;
 }
 
 ion-toolbar {
-    --background: #181A20;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
+  --background: #181A20;
+  margin: 0;
+  position: absolute;
+  top: 55%;
+  -ms-transform: translateY(-45%);
+  transform: translateY(-45%);
 }
 
-ion-button {
-    --background: linear-gradient(to right, #0BA360, #3CBA92);
-    --border-radius: 4px !important;
-    width: 75vw;
-    height: 6vh;
-}
 
 
 </style>

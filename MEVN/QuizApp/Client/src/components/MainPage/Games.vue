@@ -1,12 +1,13 @@
 <template>
-    <ion-page>
-        <ion-content>
-          <div class="header">
-            <img src="../../assets/settings.svg" alt="settings" v-on:click="GoToSettings()" id="settings">
-            <h1 id="title">QuizNord</h1>
-            <img v-on:click="GoToFindOpponent()" src="../../assets/plus.png" alt="add" id="add">
-            <ion-badge v-if="currentUser.invites!=undefined && currentUser.invites.length!=0" v-on:click="GoToInvites()">{{currentUser.invites.length}}</ion-badge>
-          </div>
+  <ion-page>
+    <ion-header>
+      <ion-toolbar>
+        <img src="../../assets/settings.svg" alt="settings" v-on:click="GoToSettings()" id="settings" slot="start">
+        <ion-title>QuizNord</ion-title>
+        <img v-on:click="GoToFindOpponent()" src="../../assets/plus.png" alt="add" id="add" slot="end">
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
             <div v-if="ongoingGames != undefined">
               <div v-if="ongoingGames.length != 0">
                 <div id="yourturn">
@@ -32,12 +33,12 @@
               </ion-list>
             </div>
           </div>
-        </ion-content>
-    </ion-page>
+    </ion-content>
+  </ion-page>
 </template>
 
 <script>
-import { IonPage, IonContent, IonBadge, IonList} from '@ionic/vue';
+import {IonPage, IonContent, IonHeader, IonToolbar, IonTitle, IonList} from '@ionic/vue';
 import OngoingGame from './OngoingGame';
 import firebase from 'firebase';
 import { Plugins, } from '@capacitor/core';
@@ -45,7 +46,7 @@ import UserService from '@/api/UserService';
 const { PushNotifications } = Plugins;
 
 export default {
-    name: '',
+    name: 'games',
     computed: {
         ongoingGames() {
           return this.$store.getters.getOngoingGames;
@@ -71,7 +72,9 @@ export default {
     components: {
         IonPage,
         IonContent,
-        IonBadge,
+        IonHeader,
+        IonToolbar,
+        IonTitle,
         IonList,
         OngoingGame,
     },
@@ -178,15 +181,6 @@ export default {
 }
 </script>
 <style scoped>
-.header {
-  display: flex;
-  flex-direction: row;     
-  justify-content: space-around; 
-  align-items: center; 
-  height: 14vh;
-  background-color: #181A20;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
-}
 
 .square {
     background: #43B15B;
@@ -194,7 +188,6 @@ export default {
     height: 16vw;
     border-radius: 0 1vh 1vh 0;
 }
-
 
 
 #turn {
@@ -217,15 +210,11 @@ ion-list {
   padding: 0;
 }
 
-ion-badge {
-  background: #FC0007;
-  width: 4vh; 
-  height: 4vh;
-  border-radius: 50%;
-  display: flex; /* or inline-flex */
-  align-items: center; 
-  justify-content: center;
-  margin: 0;
+ion-title {
+  --background: #141A33;
+  color: white;
+  text-align: center;
+  font-size: 1.5rem;
 }
 
 #yourturn {
@@ -243,15 +232,30 @@ ion-badge {
 }
 
 #add {
-  margin: 0;
+  margin-right: 10vw;
   padding: 0;
   height: 4.2vh;
 }
 
 #settings {
-  margin: 0;
+  margin-left: 10vw;
   padding: 0;
   height: 4.2vh;
+}
+
+ion-header {
+    background: #181A20;
+    position: relative;
+    height: 16vh;
+}
+
+ion-toolbar {
+  --background: #181A20;
+  margin: 0;
+  position: absolute;
+  top: 55%;
+  -ms-transform: translateY(-45%);
+  transform: translateY(-45%);
 }
 
 
