@@ -13,6 +13,7 @@ const userSchema = new Schema({
             myTurn: Boolean,
             img: String,
             roundsPlayed: Number,
+            token: String
         },
         player2: {
             username: String,
@@ -22,6 +23,7 @@ const userSchema = new Schema({
             myTurn: Boolean,
             img: String,
             roundsPlayed: Number,
+            token: String
         },
         isFull: Boolean,
         gameId: String,

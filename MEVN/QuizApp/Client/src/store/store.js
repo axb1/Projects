@@ -114,8 +114,7 @@ export default createStore({
         },
 
         setCurrentGame(state, game) {
-            console.log("Current game was set");
-            console.log(game.player1.username);
+            console.log(game);
             state.commit('setCurrentGame', game)
         },
 
@@ -258,7 +257,7 @@ export default createStore({
                     }
                     if(timesRun === 6) {
                         // If no opponent found, set admin as opponent
-                        var player2 = {username: "QuizNordTeamet", correctAnswers: [], goFirst: false, dateOfLastTurn: date, myTurn: false, img: 'https://cdn.bulbagarden.net/upload/0/02/009Blastoise.png', roundsPlayed: 0};
+                        var player2 = {username: "QuizNordTeamet", correctAnswers: [], goFirst: false, dateOfLastTurn: date, myTurn: false, img: 'https://cdn.bulbagarden.net/upload/0/02/009Blastoise.png', roundsPlayed: 0, token: ""};
                         var update = {player2: player2, isFull: true};
                         await GameService.updateGame(gameId, update);
 

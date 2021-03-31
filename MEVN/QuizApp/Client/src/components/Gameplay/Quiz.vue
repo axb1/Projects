@@ -190,7 +190,6 @@ export default {
                 
                 // Remove badge style from last question
                 var badge = "badge"+ String(this.currentQuestionIndex+1);
-                console.log(badge);
                 document.getElementById(badge).style.background = "#181A20";
 
                 //
@@ -283,13 +282,9 @@ export default {
     },
 
   ionViewDidEnter() {
-    console.log(this.currentGame.player1.username);
-    console.log(this.currentGame.player2.username);
     this.currentQuestionIndex = 0;
     this.correctAnswers = 0;
     this.ProgressBarCountdown();
-    console.log(this.currentGame.player1.token);
-    console.log(this.currentGame.player2.token);
   },
 
   async ionViewWillEnter() {

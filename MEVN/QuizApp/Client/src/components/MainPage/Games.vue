@@ -139,7 +139,6 @@ export default {
       this.$store.dispatch('setPreviousGames');
 
       this.timer = setInterval(() => {
-        console.log("I was here");
         this.$store.dispatch('setOngoingGames');
         this.$store.dispatch('setPreviousGames');
       }, 30000)
