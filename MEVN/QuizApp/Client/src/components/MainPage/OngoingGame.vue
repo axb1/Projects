@@ -2,24 +2,23 @@
     <button v-if="(ongoingGame.player1.myTurn == false && ongoingGame.player1.username == currentUser.username)" class="notmyturn">
         <img :src="ongoingGame.player2.img" alt="pfp">
         <p>{{ongoingGame.player2.username}}</p>
-        <p>{{Math.floor(Math.floor((today-Date.parse(ongoingGame.player2.dateOfLastTurn)))/(1000*60)) +"m"}}</p>
+        <p>{{Math.floor(Math.floor((currentTime-Date.parse(ongoingGame.player2.dateOfLastTurn)))/(1000*60)) +"m"}}</p>
     </button>
     <button v-else-if="(ongoingGame.player1.myTurn == true && ongoingGame.player1.username == currentUser.username)" @click="GoToGame(ongoingGame)">
         <img :src="ongoingGame.player2.img" alt="pfp">
         <p>{{ongoingGame.player2.username}}</p>
-        <p>{{Math.floor(Math.floor((today-Date.parse(ongoingGame.player2.dateOfLastTurn)))/(1000*60))+"m"}}</p>
+        <p>{{"0m"}}</p>
     </button>
     <button v-else-if="(ongoingGame.player2.myTurn == true && ongoingGame.player2.username == currentUser.username)" @click="GoToGame(ongoingGame)">
         <img :src="ongoingGame.player1.img" alt="pfp">
         <p>{{ongoingGame.player1.username}}</p>
-        <p>{{Math.floor(Math.floor((today-Date.parse(ongoingGame.player1.dateOfLastTurn)))/(1000*60))+"m"}}</p>
+        <p>{{"0m"}}</p>
     </button>
     <button v-else-if="(ongoingGame.player2.myTurn == false && ongoingGame.player2.username == currentUser.username)" class="notmyturn">
         <img :src="ongoingGame.player1.img" alt="pfp">
         <p>{{ongoingGame.player1.username}}</p>
-        <p>{{Math.floor(Math.floor((today-Date.parse(ongoingGame.player1.dateOfLastTurn)))/(1000*60)+"m")}}</p>
+        <p>{{Math.floor(Math.floor((currentTime-Date.parse(ongoingGame.player1.dateOfLastTurn)))/(1000*60)+"m")}}</p>
     </button>
-
 </template>
 
 
@@ -29,12 +28,14 @@ export default {
     props: {ongoingGame: Object},
     computed: {
         currentUser() {
-          return this.$store.getters.getCurrentUser;
+            return this.$store.getters.getCurrentUser;
         },
+        currentTime() {
+            return this.$store.getters.getCurrentTime;
+        }
     },
     data: function() {
       return {
-          today: Date
       };  
     },
     methods: {
@@ -43,9 +44,6 @@ export default {
             this.$router.push('/selectcategories');
         }
     },
-    ionViewDidEnter() {
-        this.today = new Date();
-    }
 }
 </script>
 

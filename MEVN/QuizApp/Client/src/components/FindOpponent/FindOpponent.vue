@@ -109,10 +109,6 @@ ion-button {
   margin-right: 5vw;
 }
 
-ion-header {
-    --background: #141A33;
-}
-
 h1 {
     color:white;
     text-align: center;

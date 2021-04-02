@@ -16,7 +16,8 @@ export default createStore({
         playerSearchResult: String,
         invites: [],
         token: String,
-        didRegisterForNotifications: false
+        didRegisterForNotifications: false,
+        currentTime: Date
     },
     mutations: {
         setOngoingGames(state, payload) {
@@ -51,6 +52,9 @@ export default createStore({
         },
         setDidRegisterForNotifications(state, payload) {
             state.didRegisterForNotifications = payload;
+        },
+        setCurrentTime(state, payload) {
+            state.currentTime = payload;
         }
     },
     actions: {
@@ -118,6 +122,11 @@ export default createStore({
             state.commit('setCurrentGame', game)
         },
 
+        setCurrentTime(state) {
+            var time = new Date();
+            state.commit('setCurrentTime', time);
+        },
+
         async setInvites(state) {
             var firebaseUser = firebase.auth().currentUser;
             var user = await UserService.getUserByEmail(firebaseUser.email);
@@ -170,6 +179,7 @@ export default createStore({
         },
 
         async lookForGameAgainstRandomOpponent(state) {
+            console.log("I was here");
             // Check if any games are available
             var games = await GameService.getAvailableGames();
 
@@ -179,7 +189,9 @@ export default createStore({
             var ongoingGames = user[0].ongoingGames;
             var date = new Date();
             // If there is a game, set player2 and update game
-            if (games.length != 0) {
+            if (games.length != 0 && games[0].player1.username != user[0].username) {
+                console.log(games[0]);
+                console.log(user.username);
                 // Find and update available game
                 var availableGame = games[0];
                 var player2 = {username: user[0].username, correctAnswers: [], goFirst: false, dateOfLastTurn: date, myTurn: false, img: user[0].img, roundsPlayed: 0, token: user[0].token};
@@ -263,6 +275,7 @@ export default createStore({
 
 
                         // Update and ddd game to users ongoing games
+                        user = await UserService.getUserByEmail(firebaseUser.email);
                         var ongoingGames = user[0].ongoingGames;
                         game[0].player2 = player2;
                         game[0].isFull = true;
@@ -432,7 +445,8 @@ export default createStore({
         getFriendSearchResult: state => state.friendSearchResult,
         getPlayerSearchResult: state => state.playerSearchResult,
         getToken: state => state.token,
-        getDidRegisterForNotifications: state => state.didRegisterForNotifications
+        getDidRegisterForNotifications: state => state.didRegisterForNotifications,
+        getCurrentTime: state => state.currentTime
     }
 })
 

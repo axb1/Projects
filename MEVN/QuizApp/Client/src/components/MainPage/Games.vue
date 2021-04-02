@@ -3,11 +3,12 @@
     <ion-header>
       <ion-toolbar>
         <img src="../../assets/settings.svg" alt="settings" v-on:click="GoToSettings()" id="settings" slot="start">
-        <ion-title>QuizNord</ion-title>
+        <ion-title id="title">QuizNord</ion-title>
         <img v-on:click="GoToFindOpponent()" src="../../assets/plus.png" alt="add" id="add" slot="end">
       </ion-toolbar>
     </ion-header>
     <ion-content>
+          <ion-spinner name="dots" v-if="lookingForRandomOpponent == true"></ion-spinner>
             <div v-if="ongoingGames != undefined">
               <div v-if="ongoingGames.length != 0">
                 <div id="yourturn">
@@ -38,7 +39,7 @@
 </template>
 
 <script>
-import {IonPage, IonContent, IonHeader, IonToolbar, IonTitle, IonList} from '@ionic/vue';
+import {IonPage, IonContent, IonHeader, IonToolbar, IonTitle, IonList, IonSpinner} from '@ionic/vue';
 import OngoingGame from './OngoingGame';
 import firebase from 'firebase';
 import { Plugins, } from '@capacitor/core';
@@ -76,6 +77,7 @@ export default {
         IonToolbar,
         IonTitle,
         IonList,
+        IonSpinner,
         OngoingGame,
     },
     methods: {
@@ -140,8 +142,10 @@ export default {
       this.$store.dispatch('setCurrentUser');
       this.$store.dispatch('setOngoingGames');
       this.$store.dispatch('setPreviousGames');
+      this.$store.dispatch('setCurrentTime');
 
       this.timer = setInterval(() => {
+        console.log("I was here");
         this.$store.dispatch('setOngoingGames');
         this.$store.dispatch('setPreviousGames');
       }, 30000)
@@ -210,7 +214,7 @@ ion-list {
   padding: 0;
 }
 
-ion-title {
+#title {
   --background: #141A33;
   color: white;
   text-align: center;
@@ -247,16 +251,30 @@ ion-header {
     background: #181A20;
     position: relative;
     height: 16vh;
+    border-bottom: 0.55px solid #14161B;
+
 }
 
 ion-toolbar {
   --background: #181A20;
+  --border-style: none;
   margin: 0;
   position: absolute;
-  top: 55%;
-  -ms-transform: translateY(-45%);
-  transform: translateY(-45%);
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
+
+ion-spinner {
+  --color: white;
+  background: #181A20;
+  width: 100%;
+  transform: scale(2);
+
+}
+
+
+
 
 
 </style>

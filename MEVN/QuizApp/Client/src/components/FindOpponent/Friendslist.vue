@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { IonPage, IonContent, IonIcon, IonButton, IonButtons, IonTitle, IonList} from '@ionic/vue';
+import { IonPage, IonContent, IonHeader, IonToolbar, IonIcon, IonButton, IonButtons, IonTitle, IonList} from '@ionic/vue';
 import {arrowBackOutline, addCircleOutline} from 'ionicons/icons';
 import InviteToGameAlert from './InviteToGameAlert';
 
@@ -44,6 +44,8 @@ export default {
     components: {
         IonPage,
         IonContent,
+        IonHeader,
+        IonToolbar,
         IonIcon,
         IonButton,
         IonButtons,
@@ -97,6 +99,7 @@ h1 {
 ion-title {
        --background: #141A33;
        color: white;
+       font-size: 1.1rem;
 }
 
 ion-list {
@@ -111,15 +114,17 @@ ion-header {
     background: #181A20;
     position: relative;
     height: 16vh;
+    border-bottom: 0.55px solid #14161B;
 }
 
 ion-toolbar {
   --background: #181A20;
+  --border-style: none;
   margin: 0;
   position: absolute;
-  top: 55%;
-  -ms-transform: translateY(-45%);
-  transform: translateY(-45%);
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
 }
 
 

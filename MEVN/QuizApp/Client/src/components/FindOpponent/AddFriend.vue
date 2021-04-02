@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { IonPage, IonContent, IonIcon, IonButton, IonButtons, IonTitle} from '@ionic/vue';
+import { IonPage, IonContent, IonHeader, IonToolbar, IonIcon, IonButton, IonButtons, IonTitle} from '@ionic/vue';
 import {arrowBackOutline} from 'ionicons/icons';
 import ConfirmAddFriendAlert from './ConfirmAddFriendAlert.vue';
 
@@ -39,6 +39,8 @@ export default {
     components: {
         IonPage,
         IonContent,
+        IonHeader,
+        IonToolbar,
         IonIcon,
         IonButton,
         IonButtons,
@@ -87,6 +89,7 @@ ion-title {
     --background: #141A33;
     color: white;
     text-align: center;
+    font-size: 1.5rem;
 }
 
 input[type=text], select {
@@ -106,11 +109,12 @@ ion-header {
     background: #181A20;
     position: relative;
     height: 16vh;
-    
+    border-bottom: 0.55px solid #14161B;
 }
 
 ion-toolbar {
   --background: #181A20;
+  --border-style: none;
   margin: 0;
   position: absolute;
   top: 50%;

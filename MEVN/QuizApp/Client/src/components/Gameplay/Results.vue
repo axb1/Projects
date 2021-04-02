@@ -43,17 +43,6 @@ export default {
     }
 </script>
 <style scoped>
-ion-icon {
-    color: white;
-    font-size: 2rem;
-    float: right;
-    margin-right: 0.5rem;
-    margin-left: 0;
-}
-
-ion-header {
-    --background: #141A33;
-}
 
 h1 {
     font-weight: bold;
