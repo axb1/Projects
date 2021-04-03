@@ -11,21 +11,15 @@
             </ion-toolbar>
         </ion-header>
         <ion-content>
-                <div>
-                    <form action="/action_page.php">
-                        <input type="text" id="searchinput" name="searchinput" placeholder="Email/brugernavn">
-                    </form>
-                </div>
-                <ion-button @click="SearchForFriend">Søg efter ven</ion-button>
-                <ConfirmAddFriendAlert v-if="friendSearchResult.length !=0" v-bind:friend="friendSearchResult[0]"></ConfirmAddFriendAlert>
-
-
+            <ion-input v-model="email" required=true placeholder="Email/brugernavn" v-on:keyup.enter="SearchForFriend"></ion-input>
+            <ion-button @click="SearchForFriend">Søg efter ven</ion-button>
+            <ConfirmAddFriendAlert v-if="friendSearchResult.length !=0" v-bind:friend="friendSearchResult[0]"></ConfirmAddFriendAlert>
         </ion-content>
     </ion-page>
 </template>
 
 <script>
-import { IonPage, IonContent, IonHeader, IonToolbar, IonIcon, IonButton, IonButtons, IonTitle} from '@ionic/vue';
+import { IonPage, IonContent, IonHeader, IonToolbar, IonIcon, IonButton, IonButtons, IonTitle, IonInput} from '@ionic/vue';
 import {arrowBackOutline} from 'ionicons/icons';
 import ConfirmAddFriendAlert from './ConfirmAddFriendAlert.vue';
 
@@ -45,6 +39,7 @@ export default {
         IonButton,
         IonButtons,
         IonTitle,
+        IonInput,
         ConfirmAddFriendAlert
     },
     computed: {
@@ -92,7 +87,7 @@ ion-title {
     font-size: 1.5rem;
 }
 
-input[type=text], select {
+ion-input{
   width: 80%;
   border-radius: 4px;
   box-sizing: border-box;

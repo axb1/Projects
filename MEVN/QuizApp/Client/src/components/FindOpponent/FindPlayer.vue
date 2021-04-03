@@ -3,15 +3,12 @@
         <ion-header>
             <ion-toolbar>
                 <ion-buttons slot="start">
-                    <ion-button class="iconbutton" @click="GoBack">
-                        <ion-icon :icon="arrowBackOutline" size="large"></ion-icon>
-                    </ion-button>
+                    <ion-icon :icon="arrowBackOutline" @click="GoBack"></ion-icon>
                 </ion-buttons>
                 <ion-title>Find modstander</ion-title>
             </ion-toolbar>
         </ion-header>
         <ion-content>
-            <h1>Modstandere</h1>
             <InviteToGameAlert v-if="playerSearchResult.length !=0" v-bind:player="playerSearchResult[0]"></InviteToGameAlert>
             <ion-input v-model="search" placeholder="Søg efter modstander.." v-on:keyup.enter="SearchForOpponent"></ion-input>
             <ion-button expand="block" v-on:click="SearchForOpponent">Søg efter modstander</ion-button>
@@ -68,43 +65,10 @@ ion-icon {
     color: white;
 }
 
-ion-title {
-    color: white;
-    font-size: 1.3rem;
-}
-
-
-
-ion-buttons {
-    --background: #181A20;
-    padding: 0;
-    margin: 0;
-}
-
-.iconbutton {
-    --background: #181A20;
-}
-
-ion-header {
-    background: #181A20;
-    position: relative;
-    height: 16vh;
-    border-bottom: 0.55px solid #14161B;
-}
-
 h1 {
     color: white;
     margin-left: 5vw;
-    margin-top: 2vh;
-}
-ion-toolbar {
-  --background: #181A20;
-  --border-style: none;
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
+    margin-top: 1vh;
 }
 
 ion-input {
@@ -128,9 +92,40 @@ ion-button {
     --border-radius: 4px !important;
     height: 6vh;
     margin-top: 2vh;
-    margin-left: 5.6vw;
+    margin-left: 10vw;
     margin-right: 10vw;
 }
+
+
+ion-header {
+    background: #181A20;
+    position: relative;
+    height: 16vh;
+    border-bottom: 0.55px solid #14161B;
+
+}
+
+ion-toolbar {
+  --background: #181A20;
+  --border-style: none;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+ion-buttons {
+    color: white;
+    padding-left: 6vw;
+    padding-right: 6vw;
+    font-size: 5vh;
+}
+
+ion-title {
+    color: white;
+}
+
 
 
 </style>

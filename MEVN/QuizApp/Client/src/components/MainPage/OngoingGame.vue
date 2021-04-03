@@ -1,23 +1,41 @@
 <template>
     <button v-if="(ongoingGame.player1.myTurn == false && ongoingGame.player1.username == currentUser.username)" class="notmyturn">
-        <img :src="ongoingGame.player2.img" alt="pfp">
-        <p>{{ongoingGame.player2.username}}</p>
-        <p>{{Math.floor(Math.floor((currentTime-Date.parse(ongoingGame.player2.dateOfLastTurn)))/(1000*60)) +"m"}}</p>
+        <div class="flex" v-if="(Math.floor(Math.floor((currentTime-Date.parse(ongoingGame.player2.dateOfLastTurn)))/(1000*60))) <= 59">
+            <img :src="ongoingGame.player2.img" alt="pfp">
+            <p>{{ongoingGame.player2.username}}</p>
+            <p>{{Math.floor(Math.floor((currentTime-Date.parse(ongoingGame.player2.dateOfLastTurn)))/(1000*60)) +"m"}}</p>
+        </div>
+        <div v-else>
+            <img :src="ongoingGame.player2.img" alt="pfp">
+            <p>{{ongoingGame.player2.username}}</p>
+            <p>{{Math.floor(Math.floor((currentTime-Date.parse(ongoingGame.player2.dateOfLastTurn)))/(1000*60*60)) +"h"}}</p>
+        </div>
     </button>
     <button v-else-if="(ongoingGame.player1.myTurn == true && ongoingGame.player1.username == currentUser.username)" @click="GoToGame(ongoingGame)">
-        <img :src="ongoingGame.player2.img" alt="pfp">
-        <p>{{ongoingGame.player2.username}}</p>
-        <p>{{"0m"}}</p>
+        <div class="flex">
+            <img :src="ongoingGame.player2.img" alt="pfp">
+            <p>{{ongoingGame.player2.username}}</p>
+            <p>{{"0m"}}</p>
+        </div>
     </button>
     <button v-else-if="(ongoingGame.player2.myTurn == true && ongoingGame.player2.username == currentUser.username)" @click="GoToGame(ongoingGame)">
-        <img :src="ongoingGame.player1.img" alt="pfp">
-        <p>{{ongoingGame.player1.username}}</p>
-        <p>{{"0m"}}</p>
+        <div class="flex">
+            <img :src="ongoingGame.player1.img" alt="pfp">
+            <p>{{ongoingGame.player1.username}}</p>
+            <p>{{"0m"}}</p>
+        </div>
     </button>
     <button v-else-if="(ongoingGame.player2.myTurn == false && ongoingGame.player2.username == currentUser.username)" class="notmyturn">
-        <img :src="ongoingGame.player1.img" alt="pfp">
-        <p>{{ongoingGame.player1.username}}</p>
-        <p>{{Math.floor(Math.floor((currentTime-Date.parse(ongoingGame.player1.dateOfLastTurn)))/(1000*60)+"m")}}</p>
+        <div class="flex" v-if="(Math.floor(Math.floor((currentTime-Date.parse(ongoingGame.player1.dateOfLastTurn)))/(1000*60))) <= 59">
+            <img :src="ongoingGame.player1.img" alt="pfp">
+            <p>{{ongoingGame.player1.username}}</p>
+            <p>{{Math.floor(Math.floor((currentTime-Date.parse(ongoingGame.player1.dateOfLastTurn)))/(1000*60)+"m")}}</p>
+        </div>
+        <div class="flex" v-else>
+            <img :src="ongoingGame.player1.img" alt="pfp">
+            <p>{{ongoingGame.player1.username}}</p>
+            <p>{{Math.floor(Math.floor((currentTime-Date.parse(ongoingGame.player1.dateOfLastTurn)))/(1000*60*60)+"h")}}</p>
+        </div>
     </button>
 </template>
 
@@ -53,10 +71,6 @@ button  {
     color: white;
     height: 8.6vh;
     width: 80vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-evenly;
-    align-items: center;
     border-radius: 1vw;
     margin-bottom: 1.5vh;
 }
@@ -74,5 +88,23 @@ p {
 .notmyturn {
     opacity: 0.5;
 }
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.parent {
+    position: relative;
+}
+
+.child {
+    width: 1em;
+    height: 1em;
+    background: blue;
+}
+
 
 </style>

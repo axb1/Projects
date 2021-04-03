@@ -3,9 +3,24 @@
         <ion-content>
             <h1>Resultat</h1>
             <h2>Du svarede rigtigt på {{correctAnswers}}/3 spørgsmål</h2>
-            <h1>Stillingen er</h1>
-            <h2>{{currentUser}}: {{scoreCurrentUser}}</h2>
-            <h2>{{opponent}}: {{scoreOpponent}}</h2>
+
+            <div v-if="gameIsOver == 'true'">
+                <div v-if="scoreCurrentUser > scoreOpponent">
+                    <h1>Du vandt!</h1>
+                </div>
+                <div v-else-if="scoreCurrentUser == scoreOpponent">
+                    <h1>Det blev uafgjort</h1>
+                </div>
+                <div v-else>
+                    <h1>Du tabte</h1>
+                </div>
+            </div>
+            <div v-else>
+                <h1>Stillingen er</h1>
+                <h2>{{currentUser}}: {{scoreCurrentUser}}</h2>
+                <h2>{{opponent}}: {{scoreOpponent}}</h2>
+            </div>
+
             <ion-button expand="block" @click="GoToMainPage">Gå tilbage</ion-button>
         </ion-content>
     </ion-page>
@@ -22,7 +37,8 @@ export default {
         scoreOpponent: Number,
         correctAnswers: Number,
         currentUser: String,
-        opponent: String
+        opponent: String,
+        gameIsOver: Boolean
     },
     data: function() {
       return {

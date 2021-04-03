@@ -125,6 +125,7 @@ export default {
           // Show us the notification payload if the app is open on our device
           PushNotifications.addListener('pushNotificationReceived',
             (notification) => {
+              this.$store.dispatch('setOngoingGames');
               alert('Push received: ' + JSON.stringify(notification));
             }
           );

@@ -1,7 +1,7 @@
 <template>
     <ion-page>
         <ion-content>
-          <ion-icon :icon="arrowBackOutline" size="large" @click="GoBack" id="arrow"></ion-icon>
+          <ion-icon :icon="arrowBackOutline" @click="GoBack" id="arrow"></ion-icon>
           <h1>Vælg sprog</h1>
           <ion-item>
                 <ion-label>Sprog</ion-label>
@@ -69,6 +69,7 @@ div {
 #arrow {
     margin-top: 5.6vh;
     margin-left: 5vw;
+    font-size: 5vh;
     color: white;
 }
 

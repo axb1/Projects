@@ -3,16 +3,12 @@
         <ion-header>
             <ion-toolbar>
                 <ion-buttons slot="start">
-                    <ion-button class="iconbutton" @click="GoBack">
-                        <ion-icon :icon="arrowBackOutline" size="large"></ion-icon>
-                    </ion-button>
-                </ion-buttons>
-                <ion-buttons slot="primary">
-                    <ion-button class="iconbutton" @click="GoToAddFriend">
-                        <ion-icon :icon="addCircleOutline" size="large"></ion-icon>
-                    </ion-button>
+                    <ion-icon :icon="arrowBackOutline" @click="GoBack"></ion-icon>
                 </ion-buttons>
                 <ion-title>Vælg ven at spille mod</ion-title>
+                <ion-buttons slot="end">
+                    <ion-icon :icon="addCircleOutline" @click="GoToAddFriend"></ion-icon>
+                </ion-buttons>
             </ion-toolbar>
         </ion-header>
         <ion-content>
@@ -24,7 +20,7 @@
 </template>
 
 <script>
-import { IonPage, IonContent, IonHeader, IonToolbar, IonIcon, IonButton, IonButtons, IonTitle, IonList} from '@ionic/vue';
+import { IonPage, IonContent, IonHeader, IonToolbar, IonButtons, IonIcon, IonTitle, IonList} from '@ionic/vue';
 import {arrowBackOutline, addCircleOutline} from 'ionicons/icons';
 import InviteToGameAlert from './InviteToGameAlert';
 
@@ -46,9 +42,8 @@ export default {
         IonContent,
         IonHeader,
         IonToolbar,
-        IonIcon,
-        IonButton,
         IonButtons,
+        IonIcon,
         IonTitle,
         IonList,
         InviteToGameAlert
@@ -69,8 +64,11 @@ export default {
 }
 </script>
 <style scoped>
-ion-icon {
+ion-buttons {
     color: white;
+    padding-left: 6vw;
+    padding-right: 6vw;
+    font-size: 5vh;
 }
 
 ion-button {
@@ -80,26 +78,12 @@ ion-button {
     width: 90%;
 }
 
-ion-buttons {
-    --background: #181A20;
-}
-
-.iconbutton {
-    --background: #181A20;
-}
-
-h1 {
-    color:white;
-    text-align: center;
-    margin-top: 1vh;
-    margin-bottom: 4vh;
-}
-
-
 ion-title {
-       --background: #141A33;
-       color: white;
-       font-size: 1.1rem;
+    --background: #141A33;
+    color: white;
+    font-size: 1.1em;
+    margin: 0;
+    padding: 0;
 }
 
 ion-list {
@@ -115,6 +99,7 @@ ion-header {
     position: relative;
     height: 16vh;
     border-bottom: 0.55px solid #14161B;
+
 }
 
 ion-toolbar {
@@ -126,6 +111,8 @@ ion-toolbar {
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+
+
 
 
 </style>

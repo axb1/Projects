@@ -222,12 +222,19 @@ export default {
                     updatedGame.player2.roundsPlayed = updatedGame.player2.roundsPlayed +1;
                     updatedGame.player1.myTurn = true;
                 }
-
                 // Set current score
                 var scoreCurrentUser = 0;
                 var scoreOpponent = 0;
                 var opponent = '';
                 var opponentToken = '';
+                var gameIsOver = 'false';
+
+                if(updatedGame.player1.roundsPlayed == 2 && updatedGame.player2.roundsPlayed == 2) {
+                    console.log(updatedGame.player1.roundsPlayed);
+                    console.log(updatedGame.player2.roundsPlayed);
+                    gameIsOver = 'true';
+                }
+
                 if (updatedGame.player1.username != this.currentUser.username) {
                     opponent = updatedGame.player1.username;
                     opponentToken = updatedGame.player1.token;
@@ -261,7 +268,8 @@ export default {
                         scoreCurrentUser: scoreCurrentUser,
                         scoreOpponent: scoreOpponent,
                         currentUser: this.currentUser.username,
-                        opponent: opponent
+                        opponent: opponent,
+                        gameIsOver: gameIsOver
                     }
                 })
             }
@@ -419,15 +427,14 @@ ion-progress-bar {
 
 #header {
     background: #181A20;
-    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
-    border-radius: 0px 0px 20px 20px;
-    height: 18%;
-    
-
+    border-bottom: 0.55px solid #14161B;
+    height: 16vh;
 }
 
 #subheader {
     margin-top: 4%;
+    display: flex;
+    align-items: center;
 }
 
 

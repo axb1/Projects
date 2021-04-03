@@ -4,7 +4,7 @@
             <ion-icon :icon="arrowBackOutline" size="large" @click="GoBack"></ion-icon>
             <h1>Forgot password?</h1>
             <h3>Confirm your email and we'll send the instructions.</h3>
-            <ion-input v-model="email" required=true placeholder="Din email.."></ion-input>
+            <ion-input v-model="email" required=true placeholder="Din email.." v-on:keyup.enter="SendPasswordResetEmail(email)"></ion-input>
             <ion-button v-on:click="SendPasswordResetEmail(email)">Reset Password</ion-button>
         </ion-content>
     </ion-page>

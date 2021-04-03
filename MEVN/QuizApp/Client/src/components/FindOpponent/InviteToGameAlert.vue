@@ -1,17 +1,20 @@
 <template>
-<ion-button @click="presentAlert">
-    <ion-thumbnail><ion-img :src="player.img"></ion-img></ion-thumbnail> 
-        <ion-label class="name">{{player.username}} </ion-label>
-</ion-button>
+  <ion-button @click="presentAlert">
+    <div class="flex">
+      <img :src="player.img" alt="pfp">
+      <p>{{player.username}}</p>
+      <p></p>
+    </div>
+  </ion-button>
 </template>
 
 <script>
-import { IonButton, alertController, IonThumbnail, IonLabel, IonImg} from '@ionic/vue';
+import { IonButton, alertController} from '@ionic/vue';
 
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  components: { IonButton, IonThumbnail, IonLabel, IonImg},
+  components: { IonButton,},
   props: {player: Object},
   computed: {
         currentUser() {
@@ -50,3 +53,31 @@ export default defineComponent({
   },
 });
 </script>
+<style scoped>
+ion-button  {
+    --background: #262A34;
+    color: white;
+    height: 8.6vh;
+    width: 80vw;
+    border-radius: 1vw;
+    margin-bottom: 1.5vh;
+}
+
+img {
+    height: auto;
+    max-width: 15%;
+    border-radius: 50%;
+}
+
+p {
+    font-size: 1.3em;
+    margin-left: 5vw;
+}
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+</style>

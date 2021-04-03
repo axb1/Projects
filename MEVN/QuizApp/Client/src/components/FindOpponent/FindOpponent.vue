@@ -1,7 +1,7 @@
 <template>
     <ion-page>
         <ion-content>
-          <ion-icon :icon="arrowBackOutline" size="large" @click="GoBack" id="arrow"></ion-icon>
+          <ion-icon :icon="arrowBackOutline" @click="GoBack" id="arrow"></ion-icon>
           <h1>Hvem vil du spille mod?</h1>
             <ion-item lines="none">
               <ion-label color="light" @click="GoToRandomOpponent">Tilfældig modstander</ion-label>
@@ -126,6 +126,7 @@ a {
 #arrow {
     margin-top: 5.6vh;
     margin-left: 5vw;
+    font-size: 5vh;
     color: white;
 }
 
