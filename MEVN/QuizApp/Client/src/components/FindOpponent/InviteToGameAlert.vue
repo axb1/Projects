@@ -55,7 +55,7 @@ export default defineComponent({
 </script>
 <style scoped>
 ion-button  {
-    --background: #262A34;
+    --background: #262A34 !important;
     color: white;
     height: 8.6vh;
     width: 80vw;

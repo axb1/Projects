@@ -145,6 +145,7 @@ export default {
           // Method called when tapping on a notification
           PushNotifications.addListener('pushNotificationActionPerformed',
             (notification) => {
+              this.$store.dispatch('setOngoingGames');
               alert('Push action performed: ' + JSON.stringify(notification));
             }
           );

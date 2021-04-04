@@ -1,7 +1,7 @@
 <template>
 <ion-button @click="presentAlert">
-    <ion-thumbnail><ion-img :src="this.friend.img"></ion-img></ion-thumbnail> 
-        <ion-label class="name">{{this.friend.username}} </ion-label>
+    <ion-thumbnail><ion-img :src="friend.img"></ion-img></ion-thumbnail> 
+        <ion-label class="name">{{friend.username}} </ion-label>
 </ion-button>
 </template>
 
@@ -40,3 +40,14 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+ion-button  {
+    --background: #262A34 !important;
+    color: white;
+    height: 8.6vh;
+    width: 80vw;
+    border-radius: 1vw;
+    margin-bottom: 1.5vh;
+}
+</style>
