@@ -38,9 +38,12 @@ export default {
                         this.email = '';
                         this.password = '';
                         this.$router.push('/games');
-                    }
-                )
-            })
+                    })
+                .catch((error) => {
+                    var errorMessage = error.message;
+                    alert(errorMessage);
+                })
+            })  
         },
 
     },

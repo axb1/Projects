@@ -1,7 +1,7 @@
 <template>
     <ion-page>
         <ion-content>
-            <ion-icon :icon="arrowBackOutline" size="large" @click="GoBack"></ion-icon>
+            <ion-icon :icon="arrowBackOutline" @click="GoBack"></ion-icon>
             <h3 class="login-txt">Opret en konto for at spille</h3>
             <ion-label>Brugernavn</ion-label>
             <ion-input v-model="accountname" required=true placeholder="Dit brugernavn.."></ion-input>
@@ -41,14 +41,10 @@ export default {
             if(this.accountname.length > 16) {
                 alert('Your account name must be 16 characters or below')
             }
-            try {
-                await UserService.createUser(this.accountname, this.email, "https://cdn.bulbagarden.net/upload/1/17/025Pikachu-Original.png");
-            } catch (error) {
-                alert("This accountname is already taken");
-            }
 
             firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
-            .then(()=> {
+            .then(async()=>  {
+                await UserService.createUser(this.accountname, this.email, "https://cdn.bulbagarden.net/upload/1/17/025Pikachu-Original.png");
                 this.$router.push('/games');
 
                 // Reset input fields
@@ -57,9 +53,10 @@ export default {
                 this.accountname = '';
                 this.confirmpassword = '';
             })
-            err => {
-                alert(err.message);
-            }
+            .catch((error) => {
+                var errorMessage = error.message;
+                alert(errorMessage);
+            })
 
         },
         GoBack() {
@@ -82,7 +79,7 @@ export default {
     color:white;
     text-align: center;
     font-size: 1.9rem;
-    margin-top: 5vh;
+    margin-top: 2.5vh;
     margin-bottom: 5vh;
     margin-right: 10vw;
     margin-left: 10vw;
@@ -90,10 +87,12 @@ export default {
 
 
 ion-icon {
-    margin-top: 4vh;
+    margin-top: 5vh;
     margin-left: 5vw;
+    font-size: 5vh;
     color: white;
 }
+
 
 ion-button {
     --background: linear-gradient(to right, #0BA360, #3CBA92);

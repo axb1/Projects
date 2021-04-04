@@ -11,9 +11,9 @@
             </ion-toolbar>
         </ion-header>
         <ion-content>
-            <ion-input v-model="email" required=true placeholder="Email/brugernavn" v-on:keyup.enter="SearchForFriend"></ion-input>
-            <ion-button @click="SearchForFriend">Søg efter ven</ion-button>
             <ConfirmAddFriendAlert v-if="friendSearchResult.length !=0" v-bind:friend="friendSearchResult[0]"></ConfirmAddFriendAlert>
+            <ion-input v-model="emailOrUsername" required=true placeholder="Email/brugernavn" v-on:keyup.enter="SearchForFriend"></ion-input>
+            <ion-button @click="SearchForFriend">Søg efter ven</ion-button>
         </ion-content>
     </ion-page>
 </template>
@@ -28,6 +28,7 @@ export default {
     data: function() {
       return {
         arrowBackOutline,
+        emailOrUsername: ''
       };  
     },
     components: {
@@ -46,13 +47,16 @@ export default {
         friendSearchResult() {
           return this.$store.getters.getFriendSearchResult;
         },
+        friends() {
+          return this.$store.getters.getFriends;
+        },
     },
     methods: {
         GoBack() {
             this.$router.push('/friendslist');
         },
         SearchForFriend() {
-            this.$store.dispatch('setFriendSearchResult', document.getElementById('searchinput').value);
+            this.$store.dispatch('setFriendSearchResult', this.emailOrUsername);
         }
     },
 }

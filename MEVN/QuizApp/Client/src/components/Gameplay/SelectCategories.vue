@@ -296,8 +296,8 @@ ion-item {
 h1 {
   color:white;
   text-align: center;
-  margin-top: 2vh;
-  margin-bottom: 2vh;
+  margin-top: 2.5vh;
+  margin-bottom: 4vh;
 }
 
 div {

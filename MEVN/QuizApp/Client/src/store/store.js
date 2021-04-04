@@ -147,8 +147,17 @@ export default createStore({
             var user = await UserService.getUserByEmail(firebaseUser.email);
             var actualUser = user[0];
             var friends = actualUser.friends;
-            friends.push(friend);
+            var alreadyAFriend = false;
 
+            friends.forEach(element => {
+                if(element.username == friend.username) {
+                    alreadyAFriend = true
+                }
+            });
+
+            if (alreadyAFriend == false && friend.username != actualUser.username) {
+                friends.push(friend);
+            } 
             await UserService.updateFriends(actualUser.username, friends);
             state.commit('setFriends', friends);
         },

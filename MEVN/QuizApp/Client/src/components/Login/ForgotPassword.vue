@@ -1,7 +1,7 @@
 <template>
     <ion-page>
         <ion-content>
-            <ion-icon :icon="arrowBackOutline" size="large" @click="GoBack"></ion-icon>
+            <ion-icon :icon="arrowBackOutline" @click="GoBack"></ion-icon>
             <h1>Forgot password?</h1>
             <h3>Confirm your email and we'll send the instructions.</h3>
             <ion-input v-model="email" required=true placeholder="Din email.." v-on:keyup.enter="SendPasswordResetEmail(email)"></ion-input>
@@ -102,8 +102,9 @@ label {
 }
 
 ion-icon {
-    margin-top: 4vh;
-    margin-left: 4vw;
+    margin-top: 5vh;
+    margin-left: 5vw;
+    font-size: 5vh;
     color: white;
 }
 
