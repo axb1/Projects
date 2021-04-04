@@ -133,6 +133,28 @@ const router = createRouter({
   Store
 })
 
+let firebaseUser = firebase.auth().currentUser;
+firebase.auth().onAuthStateChanged(function(user) {
+  console.log(user);
+  firebaseUser = user;
+});
+
+firebase.auth().onAuthStateChanged(newUserState => {
+  firebaseUser = newUserState;
+  if(firebaseUser) {
+    router.push('/games');
+  }
+})
+
+router.beforeEach((to, from, next) => {
+  console.log(firebaseUser);
+  if (!firebaseUser && to.meta.requiresAuth) {
+    next('login');
+  } else {
+    next();
+  }
+})
+
 
 
 
