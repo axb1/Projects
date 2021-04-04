@@ -24,15 +24,17 @@ export default defineComponent({
           header: 'Do you want to play?',
           buttons: [{
             text: 'Decline',
-            handler: blah => {
+            handler: async blah => {
               console.log(blah);
-              this.$store.dispatch('removeInvite', this.invite.inviteID);
+              await this.$store.dispatch('removeInvite', this.invite.inviteID);
+              this.$store.dispatch('setCurrentUser');
             }
           }, {
               text: 'Accept',
-              handler: meh => {
+              handler: async meh => {
                   console.log(meh);
-                  this.$store.dispatch('removeInvite', this.invite.inviteID);
+                  await this.$store.dispatch('removeInvite', this.invite.inviteID);
+                  this.$store.dispatch('setCurrentUser');
                   this.$store.dispatch('createGameAgainstFriend', {username: this.invite.username, img: this.invite.img, token: this.invite.token});
               }
           }],

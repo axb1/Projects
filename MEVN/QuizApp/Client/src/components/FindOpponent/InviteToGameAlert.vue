@@ -38,7 +38,7 @@ export default defineComponent({
               handler: meh => {
                 console.log(meh);
                 if(this.player.username == this.currentUser.username) {
-                  this.$router.push('/friendslist');
+                  this.$router.push('/games');
                 }
                 else {
                   this.$store.dispatch('addInviteToPlayersInvites', {receiverUsername: this.player.username, requesterUsername: this.currentUser.username, requesterImg: this.currentUser.img, token:this.currentUser.token});
