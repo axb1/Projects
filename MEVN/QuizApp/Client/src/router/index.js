@@ -136,7 +136,6 @@ const router = createRouter({
 
 let firebaseUser = firebase.auth().currentUser;
 firebase.auth().onAuthStateChanged(function(user) {
-  console.log(user);
   firebaseUser = user;
 });
 
@@ -148,7 +147,6 @@ firebase.auth().onAuthStateChanged(newUserState => {
 })
 
 router.beforeEach((to, from, next) => {
-  console.log(firebaseUser);
   if (!firebaseUser && to.meta.requiresAuth) {
     next('login');
   } else {

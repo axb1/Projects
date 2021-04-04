@@ -80,8 +80,11 @@ export default createStore({
         },
         async setCurrentUser(state) {
             var firebaseUser = firebase.auth().currentUser;
+            console.log(firebaseUser);
+            console.log(firebaseUser.email);
             var user = await UserService.getUserByEmail(firebaseUser.email);
             var actualUser = user[0];
+            console.log(actualUser);
             state.commit('setCurrentUser', actualUser);
         },
 
@@ -118,7 +121,6 @@ export default createStore({
         },
 
         setCurrentGame(state, game) {
-            console.log(game);
             state.commit('setCurrentGame', game)
         },
 
@@ -188,7 +190,6 @@ export default createStore({
         },
 
         async lookForGameAgainstRandomOpponent(state) {
-            console.log("I was here");
             // Check if any games are available
             var games = await GameService.getAvailableGames();
 
@@ -199,8 +200,6 @@ export default createStore({
             var date = new Date();
             // If there is a game, set player2 and update game
             if (games.length != 0 && games[0].player1.username != user[0].username) {
-                console.log(games[0]);
-                console.log(user.username);
                 // Find and update available game
                 var availableGame = games[0];
                 var player2 = {username: user[0].username, correctAnswers: [], goFirst: false, dateOfLastTurn: date, myTurn: false, img: user[0].img, roundsPlayed: 0, token: user[0].token};

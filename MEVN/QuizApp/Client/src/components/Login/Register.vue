@@ -47,16 +47,17 @@ export default {
                 return;
             }
 
-            firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
+            await firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
             .then(async()=>  {
                 await UserService.createUser(this.accountname, this.email, "https://cdn.bulbagarden.net/upload/1/17/025Pikachu-Original.png");
-                this.$router.push('/games');
+                this.$store.dispatch('setCurrentUser');
 
                 // Reset input fields
                 this.email = '';
                 this.password = '';
                 this.accountname = '';
                 this.confirmpassword = '';
+                this.$router.push('/games');
             })
             .catch((error) => {
                 var errorMessage = error.message;

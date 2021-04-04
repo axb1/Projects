@@ -9,6 +9,7 @@
     </ion-header>
     <ion-content>
           <ion-spinner name="dots" v-if="lookingForRandomOpponent == true"></ion-spinner>
+          <div v-if="currentUser != undefined">
             <div v-if="currentUser.invites != undefined && currentUser.invites.length != 0">
                 <div id="invites">
                   <div class="squareinvites"></div>
@@ -17,8 +18,8 @@
               <ion-list v-for="invite in currentUser.invites" :key="invite.inviteID">
                 <InviteFriendAlert v-bind:invite="invite"></InviteFriendAlert>
               </ion-list>
-            </div>
-
+            </div>       
+          </div>
             <div v-if="ongoingGames != undefined">
               <div v-if="ongoingGames.length != 0">
                 <div id="yourturn">
@@ -159,7 +160,6 @@ export default {
       this.$store.dispatch('setCurrentTime');
 
       this.timer = setInterval(() => {
-        console.log("I was here");
         this.$store.dispatch('setOngoingGames');
         this.$store.dispatch('setPreviousGames');
       }, 30000)
@@ -179,7 +179,6 @@ export default {
           console.log("Not logged in");
         }
       })
-
       // This is SUPER sketchy
       var user = await UserService.getUserByUsername(this.currentUser.username);
       var counter = 0;
