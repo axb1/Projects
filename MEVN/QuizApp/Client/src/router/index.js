@@ -16,6 +16,7 @@ import PreviousGame from '../components/MainPage/PreviousGame.vue';
 import InviteFriendAlert from '../components/MainPage/InviteFriendAlert.vue';
 import FindPlayer from '../components/FindOpponent/FindPlayer.vue';
 import PreviousGames from '../components/MainPage/PreviousGames.vue';
+import firebase from 'firebase';
 import Store from '../store/store';
 
 
