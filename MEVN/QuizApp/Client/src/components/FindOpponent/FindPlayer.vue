@@ -1,11 +1,11 @@
 <template>
     <ion-page>
         <ion-header>
-            <ion-toolbar>
+            <ion-toolbar mode="ios">
+                <ion-title>Find modstander</ion-title>
                 <ion-buttons slot="start">
                     <ion-icon :icon="arrowBackOutline" @click="GoBack"></ion-icon>
                 </ion-buttons>
-                <ion-title>Find modstander</ion-title>
             </ion-toolbar>
         </ion-header>
         <ion-content>
@@ -65,12 +65,6 @@ ion-icon {
     color: white;
 }
 
-h1 {
-    color: white;
-    margin-left: 5vw;
-    margin-top: 1vh;
-}
-
 ion-input {
     --padding-top: 1.0vh;
     --padding-bottom: 1.0vh;
@@ -124,6 +118,7 @@ ion-buttons {
 
 ion-title {
     color: white;
+    font-size: 1.4em;
 }
 
 

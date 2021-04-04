@@ -1,11 +1,11 @@
 <template>
     <ion-page>
         <ion-header>
-            <ion-toolbar>
+            <ion-toolbar mode="ios">
+                <ion-title>Vælg ven at spille mod</ion-title>
                 <ion-buttons slot="start">
                     <ion-icon :icon="arrowBackOutline" @click="GoBack"></ion-icon>
                 </ion-buttons>
-                <ion-title>Vælg ven at spille mod</ion-title>
                 <ion-buttons slot="end">
                     <ion-icon :icon="addCircleOutline" @click="GoToAddFriend"></ion-icon>
                 </ion-buttons>

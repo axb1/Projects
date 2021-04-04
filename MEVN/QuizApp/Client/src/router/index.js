@@ -16,6 +16,7 @@ import OngoingGame from '../components/MainPage/OngoingGame.vue';
 import PreviousGame from '../components/MainPage/PreviousGame.vue';
 import InviteFriendAlert from '../components/MainPage/InviteFriendAlert.vue';
 import FindPlayer from '../components/FindOpponent/FindPlayer.vue';
+import PreviousGames from '../components/MainPage/PreviousGames.vue';
 import Store from '../store/store';
 
 
@@ -123,6 +124,12 @@ const routes = [
     path:'/findplayer',
     name: 'findplayer',
     component: FindPlayer,
+    props: true
+  },
+  {
+    path:'/previousgames',
+    name: 'previousgames',
+    component: PreviousGames,
     props: true
   },
 ]

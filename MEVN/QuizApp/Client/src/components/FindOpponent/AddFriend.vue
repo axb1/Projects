@@ -1,19 +1,17 @@
 <template>
     <ion-page>
         <ion-header>
-            <ion-toolbar>
-                <ion-buttons slot="start">
-                    <ion-button class="iconbutton" @click="GoBack">
-                        <ion-icon :icon="arrowBackOutline" size="large"></ion-icon>
-                    </ion-button>
-                </ion-buttons>
+            <ion-toolbar mode="ios">
                 <ion-title>Tilføj ven</ion-title>
+                <ion-buttons slot="start" @click="GoBack">
+                    <ion-icon :icon="arrowBackOutline" size="large"></ion-icon>
+                </ion-buttons>
             </ion-toolbar>
         </ion-header>
         <ion-content>
             <ConfirmAddFriendAlert v-if="friendSearchResult.length !=0" v-bind:friend="friendSearchResult[0]"></ConfirmAddFriendAlert>
             <ion-input v-model="emailOrUsername" required=true placeholder="Email/brugernavn" v-on:keyup.enter="SearchForFriend"></ion-input>
-            <ion-button @click="SearchForFriend">Søg efter ven</ion-button>
+            <ion-button @click="SearchForFriend" expand="block">Søg efter ven</ion-button>
         </ion-content>
     </ion-page>
 </template>
@@ -64,24 +62,17 @@ export default {
 <style scoped>
 ion-icon {
     color: white;
+    margin-left: 5vw;
 }
 
 ion-button {
-  --background: #262A34;
-  --padding-top: 1.5vh;
-  --padding-bottom: 1.5vh;
-  --border-radius: 6px;
-  margin-top: 1.5vh;
-  margin-left: 5vw;
-  margin-right: 5vw;
-}
-
-ion-buttons {
-    --background: #181A20;
-}
-
-.iconbutton {
-    --background: #181A20;
+    --background: linear-gradient(to right, #0BA360, #3CBA92);
+    --border-radius: 4px !important;
+    height: 6vh;
+    margin-top: 2vh;
+    margin-left: 10vw;
+    margin-right: 10vw;
+    width: 80vw;
 }
 
 ion-title {
@@ -102,6 +93,7 @@ ion-input{
   border: 1px solid #262A34;
   background-color: #262A34;
   color: white;
+  margin-top: 10vh;
 }
 
 ion-header {
