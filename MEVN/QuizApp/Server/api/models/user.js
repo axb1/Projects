@@ -59,7 +59,8 @@ const userSchema = new Schema({
     invites: [{
         username: String,
         img: String,
-        inviteID: String
+        inviteID: String,
+        token: String
     }],
     token: String
     

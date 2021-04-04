@@ -166,7 +166,7 @@ export default createStore({
             var opponent = await UserService.getUserByUsername(invite.receiverUsername);
             var opponentInvites = opponent[0].invites;
             var inviteID = "id" + Math.random().toString(16).slice(2);
-            var newInvite = {username: invite.requesterUsername, img: invite.requesterImg, inviteID: inviteID };
+            var newInvite = {username: invite.requesterUsername, img: invite.requesterImg, inviteID: inviteID, token: invite.token };
             opponentInvites.push(newInvite);
             await UserService.updateInvites(invite.receiverUsername, opponentInvites);
         },
@@ -183,7 +183,7 @@ export default createStore({
                 } 
             }
             await UserService.updateInvites(actualUser.username, currentInvites);
-            state.commit('setInvites');
+            state.commit('setInvites', currentInvites);
 
         },
 

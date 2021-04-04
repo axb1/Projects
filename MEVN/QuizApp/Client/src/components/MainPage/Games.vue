@@ -9,6 +9,16 @@
     </ion-header>
     <ion-content>
           <ion-spinner name="dots" v-if="lookingForRandomOpponent == true"></ion-spinner>
+            <div v-if="currentUser.invites != undefined && currentUser.invites.length != 0">
+                <div id="invites">
+                  <div class="squareinvites"></div>
+                  <h1 id="invitestxt">Invitationer</h1>
+                </div>
+              <ion-list v-for="invite in currentUser.invites" :key="invite.inviteID">
+                <InviteFriendAlert v-bind:invite="invite"></InviteFriendAlert>
+              </ion-list>
+            </div>
+
             <div v-if="ongoingGames != undefined">
               <div v-if="ongoingGames.length != 0">
                 <div id="yourturn">
@@ -19,7 +29,7 @@
                 <OngoingGame v-if="(ongoingGame.player2.myTurn == true && ongoingGame.player2.username == currentUser.username)" v-bind:ongoingGame="ongoingGame"></OngoingGame>
                 <OngoingGame v-if="(ongoingGame.player1.myTurn == true && ongoingGame.player1.username == currentUser.username)" v-bind:ongoingGame="ongoingGame"></OngoingGame>
               </ion-list>
-              </div>
+            </div>
 
             </div>
           <div v-if="ongoingGames != undefined">
@@ -44,6 +54,7 @@ import OngoingGame from './OngoingGame';
 import firebase from 'firebase';
 import { Plugins, } from '@capacitor/core';
 import UserService from '@/api/UserService';
+import InviteFriendAlert from './InviteFriendAlert.vue';
 const { PushNotifications } = Plugins;
 
 export default {
@@ -79,6 +90,7 @@ export default {
         IonList,
         IonSpinner,
         OngoingGame,
+        InviteFriendAlert
     },
     methods: {
         GoToInvites() {
@@ -187,7 +199,7 @@ export default {
 </script>
 <style scoped>
 
-.square {
+.square{
     background: #43B15B;
     width: 5vw;
     height: 16vw;
@@ -195,10 +207,32 @@ export default {
 }
 
 
+.squareinvites {
+  background: #1DA1F2;
+  width: 5vw;
+  height: 16vw;
+  border-radius: 0 1vh 1vh 0;
+}
+
+
 #turn {
   color: white;
   margin-left: 5vw;
   font-size: 1.3rem;
+}
+
+#invites {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  display: flex;
+  align-items: center;
+}
+
+#invites2 {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  display: flex;
+  align-items: center;
 }
 
 #title {
@@ -234,6 +268,12 @@ ion-list {
   margin-bottom: 2vh;
   display: flex;
   align-items: center;
+}
+
+#invitestxt {
+  color: white;
+  margin-left: 5vw;
+  font-size: 1.3rem;
 }
 
 #add {

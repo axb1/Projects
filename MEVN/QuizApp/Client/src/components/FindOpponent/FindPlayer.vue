@@ -66,17 +66,17 @@ ion-icon {
 }
 
 ion-input {
-    --padding-top: 1.0vh;
-    --padding-bottom: 1.0vh;
+    --padding-top: 1.8vh;
+    --padding-bottom: 1.8vh;
     --padding-start: 1.5vh;
     --padding-end: 1.5vh;
-    width: 80vw;
+    width: 86vw;
     border: 1px solid #262A34;
     border-radius: 4px;
-    margin-left: 10vw;
-    margin-right: 10vw;
+    margin-left: 7vw;
+    margin-right: 7vw;
     margin-bottom: 2vh;
-    margin-top: 10vh;
+    margin-top: 1vh;
     background-color: #262A34;
     color: white;
 }

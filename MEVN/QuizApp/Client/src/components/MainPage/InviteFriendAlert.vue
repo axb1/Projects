@@ -1,8 +1,11 @@
 <template>
-    <ion-button @click="presentAlert">
-    <ion-thumbnail><ion-img :src="this.invite.img"></ion-img></ion-thumbnail> 
-        <ion-label class="name">{{this.invite.username}} </ion-label>
-    </ion-button>
+  <div class="flex">
+      <ion-button @click="presentAlert">
+      <div class="flex"></div>
+      <ion-thumbnail><ion-img :src="invite.img"></ion-img></ion-thumbnail> 
+        <ion-label class="name">{{invite.username}} </ion-label>
+      </ion-button>
+  </div>
 </template>
 
 <script>
@@ -30,7 +33,7 @@ export default defineComponent({
               handler: meh => {
                   console.log(meh);
                   this.$store.dispatch('removeInvite', this.invite.inviteID);
-                  this.$store.dispatch('createGameAgainstFriend', {username: this.invite.username, img: this.invite.img});
+                  this.$store.dispatch('createGameAgainstFriend', {username: this.invite.username, img: this.invite.img, token: this.invite.token});
               }
           }],
         });
@@ -40,3 +43,22 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+  ion-button {
+    --background: #262A34;
+    color: white;
+    height: 8.6vh;
+    width: 80vw;
+    --border-radius: 1vw;
+    margin-bottom: 1.5vh;
+  }
+
+.flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+</style>

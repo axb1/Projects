@@ -11,7 +11,6 @@ import RandomOpponent from '../components/FindOpponent/RandomOpponent.vue';
 import Settings from '../components/MainPage/Settings.vue';
 import Friendslist from '../components/FindOpponent/Friendslist.vue';
 import AddFriend from '../components/FindOpponent/AddFriend.vue';
-import Invites from '../components/MainPage/Invites.vue';
 import OngoingGame from '../components/MainPage/OngoingGame.vue';
 import PreviousGame from '../components/MainPage/PreviousGame.vue';
 import InviteFriendAlert from '../components/MainPage/InviteFriendAlert.vue';
@@ -97,12 +96,6 @@ const routes = [
     path:'/addfriend',
     name: 'addfriend',
     component: AddFriend,
-    props: true
-  },
-  {
-    path:'/invites',
-    name: 'invites',
-    component: Invites,
     props: true
   },
   {

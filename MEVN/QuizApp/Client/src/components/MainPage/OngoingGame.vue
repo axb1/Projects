@@ -5,7 +5,7 @@
             <p>{{ongoingGame.player2.username}}</p>
             <p>{{Math.floor(Math.floor((currentTime-Date.parse(ongoingGame.player2.dateOfLastTurn)))/(1000*60)) +"m"}}</p>
         </div>
-        <div v-else>
+        <div v-else class="flex">
             <img :src="ongoingGame.player2.img" alt="pfp">
             <p>{{ongoingGame.player2.username}}</p>
             <p>{{Math.floor(Math.floor((currentTime-Date.parse(ongoingGame.player2.dateOfLastTurn)))/(1000*60*60)) +"h"}}</p>

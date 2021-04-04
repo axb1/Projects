@@ -83,17 +83,19 @@ ion-title {
 }
 
 ion-input{
-  width: 80%;
-  border-radius: 4px;
-  box-sizing: border-box;
-  height: 4vh;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  border: 1px solid #262A34;
-  background-color: #262A34;
-  color: white;
-  margin-top: 10vh;
+    --padding-top: 1.8vh;
+    --padding-bottom: 1.8vh;
+    --padding-start: 1.5vh;
+    --padding-end: 1.5vh;
+    width: 86vw;
+    border: 1px solid #262A34;
+    border-radius: 4px;
+    margin-left: 7vw;
+    margin-right: 7vw;
+    margin-bottom: 2vh;
+    margin-top: 1vh;
+    background-color: #262A34;
+    color: white;
 }
 
 ion-header {

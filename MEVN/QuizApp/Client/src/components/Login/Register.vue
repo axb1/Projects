@@ -40,6 +40,11 @@ export default {
             }
             if(this.accountname.length > 16) {
                 alert('Your account name must be 16 characters or below')
+                return;
+            }
+            if(this.accountname.length < 3) {
+                alert('Your account name must be at least 3 characters')
+                return;
             }
 
             firebase.auth().createUserWithEmailAndPassword(this.email, this.password)

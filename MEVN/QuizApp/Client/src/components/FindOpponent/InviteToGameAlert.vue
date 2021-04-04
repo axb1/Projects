@@ -41,7 +41,7 @@ export default defineComponent({
                   this.$router.push('/friendslist');
                 }
                 else {
-                  this.$store.dispatch('addInviteToPlayersInvites', {receiverUsername: this.player.username, requesterUsername: this.currentUser.username, requesterImg: this.currentUser.img});
+                  this.$store.dispatch('addInviteToPlayersInvites', {receiverUsername: this.player.username, requesterUsername: this.currentUser.username, requesterImg: this.currentUser.img, token:this.currentUser.token});
                   this.$router.push('/games');
                 }
               }
