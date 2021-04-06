@@ -50,7 +50,7 @@ export default {
             await firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
             .then(async()=>  {
                 await UserService.createUser(this.accountname, this.email, "https://cdn.bulbagarden.net/upload/1/17/025Pikachu-Original.png");
-                this.$store.dispatch('setCurrentUser');
+                await this.$store.dispatch('setCurrentUser');
 
                 // Reset input fields
                 this.email = '';

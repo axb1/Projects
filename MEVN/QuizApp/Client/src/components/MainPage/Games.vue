@@ -154,11 +154,10 @@ export default {
     },
 
     async ionViewWillEnter() {
-      this.$store.dispatch('setCurrentUser');
-      this.$store.dispatch('setOngoingGames');
-      this.$store.dispatch('setPreviousGames');
-      this.$store.dispatch('setCurrentTime');
-
+      await this.$store.dispatch('setCurrentUser');
+      await this.$store.dispatch('setOngoingGames');
+      await this.$store.dispatch('setPreviousGames');
+      await this.$store.dispatch('setCurrentTime');
       this.timer = setInterval(() => {
         this.$store.dispatch('setOngoingGames');
         this.$store.dispatch('setPreviousGames');

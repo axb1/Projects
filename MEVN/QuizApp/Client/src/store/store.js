@@ -80,11 +80,17 @@ export default createStore({
         },
         async setCurrentUser(state) {
             var firebaseUser = firebase.auth().currentUser;
-            console.log(firebaseUser);
-            console.log(firebaseUser.email);
-            var user = await UserService.getUserByEmail(firebaseUser.email);
+            var user = [];
+            var counter = 0;
+            while(user.length == 0) {
+                user = await UserService.getUserByEmail(firebaseUser.email);
+                counter = counter +1;
+
+                if (counter == 10) {
+                    break;
+                }
+            }
             var actualUser = user[0];
-            console.log(actualUser);
             state.commit('setCurrentUser', actualUser);
         },
 
@@ -108,8 +114,9 @@ export default createStore({
         async setPlayerSearchResult(state, input) {
             var searchResult = [];
             var usernameResult = await UserService.getUserByUsername(input);
+            console.log(usernameResult);
             if (usernameResult.length != 0) {
-                var user = {username: usernameResult[0].username, img: usernameResult[0].img}
+                var user = {username: usernameResult[0].username, img: usernameResult[0].img, token: usernameResult[0].token}
                 searchResult.push(user);
             }
             state.commit('setPlayerSearchResult', searchResult);

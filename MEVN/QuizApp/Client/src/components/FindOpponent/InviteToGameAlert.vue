@@ -12,7 +12,7 @@
 import { IonButton, alertController} from '@ionic/vue';
 
 import { defineComponent } from 'vue';
-
+import NotificationService from '../../api/NotificationService';
 export default defineComponent({
   components: { IonButton,},
   props: {player: Object},
@@ -35,12 +35,17 @@ export default defineComponent({
             }
           }, {
               text: 'Accept',
-              handler: meh => {
+              handler: async meh => {
                 console.log(meh);
                 if(this.player.username == this.currentUser.username) {
                   this.$router.push('/games');
                 }
                 else {
+                  var username = this.currentUser.username;
+                  var title = 'QuizNord';
+                  var body = username + " har inviteret dig til at spille";
+                  console.log(this.player);
+                  await NotificationService.sendNotification(title, body, this.player.token);
                   this.$store.dispatch('addInviteToPlayersInvites', {receiverUsername: this.player.username, requesterUsername: this.currentUser.username, requesterImg: this.currentUser.img, token:this.currentUser.token});
                   this.$router.push('/games');
                 }
