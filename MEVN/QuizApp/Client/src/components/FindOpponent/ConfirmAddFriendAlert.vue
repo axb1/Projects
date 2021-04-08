@@ -29,7 +29,8 @@ export default defineComponent({
               text: 'Accept',
               handler: meh => {
                   console.log(meh);
-                  this.$store.dispatch('addFriendToFriendslist', {username: this.friend.username, img: this.friend.img});
+                  console.log(this.friend.token);
+                  this.$store.dispatch('addFriendToFriendslist', {username: this.friend.username, img: this.friend.img, token: this.friend.token});
                   this.$router.push('/friendslist');
               }
           }],

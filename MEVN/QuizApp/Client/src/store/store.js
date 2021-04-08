@@ -98,6 +98,7 @@ export default createStore({
             var firebaseUser = firebase.auth().currentUser;
             var user = await UserService.getUserByEmail(firebaseUser.email);
             var actualUser = user[0];
+            console.log(actualUser.friends);
             state.commit('setFriends', actualUser.friends);
         },
 
@@ -157,6 +158,8 @@ export default createStore({
             var actualUser = user[0];
             var friends = actualUser.friends;
             var alreadyAFriend = false;
+            
+            console.log(friend);
 
             friends.forEach(element => {
                 if(element.username == friend.username) {

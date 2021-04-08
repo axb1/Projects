@@ -16,6 +16,7 @@ import PreviousGame from '../components/MainPage/PreviousGame.vue';
 import InviteFriendAlert from '../components/MainPage/InviteFriendAlert.vue';
 import FindPlayer from '../components/FindOpponent/FindPlayer.vue';
 import PreviousGames from '../components/MainPage/PreviousGames.vue';
+import Welcome from '../components/Login/Welcome.vue';
 import firebase from 'firebase';
 import Store from '../store/store';
 
@@ -23,7 +24,7 @@ import Store from '../store/store';
 const routes = [
   {
     path: '',
-    redirect: '/login',
+    redirect: '/welcome',
   },
   {
     path:'/login',
@@ -125,6 +126,11 @@ const routes = [
     name: 'previousgames',
     component: PreviousGames,
     props: true
+  },
+  {
+    path:'/welcome',
+    name: 'welcome',
+    component: Welcome,
   },
 ]
 

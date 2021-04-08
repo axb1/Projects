@@ -1,29 +1,41 @@
 <template>
     <ion-page>
+        <ion-header>
+            <ion-toolbar mode="ios">
+                <ion-title>Login</ion-title>
+                <ion-buttons slot="start">
+                    <ion-icon :icon="arrowBackOutline" @click="GoToWelcome"></ion-icon>
+                </ion-buttons>
+            </ion-toolbar>
+        </ion-header>
         <ion-content>
-            <h1>Velkommen til QuizNord</h1>
-            <ion-label>Email</ion-label>
+            <p id="margin"></p>
+            <ion-label id="email">Email</ion-label>
             <ion-input v-model="email" required=true placeholder="Din email.."></ion-input>
             <ion-label>Password</ion-label>
             <ion-input v-model="password" type="password" required=true placeholder="Dit password.." v-on:keyup.enter="login"></ion-input>
             <h3 class="forgot-txt"><router-link to="/forgotpassword">Glemt password?</router-link></h3>
 
             <ion-button v-on:click="login">Login</ion-button>
-            <h2 id="noaccount">Har du ikke en konto?</h2>
-            <h2 id="signup"><router-link to="/register">Opret konto</router-link></h2>
+            <div id="footer">
+                <p id="noaccount">Har du ikke en konto?</p>
+                <p id="signup"><router-link to="/register">Opret konto</router-link></p>
+            </div>
         </ion-content>
     </ion-page>
 </template>
 
 <script>
-import { IonPage, IonContent, IonInput, IonLabel} from '@ionic/vue';
+import { IonPage, IonHeader, IonToolbar, IonTitle, IonButtons, IonIcon, IonContent, IonInput, IonLabel} from '@ionic/vue';
+import { arrowBackOutline } from 'ionicons/icons';
 import firebase from 'firebase';
 export default {
     name: 'login',
     data: function() {
       return {
           email: '',
-          password: ''
+          password: '',
+          arrowBackOutline
       };  
     },
     methods: {
@@ -45,33 +57,25 @@ export default {
                 })
             })  
         },
+        GoToWelcome() {
+            this.$router.push('/welcome')
+        }
 
     },
     components: {
         IonPage,
         IonContent,
+        IonHeader,
+        IonToolbar,
+        IonTitle,
+        IonButtons,
+        IonIcon,
         IonInput,
-        IonLabel
+        IonLabel,
     }
 }
 </script>
 <style scoped>
-.login-txt {
-    text-align: center;
-    font-size: 1.3rem;
-    color: white;
-    margin-bottom: 3vh;
-}
-#emailtxt {
-    margin-left: 8vw;
-    color: white;
-}
-
-#passwordtxt {
-    margin-left: 8vw;
-    color: white;
-}
-
 .forgot-txt {
     color: #3C8AFF;
     text-align: right;
@@ -87,29 +91,6 @@ export default {
     text-decoration: none;
 }
 
-
-#noaccount {
-    color: white;
-    display: inline-block;
-    margin-top: 26vh;
-    font-size: 1rem;
-    margin-left: 20vw;
-}
-
-#signup {
-    display: inline-block;
-}
-
-#signup a {
-    color: #3C8AFF;
-    text-decoration: none;
-    font-size: 1rem;
-    margin-left: 4vw;
-}
-
-.rememeberme {
-    margin-left: 4vw;
-}
 
 ion-button {
     --background: linear-gradient(to right, #0BA360, #3CBA92);
@@ -144,14 +125,61 @@ ion-input {
 }
 
 
-h1 {
-    font-weight: bold;
-    text-align: center;
-    color: white;
-    margin-top: 14vh;
-    margin-bottom: 5vh;
+ion-header {
+    background: #181A20;
+    position: relative;
+    height: 16vh;
+    border-bottom: 0.55px solid #14161B;
 }
 
+ion-toolbar {
+  --background: #181A20;
+  --border-style: none;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+ion-buttons {
+    color: white;
+    padding-left: 6vw;
+    padding-right: 6vw;
+    font-size: 5vh;
+}
+
+ion-title {
+    color: white;
+    font-size: 1.4em;
+}
+
+
+#footer {
+   position:fixed;
+   bottom: 0;
+   text-align: center;
+}
+
+#noaccount {
+    color: white;
+    margin-right: 3vw;
+    display: inline-block;
+    margin-left: 17vw;
+}
+
+#signup {
+    display: inline-block;
+}
+
+#signup a {
+    color: #3C8AFF;
+    text-decoration: none;
+}
+
+#margin {
+    margin-top: 10vh;
+}
 
 
 
