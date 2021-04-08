@@ -64,6 +64,9 @@ export default {
         },
         GoToFindPlayer() {
           this.$router.push('/findplayer');
+        },
+        GoToFaceBookFriendslist() {
+          this.$router.push('facebookfriendslist');
         }
     },
         ionViewWillEnter() {

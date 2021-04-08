@@ -17,6 +17,7 @@ import InviteFriendAlert from '../components/MainPage/InviteFriendAlert.vue';
 import FindPlayer from '../components/FindOpponent/FindPlayer.vue';
 import PreviousGames from '../components/MainPage/PreviousGames.vue';
 import Welcome from '../components/Login/Welcome.vue';
+import FacebookFriendslist from '../components/FindOpponent/FacebookFriendslist.vue';
 import firebase from 'firebase';
 import Store from '../store/store';
 
@@ -132,6 +133,11 @@ const routes = [
     name: 'welcome',
     component: Welcome,
   },
+  {
+    path:'/facebookfriendslist',
+    name: 'facebookfriendslist',
+    component: FacebookFriendslist,
+  },
 ]
 
 const router = createRouter({
@@ -154,7 +160,7 @@ firebase.auth().onAuthStateChanged(newUserState => {
 
 router.beforeEach((to, from, next) => {
   if (!firebaseUser && to.meta.requiresAuth) {
-    next('login');
+    next('welcome');
   } else {
     next();
   }

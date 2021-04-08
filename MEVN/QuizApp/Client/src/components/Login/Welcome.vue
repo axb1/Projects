@@ -11,7 +11,7 @@
                     <ion-label color="light">Login med email</ion-label>
                     <ion-icon :icon="mail" slot="start"></ion-icon>
                 </ion-item>
-                <ion-item id="person" lines="none">
+                <ion-item @click="Test" id="person" lines="none">
                     <ion-label color="light">Spil som gæst</ion-label>
                     <ion-icon :icon="personCircle" slot="start"></ion-icon>
                 </ion-item>
@@ -23,6 +23,8 @@
 <script>
 import { IonPage, IonContent, IonItem, IonLabel, IonIcon} from '@ionic/vue';
 import firebase from 'firebase';
+import UserService from '../../api/UserService';
+import FacebookService from '../../api/FacebookService';
 import {logoFacebook, mail, personCircle} from 'ionicons/icons';
 
 export default {
@@ -37,16 +39,23 @@ export default {
     methods: {
         SignInWithFacebook() {
             var provider = new firebase.auth.FacebookAuthProvider();
+
+            // Allow access to Facebook friends
+            provider.addScope('user_friends');
                     firebase
                     .auth()
                     .signInWithPopup(provider)
-                    .then((result) => {
+                    .then(async (result) => {
                         /** @type {firebase.auth.OAuthCredential} */
                         var credential = result.credential;
-
+                        console.log(credential)
                         // The signed-in user info.
                         var user = result.user;
                         console.log(user);
+
+                        // Create user on server if doesn't exist
+                        await UserService.createUser(user.displayName + user.uid, user.email, "https://cdn.bulbagarden.net/upload/1/17/025Pikachu-Original.png");
+                        await this.$store.dispatch('setCurrentUser');
 
                         // This gives you a Facebook Access Token. You can use it to access the Facebook API.
                         var accessToken = credential.accessToken;
@@ -61,6 +70,9 @@ export default {
         },
         GoToLogin() {
             this.$router.push('/login');
+        },
+        async Test() {
+            await FacebookService.getFriendsThatHaveApp("EAAaJiKaJJ7wBAIC442NjufTgCeDaCWI8VQjlEKwMuBMSm3UZCkIT0vrSeo5EHjOHCxNZBgVe1DoHQHKSZAWEIH9pIvd4Rsf6WREKxTeFIS90cE9LdJwUcgRmNVHh48xjG8nFehWZBI7oF5RZCihL2YN6jSh3FqC7ijtLZBcnGvWd3mSORwXfUMUURLHzZCOaLF8zr6vFOctIKxpfNhr3A7GBmsLCaMyVxquLo4q9PchxQZDZD");
         }
     },
     components: {
