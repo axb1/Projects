@@ -12,7 +12,7 @@
               <ion-icon :icon="personSharp" slot="start"></ion-icon>
             </ion-item>
             <ion-item lines="none">
-              <ion-label color="light">Facebookven</ion-label>
+              <ion-label @click="GoToFacebookFriendslist" color="light">Facebookven</ion-label>
               <ion-icon :icon="logoFacebook" slot="start"></ion-icon>
             </ion-item>
             <ion-item lines="none">
@@ -65,8 +65,8 @@ export default {
         GoToFindPlayer() {
           this.$router.push('/findplayer');
         },
-        GoToFaceBookFriendslist() {
-          this.$router.push('facebookfriendslist');
+        GoToFacebookFriendslist() {
+          this.$router.push('/facebookfriendslist');
         }
     },
         ionViewWillEnter() {

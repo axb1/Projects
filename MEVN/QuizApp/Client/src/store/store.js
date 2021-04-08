@@ -17,7 +17,8 @@ export default createStore({
         invites: [],
         token: String,
         didRegisterForNotifications: false,
-        currentTime: Date
+        currentTime: Date,
+        FBAccessToken: String
     },
     mutations: {
         setOngoingGames(state, payload) {
@@ -55,6 +56,9 @@ export default createStore({
         },
         setCurrentTime(state, payload) {
             state.currentTime = payload;
+        },
+        setFBAccessToken(state, payload) {
+            state.FBAccessToken = payload
         }
     },
     actions: {
@@ -150,6 +154,10 @@ export default createStore({
 
         async setDidRegisterForNotifications(state, didRegisterForNotifications) {
             state.commit('setDidRegisterForNotifications', didRegisterForNotifications);
+        },
+
+        setFBAccessToken(state, token) {
+            state.commit('setFBAccessToken', token);
         },
 
         async addFriendToFriendslist(state, friend) {
@@ -464,7 +472,8 @@ export default createStore({
         getPlayerSearchResult: state => state.playerSearchResult,
         getToken: state => state.token,
         getDidRegisterForNotifications: state => state.didRegisterForNotifications,
-        getCurrentTime: state => state.currentTime
+        getCurrentTime: state => state.currentTime,
+        getFBAccessToken: state => state.FBAccessToken
     }
 })
 

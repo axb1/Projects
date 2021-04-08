@@ -17,10 +17,16 @@
 
 <script>
 import { IonPage, IonContent, IonHeader, IonToolbar, IonButtons, IonIcon, IonTitle, IonList} from '@ionic/vue';
+import FacebookService from '../../api/FacebookService';
 import {arrowBackOutline} from 'ionicons/icons';
 
 export default {
     name: 'facebookfriendslist',
+    computed: {
+        FBAccessToken() {
+            return this.$store.getters.getFBAccessToken;
+        },
+    },
     data: function() {
       return {
         arrowBackOutline,
@@ -41,6 +47,10 @@ export default {
           this.$router.push('/findopponent');
         },
     },
+    async ionViewWillEnter() {
+        var friends = await FacebookService.getFriendsThatHaveApp(this.FBAccessToken);
+        console.log(friends);
+    }
 }
 </script>
 <style scoped>
