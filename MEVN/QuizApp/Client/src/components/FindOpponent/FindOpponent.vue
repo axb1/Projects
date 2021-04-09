@@ -19,12 +19,13 @@
               <ion-label color="light" @click="GoToFindPlayer">Find modstander</ion-label>
               <ion-icon :icon="search" slot="start"></ion-icon>
             </ion-item>
+            <ion-button @click="BasicShare"></ion-button>
         </ion-content>
     </ion-page>
 </template>
 
 <script>
-import { IonPage, IonContent, IonLabel, IonIcon, IonItem} from '@ionic/vue';
+import { IonPage, IonContent, IonLabel, IonIcon, IonItem, IonButton} from '@ionic/vue';
 import { helpOutline, personSharp, logoFacebook, search, arrowBackOutline} from 'ionicons/icons';
 import { Plugins } from '@capacitor/core';
 const { Share } = Plugins;
@@ -46,6 +47,7 @@ export default {
         IonLabel,
         IonIcon,
         IonItem,
+        IonButton
     },
     methods: {
         GoBack() {
@@ -74,7 +76,7 @@ export default {
           await Share.share({
               title: 'See cool stuff',
               text: 'Really awesome thing you need to see right meow',
-              url: 'http://ionicframework.com/',
+              url: 'dr.dk',
               dialogTitle: 'Share with buddies',
           });
         }
