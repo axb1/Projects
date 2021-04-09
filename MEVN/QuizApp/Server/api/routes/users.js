@@ -107,6 +107,20 @@ router.get('/', async (req, res) => {
     }
 });
 
+// Get all guests
+router.get('/guest', async (req, res) => {
+    try {
+        const queryParam = 'Guest';
+        const regex = new RegExp(queryParam)
+        const users = await User.find({username: {$regex: regex}})
+        res.json(users);
+
+    } catch(err) {
+        res.json({message: err})
+    }
+});
+
+
 // Get user by username
 router.get('/username/:username', async (req, res) => {
     const username = req.params.username;

@@ -169,7 +169,6 @@ export default {
     },
 
     async ionViewDidEnter() {
-
       firebase.auth().onAuthStateChanged(user => {
         if(user) {
           console.log("Logged in");
@@ -178,6 +177,7 @@ export default {
           console.log("Not logged in");
         }
       })
+      console.log(this.currentUser);
       // This is SUPER sketchy
       var user = await UserService.getUserByUsername(this.currentUser.username);
       var counter = 0;

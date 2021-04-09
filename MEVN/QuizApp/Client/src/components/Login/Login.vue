@@ -1,14 +1,8 @@
 <template>
     <ion-page>
-        <ion-header>
-            <ion-toolbar mode="ios">
-                <ion-title>Login</ion-title>
-                <ion-buttons slot="start">
-                    <ion-icon :icon="arrowBackOutline" @click="GoToWelcome"></ion-icon>
-                </ion-buttons>
-            </ion-toolbar>
-        </ion-header>
         <ion-content>
+            <ion-icon :icon="arrowBackOutline" @click="GoToWelcome"></ion-icon>
+            <h1>Login med QuizNord</h1>
             <p id="margin"></p>
             <ion-label id="email">Email</ion-label>
             <ion-input v-model="email" required=true placeholder="Din email.."></ion-input>
@@ -26,7 +20,7 @@
 </template>
 
 <script>
-import { IonPage, IonHeader, IonToolbar, IonTitle, IonButtons, IonIcon, IonContent, IonInput, IonLabel} from '@ionic/vue';
+import { IonPage, IonIcon, IonContent, IonInput, IonLabel} from '@ionic/vue';
 import { arrowBackOutline } from 'ionicons/icons';
 import firebase from 'firebase';
 export default {
@@ -65,10 +59,6 @@ export default {
     components: {
         IonPage,
         IonContent,
-        IonHeader,
-        IonToolbar,
-        IonTitle,
-        IonButtons,
         IonIcon,
         IonInput,
         IonLabel,
@@ -124,36 +114,20 @@ ion-input {
     color: white;
 }
 
-
-ion-header {
-    background: #181A20;
-    position: relative;
-    height: 16vh;
-    border-bottom: 0.55px solid #14161B;
-}
-
-ion-toolbar {
-  --background: #181A20;
-  --border-style: none;
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-
-ion-buttons {
-    color: white;
-    padding-left: 6vw;
-    padding-right: 6vw;
+ion-icon {
+    margin-top: 5vh;
+    margin-left: 5vw;
     font-size: 5vh;
-}
-
-ion-title {
     color: white;
-    font-size: 1.4em;
 }
 
+h1 {
+    font-weight: bold;
+    text-align: center;
+    color: white;
+    margin-top: 2.5vh;
+    margin-bottom: 5vh;
+}
 
 #footer {
    position:fixed;

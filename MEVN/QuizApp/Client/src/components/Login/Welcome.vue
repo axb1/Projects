@@ -11,7 +11,7 @@
                     <ion-label color="light">Login med email</ion-label>
                     <ion-icon :icon="mail" slot="start"></ion-icon>
                 </ion-item>
-                <ion-item id="person" lines="none">
+                <ion-item @click="SignInAsGuest" id="person" lines="none">
                     <ion-label color="light">Spil som gæst</ion-label>
                     <ion-icon :icon="personCircle" slot="start"></ion-icon>
                 </ion-item>
@@ -64,6 +64,22 @@ export default {
 
                         // ...
                     });
+        },
+        async SignInAsGuest() {
+            // This isn't okay (but I'm still gonna do it)
+            var guests = await UserService.getGuests();
+            var amountOfGuests = guests.length;
+            await firebase.auth().createUserWithEmailAndPassword("guest" + String(amountOfGuests+1) + "@test.com", Math.random().toString(36).substr(2, 7))
+            .then(async()=>  {
+                await UserService.createUser("Guest" + String(amountOfGuests+1), "guest" + String(amountOfGuests+1) + "@test.com", "https://cdn.bulbagarden.net/upload/1/17/025Pikachu-Original.png");
+                await this.$store.dispatch('setCurrentUser');
+                this.$router.push('/games');
+            })
+            .catch((error) => {
+                var errorMessage = error.message;
+                alert(errorMessage);
+            })
+   
         },
         GoToLogin() {
             this.$router.push('/login');

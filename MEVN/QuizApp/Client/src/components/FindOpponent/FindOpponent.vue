@@ -26,6 +26,8 @@
 <script>
 import { IonPage, IonContent, IonLabel, IonIcon, IonItem} from '@ionic/vue';
 import { helpOutline, personSharp, logoFacebook, search, arrowBackOutline} from 'ionicons/icons';
+import { Plugins } from '@capacitor/core';
+const { Share } = Plugins;
 
 export default {
     name: 'findopponent',
@@ -67,6 +69,14 @@ export default {
         },
         GoToFacebookFriendslist() {
           this.$router.push('/facebookfriendslist');
+        },
+        async BasicShare() {
+          await Share.share({
+              title: 'See cool stuff',
+              text: 'Really awesome thing you need to see right meow',
+              url: 'http://ionicframework.com/',
+              dialogTitle: 'Share with buddies',
+          });
         }
     },
         ionViewWillEnter() {

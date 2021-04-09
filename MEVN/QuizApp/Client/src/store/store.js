@@ -64,6 +64,7 @@ export default createStore({
     actions: {
         async setOngoingGames(state) {
             var firebaseUser = firebase.auth().currentUser;
+
             var user = await UserService.getUserByEmail(firebaseUser.email);
             if (user[0].ongoingGames.length !=0) {
                 var games = user[0].ongoingGames;
@@ -83,6 +84,7 @@ export default createStore({
             }
         },
         async setCurrentUser(state) {
+
             var firebaseUser = firebase.auth().currentUser;
             var user = [];
             var counter = 0;

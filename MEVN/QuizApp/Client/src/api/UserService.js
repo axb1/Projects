@@ -21,6 +21,26 @@ class UserService {
             
         });
     }
+    // Get guests
+    static getGuests() {
+        return new Promise ((resolve,reject) => {
+            axios.get(url + "guest").then((res) => {
+                const data = res.data;
+                resolve(
+                    data.map(user => ({
+                        ...user,
+                        createdAt: new Date(user.createdAt)
+                    }))
+                );
+            })
+            .catch((err)=> {
+                reject(err);
+            })
+            
+        });
+    }
+
+
     // Get user by name
     static getUserByEmail(email) {
         return new Promise ((resolve,reject) => {
