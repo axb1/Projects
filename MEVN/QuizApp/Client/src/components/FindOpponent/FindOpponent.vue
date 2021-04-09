@@ -3,30 +3,33 @@
         <ion-content>
           <ion-icon :icon="arrowBackOutline" @click="GoBack" id="arrow"></ion-icon>
           <h1>Hvem vil du spille mod?</h1>
-            <ion-item lines="none">
-              <ion-label color="light" @click="GoToRandomOpponent">Tilfældig modstander</ion-label>
+            <ion-item @click="GoToRandomOpponent" lines="none">
+              <ion-label color="light" >Tilfældig modstander</ion-label>
               <ion-icon :icon="helpOutline" slot="start"></ion-icon>
             </ion-item>
             <ion-item lines="none">
               <ion-label color="light" @click="GoToFriendslist">QuizNordven</ion-label>
               <ion-icon :icon="personSharp" slot="start"></ion-icon>
             </ion-item>
-            <ion-item lines="none">
-              <ion-label @click="GoToFacebookFriendslist" color="light">Facebookven</ion-label>
+            <ion-item @click="GoToFacebookFriendslist" lines="none">
+              <ion-label color="light">Facebookven</ion-label>
               <ion-icon :icon="logoFacebook" slot="start"></ion-icon>
             </ion-item>
-            <ion-item lines="none">
-              <ion-label color="light" @click="GoToFindPlayer">Find modstander</ion-label>
+            <ion-item @click="GoToFindPlayer" lines="none">
+              <ion-label color="light" >Find modstander</ion-label>
               <ion-icon :icon="search" slot="start"></ion-icon>
-            </ion-item>
-            <ion-button @click="BasicShare"></ion-button>
+            </ion-item> 
+            <ion-item class="invite" @click="BasicShare" lines="none">
+              <ion-label color="light" >Inviter venner til QuizNord</ion-label>
+              <ion-icon :icon="peopleSharp" slot="start"></ion-icon>
+            </ion-item> 
         </ion-content>
     </ion-page>
 </template>
 
 <script>
-import { IonPage, IonContent, IonLabel, IonIcon, IonItem, IonButton} from '@ionic/vue';
-import { helpOutline, personSharp, logoFacebook, search, arrowBackOutline} from 'ionicons/icons';
+import { IonPage, IonContent, IonLabel, IonIcon, IonItem } from '@ionic/vue';
+import { helpOutline, personSharp, logoFacebook, search, arrowBackOutline, peopleSharp} from 'ionicons/icons';
 import { Plugins } from '@capacitor/core';
 const { Share } = Plugins;
 
@@ -39,6 +42,7 @@ export default {
         logoFacebook,
         search,
         arrowBackOutline,
+        peopleSharp
       };  
     },
     components: {
@@ -47,7 +51,6 @@ export default {
         IonLabel,
         IonIcon,
         IonItem,
-        IonButton
     },
     methods: {
         GoBack() {
@@ -74,10 +77,10 @@ export default {
         },
         async BasicShare() {
           await Share.share({
-              title: 'See cool stuff',
-              text: 'Really awesome thing you need to see right meow',
-              url: 'dr.dk',
-              dialogTitle: 'Share with buddies',
+              title: 'Spil Quiz Nord!',
+              text: 'Quizzen med +5.000 danske spørgsmål',
+              url: 'http://dr.dk/',
+              dialogTitle: 'Del med dine venner',
           });
         }
     },
@@ -96,6 +99,8 @@ ion-title {
     color: white;
 }
 
+
+
 ion-item {
   --background: #262A34;
   --padding-top: 1.5vh;
@@ -106,6 +111,12 @@ ion-item {
   margin-right: 5vw;
 }
 
+.invite {
+  --background: #0BA360 !important;
+}
+
+
+
 
 ion-icon {
     color: white;
@@ -113,15 +124,6 @@ ion-icon {
 
 ion-label {
   --color: white;
-}
-ion-button {
-  --background: #262A34;
-  --padding-top: 1.5vh;
-  --padding-bottom: 1.5vh;
-  --border-radius: 6px;
-  margin-top: 1.5vh;
-  margin-left: 5vw;
-  margin-right: 5vw;
 }
 
 h1 {
@@ -133,10 +135,6 @@ h1 {
     margin-right: 5vw;
 }
 
-a {
-    text-decoration: none;
-    color: white;
-}
 
 #arrow {
     margin-top: 5.6vh;
