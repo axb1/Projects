@@ -3,7 +3,7 @@
         <ion-content>
             <h1>Velkommen til QuizNord</h1>
             <div class="container">
-                <ion-item @click="Test" id="facebook" lines="none">
+                <ion-item @click="SignInWithFacebook" id="facebook" lines="none">
                     <ion-label color="light">Login med Facebook</ion-label>
                     <ion-icon :icon="logoFacebook" slot="start"></ion-icon>
                 </ion-item>
@@ -21,11 +21,9 @@
 </template>
 
 <script>
-
-
-
 import { IonPage, IonContent, IonItem, IonLabel, IonIcon} from '@ionic/vue';
-import FacebookService from '../../api/FacebookService.js';
+import firebase from 'firebase';
+import UserService from '../../api/UserService'
 import {logoFacebook, mail, personCircle} from 'ionicons/icons';
 
 export default {
@@ -38,16 +36,38 @@ export default {
       };  
     },
     methods: {
+        SignInWithFacebook() {
+            var provider = new firebase.auth.FacebookAuthProvider();
+
+            // Allow access to Facebook friends
+            provider.addScope('user_friends');
+                    firebase
+                    .auth()
+                    .signInWithPopup(provider)
+                    .then(async (result) => {
+                        /** @type {firebase.auth.OAuthCredential} */
+                        var credential = result.credential;
+                        console.log(credential)
+                        // The signed-in user info.
+                        var user = result.user;
+                        console.log(user);
+
+                        // Create user on server if doesn't exist
+                        await UserService.createUser(user.displayName + user.uid, user.email, "https://cdn.bulbagarden.net/upload/1/17/025Pikachu-Original.png");
+                        await this.$store.dispatch('setFBAccessToken', credential.accessToken);
+                        await this.$store.dispatch('setCurrentUser');
+                
+
+                    })
+                    .catch((error) => {
+                        console.log(error);
+
+                        // ...
+                    });
+        },
         GoToLogin() {
             this.$router.push('/login');
         },
-
-        async Test() {
-            FacebookService.login(); 
-        }
-    },
-    async ionViewWillEnter() {
-        await FacebookService.init();
     },
     components: {
         IonPage,
