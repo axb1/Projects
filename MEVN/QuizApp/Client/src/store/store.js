@@ -377,8 +377,17 @@ export default createStore({
              state.commit('setOngoingGames', ongoingGames);
         },
 
+        async updatePreviousQuestionsAfterRound(state, updatedPreviousQuestions) {
+            // Get user
+            var firebaseUser = firebase.auth().currentUser;
+            var user = await UserService.getUserByEmail(firebaseUser.email);
+            console.log(updatedPreviousQuestions);
+            await UserService.updatePreviousQuestions(user[0].username, updatedPreviousQuestions);
+        },
+
 
         async updateOngoingGamesAfterRound(state, updatedGame) {
+
             // Get user
             var firebaseUser = firebase.auth().currentUser;
             var user = await UserService.getUserByEmail(firebaseUser.email);

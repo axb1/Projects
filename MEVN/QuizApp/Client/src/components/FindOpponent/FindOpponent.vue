@@ -77,7 +77,7 @@ export default {
         },
         async BasicShare() {
           await Share.share({
-              title: 'Spil Quiz Nord!',
+              title: 'Spil QuizNord!',
               text: 'Quizzen med +5.000 danske spørgsmål',
               url: 'http://dr.dk/',
               dialogTitle: 'Del med dine venner',

@@ -116,6 +116,13 @@
             <ion-checkbox class="categoryCheckbox" @update:modelValue="category.isChecked = $event" :modelValue="category.isChecked"></ion-checkbox>
           </ion-item>
         </div>
+        <div v-if="category.val == 'Musik'">
+          <ion-item lines="none">
+            <ion-label color="light">{{category.val}}</ion-label>
+            <ion-icon :icon="musicalNotesSharp" slot="start"></ion-icon>
+            <ion-checkbox class="categoryCheckbox" @update:modelValue="category.isChecked = $event" :modelValue="category.isChecked"></ion-checkbox>
+          </ion-item>
+        </div>
       </ion-list>
       <ion-button v-on:click="StartTheGame()">Bekræft kategorier</ion-button>
     </ion-content>
@@ -206,7 +213,7 @@ export default {
     AssignRandomCategories() {
       let randomNumbers = [];
       while (randomNumbers.length != 5) {
-        let randomNumber = Math.floor(Math.random() * 12 + 0);
+        let randomNumber = Math.floor(Math.random() * 17 + 0);
         if (!randomNumbers.includes(randomNumber)) {
           randomNumbers.push(randomNumber)
         } 
@@ -215,6 +222,7 @@ export default {
         var category = {val: this.allCategories[element], isChecked: false};
         this.randomCategories.push(category);
       });
+      console.log(this.randomCategories);
     },
 
     // Check how many checkboxes are checked, if 3 then go to the Quiz page and push categories into items prop for use on next page

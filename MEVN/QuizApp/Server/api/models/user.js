@@ -63,7 +63,8 @@ const userSchema = new Schema({
         inviteID: String,
         token: String
     }],
-    token: String
+    token: String,
+    previousQuestions: Array
     
 });
 

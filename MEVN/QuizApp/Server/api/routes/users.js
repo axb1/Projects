@@ -13,6 +13,7 @@ router.post('/', async (req, res) => {
         friends: req.body.friends,
         invites: req.body.invites,
         token: req.body.token,
+        previousQuestions: req.body.previousQuestions
     });
 
     try {
@@ -88,6 +89,18 @@ router.put('/invites', async (req, res) => {
 router.put('/token', async (req, res) => {
     const filter = {username: req.body.username};
     const update = {token: req.body.token};
+    try {
+        const updatedUser = await User.findOneAndUpdate(filter, update);
+        res.json(updatedUser);
+    } catch(err){
+        res.json({message: err})
+    }
+});
+
+// Update user (update previousQuestions)
+router.put('/previousquestions', async (req, res) => {
+    const filter = {username: req.body.username};
+    const update = {previousQuestions: req.body.previousQuestions};
     try {
         const updatedUser = await User.findOneAndUpdate(filter, update);
         res.json(updatedUser);

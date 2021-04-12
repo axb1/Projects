@@ -63,8 +63,9 @@ export default {
         error: '',
         arrowBackOutline,
         currentPercentage: '1',
-        decrement: '0.0033',
+        decrement: '0.005',
         timer: '',
+        shuffledQuestions: []
 
       };  
     },
@@ -187,7 +188,6 @@ export default {
                 // Start progress bar
                 this.ProgressBarCountdown();
 
-                
                 // Remove badge style from last question
                 var badge = "badge"+ String(this.currentQuestionIndex+1);
                 document.getElementById(badge).style.background = "#181A20";
@@ -195,7 +195,7 @@ export default {
                 //
                 this.currentQuestionIndex = this.currentQuestionIndex + 1;
                 this.currentQuestion.length = 0;
-                this.currentQuestion.push(this.questions[this.currentQuestionIndex][0]);
+                this.currentQuestion.push(this.questions[this.currentQuestionIndex]);
 
                 var badgeNext = "badge" + String(this.currentQuestionIndex+1);
                 document.getElementById(badgeNext).style.background = "#56BE65";
@@ -206,6 +206,14 @@ export default {
                 this.currentPercentage = '1';
                 document.getElementById('progress').setAttribute('value', 1);
                 clearInterval(this.timer);
+
+                // Add questions to users previous questions
+                var updatedPreviousQuestions = this.currentUser.previousQuestions;
+                this.questions.forEach(question => {
+                    updatedPreviousQuestions.push(question._id);
+                });
+                console.log(updatedPreviousQuestions);
+                this.$store.dispatch('updatePreviousQuestionsAfterRound', updatedPreviousQuestions);
 
 
                 if (this.currentUser.username == updatedGame.player1.username) {
@@ -276,8 +284,8 @@ export default {
         },
         ProgressBarCountdown() {
             this.timer = setInterval(() => {
-                if (this.currentPercentage != '-0.0031999999999971565') {
-                    this.currentPercentage = this.currentPercentage -this.decrement;
+                if (this.currentPercentage != '0.0000') {
+                    this.currentPercentage = (this.currentPercentage -this.decrement).toFixed(4);
                     document.getElementById('progress').setAttribute('value', this.currentPercentage);
                 }
                 else {
@@ -285,6 +293,15 @@ export default {
                     this.TimedOut();
                 }
             }, 100)
+        },
+        shuffleArray(array) {
+            for (var i = array.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var temp = array[i];
+                array[i] = array[j];
+                array[j] = temp;
+            }
+            this.shuffledQuestions = array;
         }
 
     },
@@ -295,15 +312,44 @@ export default {
     this.ProgressBarCountdown();
   },
 
+  ionViewWillLeave() {
+      this.questions = [];
+      this.currentQuestion = [];
+  },
+
   async ionViewWillEnter() {
         // Read the categories from the "items" prop that is passed from SelectCategories
         // Get questions from database with corresponding categories
         // Using this type of for-syntax is required as we can't use async await within a foreach
+        console.log(this.items);
         for (const item of this.items) {
+            // Get all questions of this category
             var questions = await QuestionService.getQuestionsByCategory(item);
-            this.questions.push(questions);
+
+            // Shuffle the questions randomly
+            this.shuffleArray(questions);
+            var didAddQuestion = false;
+            // Check if question is in users previous questions
+            for (var i = 0; i < this.shuffledQuestions.length; i++) {
+                if (this.currentUser.previousGames.indexOf(this.shuffledQuestions[i]._id) > -1) {
+                    //In the array! Don't add question
+                } else {
+                    //Not in the array. Add question
+                    this.questions.push(this.shuffledQuestions[i]);
+                    didAddQuestion = true;
+                    break;
+                }
+            }
+
+            // If the user has already encountered all the questions, add one random question
+            if (didAddQuestion == false) {
+                var randomQuestion = questions[Math.floor(Math.random() * questions.length)];
+                this.questions.push(randomQuestion);
+            }
         }
-        this.currentQuestion.push(this.questions[0][0]);
+        console.log(this.questions);
+        this.currentQuestion.push(this.questions[0]);
+        console.log(this.currentQuestion);
 
         // Set styling on first badge
         document.getElementById("badge1").style.background = "#56BE65";

@@ -108,7 +108,8 @@ class UserService {
             previousGames: [],
             searchingForGame: false,
             img: img,
-            token: ""
+            token: "",
+            previousQuestions: []
         });
     }
 
@@ -125,6 +126,14 @@ class UserService {
         return axios.put(url + 'previousgames', {
             username: username,
             previousGames: previousGames
+        })
+    }
+
+    // Update previous games
+    static updatePreviousQuestions(username, previousQuestions) {
+        return axios.put(url + 'previousquestions', {
+            username: username,
+            previousQuestions: previousQuestions
         })
     }
 
