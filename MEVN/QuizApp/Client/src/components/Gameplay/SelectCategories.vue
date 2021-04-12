@@ -222,7 +222,6 @@ export default {
         var category = {val: this.allCategories[element], isChecked: false};
         this.randomCategories.push(category);
       });
-      console.log(this.randomCategories);
     },
 
     // Check how many checkboxes are checked, if 3 then go to the Quiz page and push categories into items prop for use on next page
