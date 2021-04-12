@@ -246,15 +246,11 @@ export default {
       }
       else {
         // Un check checkboxes and go to quiz
+        this.$store.dispatch('setCategories', selectedCategories);
         cboxes.forEach(element => {
           element.checked = false;
         });
-        this.$router.push({
-          name: 'quiz',
-          params: {
-            items: selectedCategories
-          }
-        })
+        this.$router.push('quiz');
       }
     },
     GoBack() {

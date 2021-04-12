@@ -18,7 +18,8 @@ export default createStore({
         token: String,
         didRegisterForNotifications: false,
         currentTime: Date,
-        FBAccessToken: String
+        FBAccessToken: String,
+        categories: []
     },
     mutations: {
         setOngoingGames(state, payload) {
@@ -59,6 +60,9 @@ export default createStore({
         },
         setFBAccessToken(state, payload) {
             state.FBAccessToken = payload
+        },
+        setCategories(state, payload) {
+            state.categories = payload;
         }
     },
     actions: {
@@ -104,7 +108,6 @@ export default createStore({
             var firebaseUser = firebase.auth().currentUser;
             var user = await UserService.getUserByEmail(firebaseUser.email);
             var actualUser = user[0];
-            console.log(actualUser.friends);
             state.commit('setFriends', actualUser.friends);
         },
 
@@ -121,7 +124,6 @@ export default createStore({
         async setPlayerSearchResult(state, input) {
             var searchResult = [];
             var usernameResult = await UserService.getUserByUsername(input);
-            console.log(usernameResult);
             if (usernameResult.length != 0) {
                 var user = {username: usernameResult[0].username, img: usernameResult[0].img, token: usernameResult[0].token}
                 searchResult.push(user);
@@ -161,6 +163,10 @@ export default createStore({
         setFBAccessToken(state, token) {
             state.commit('setFBAccessToken', token);
         },
+        
+        setCategories(state, categories) {
+            state.commit('setCategories', categories);
+        },
 
         async addFriendToFriendslist(state, friend) {
             var firebaseUser = firebase.auth().currentUser;
@@ -169,7 +175,6 @@ export default createStore({
             var friends = actualUser.friends;
             var alreadyAFriend = false;
             
-            console.log(friend);
 
             friends.forEach(element => {
                 if(element.username == friend.username) {
@@ -381,7 +386,6 @@ export default createStore({
             // Get user
             var firebaseUser = firebase.auth().currentUser;
             var user = await UserService.getUserByEmail(firebaseUser.email);
-            console.log(updatedPreviousQuestions);
             await UserService.updatePreviousQuestions(user[0].username, updatedPreviousQuestions);
         },
 
@@ -484,7 +488,8 @@ export default createStore({
         getToken: state => state.token,
         getDidRegisterForNotifications: state => state.didRegisterForNotifications,
         getCurrentTime: state => state.currentTime,
-        getFBAccessToken: state => state.FBAccessToken
+        getFBAccessToken: state => state.FBAccessToken,
+        getCategories: state => state.categories
     }
 })
 

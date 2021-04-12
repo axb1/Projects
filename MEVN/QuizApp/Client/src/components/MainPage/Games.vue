@@ -177,14 +177,12 @@ export default {
           console.log("Not logged in");
         }
       })
-      console.log(this.currentUser);
       // This is SUPER sketchy
       var user = await UserService.getUserByUsername(this.currentUser.username);
       var counter = 0;
       while(user.length == 0 && this.didRegisterForNotifications == false) {
         user = await UserService.getUserByUsername(this.currentUser.username);
         counter = counter + 1;
-        console.log(counter);
       }
       if (user[0].token == "") {
          this.RegisterForPushNotifications();

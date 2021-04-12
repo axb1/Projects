@@ -47,10 +47,8 @@ export default {
                     .then(async (result) => {
                         /** @type {firebase.auth.OAuthCredential} */
                         var credential = result.credential;
-                        console.log(credential)
                         // The signed-in user info.
                         var user = result.user;
-                        console.log(user);
 
                         // Create user on server if doesn't exist
                         await UserService.createUser(user.displayName + user.uid, user.email, "https://cdn.bulbagarden.net/upload/1/17/025Pikachu-Original.png");

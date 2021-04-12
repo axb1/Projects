@@ -51,9 +51,11 @@ export default {
         },
         token() {
             return this.$store.getters.getToken;
+        },
+        categories() {
+            return this.$store.getters.getCategories;
         }
     },
-    props: ['items'],
     data: function() {
       return {
         questions: [],
@@ -210,9 +212,12 @@ export default {
                 // Add questions to users previous questions
                 var updatedPreviousQuestions = this.currentUser.previousQuestions;
                 this.questions.forEach(question => {
-                    updatedPreviousQuestions.push(question._id);
+                    if(updatedPreviousQuestions.indexOf(question._id) > -1)  {
+                        console.log("In the array");
+                    } else {
+                        updatedPreviousQuestions.push(question._id);
+                    }
                 });
-                console.log(updatedPreviousQuestions);
                 this.$store.dispatch('updatePreviousQuestionsAfterRound', updatedPreviousQuestions);
 
 
@@ -238,8 +243,6 @@ export default {
                 var gameIsOver = 'false';
 
                 if(updatedGame.player1.roundsPlayed == 2 && updatedGame.player2.roundsPlayed == 2) {
-                    console.log(updatedGame.player1.roundsPlayed);
-                    console.log(updatedGame.player2.roundsPlayed);
                     gameIsOver = 'true';
                 }
 
@@ -321,8 +324,7 @@ export default {
         // Read the categories from the "items" prop that is passed from SelectCategories
         // Get questions from database with corresponding categories
         // Using this type of for-syntax is required as we can't use async await within a foreach
-        console.log(this.items);
-        for (const item of this.items) {
+        for (const item of this.categories) {
             // Get all questions of this category
             var questions = await QuestionService.getQuestionsByCategory(item);
 
@@ -331,10 +333,12 @@ export default {
             var didAddQuestion = false;
             // Check if question is in users previous questions
             for (var i = 0; i < this.shuffledQuestions.length; i++) {
-                if (this.currentUser.previousGames.indexOf(this.shuffledQuestions[i]._id) > -1) {
+                if (this.currentUser.previousQuestions.indexOf(this.shuffledQuestions[i]._id) > -1) {
                     //In the array! Don't add question
+                    console.log("In the array");
                 } else {
                     //Not in the array. Add question
+                    console.log("Not in the array");
                     this.questions.push(this.shuffledQuestions[i]);
                     didAddQuestion = true;
                     break;
@@ -343,13 +347,12 @@ export default {
 
             // If the user has already encountered all the questions, add one random question
             if (didAddQuestion == false) {
+                console.log("Random question");
                 var randomQuestion = questions[Math.floor(Math.random() * questions.length)];
                 this.questions.push(randomQuestion);
             }
         }
-        console.log(this.questions);
         this.currentQuestion.push(this.questions[0]);
-        console.log(this.currentQuestion);
 
         // Set styling on first badge
         document.getElementById("badge1").style.background = "#56BE65";
