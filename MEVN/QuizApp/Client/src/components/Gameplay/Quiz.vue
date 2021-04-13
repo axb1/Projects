@@ -3,8 +3,7 @@
         <ion-content>
             <div id="header">
                 <div id="subheader">
-                    <ion-icon v-on:click="LeaveGame()" :icon="arrowBackOutline" size="large" id="icon"></ion-icon>
-                    <h1 id="quiz">Quiz</h1>
+                    <h1 id="quiz">QUIZ</h1>
                 </div>
                 <div id="currentquestionlist">
                     <li>
@@ -34,7 +33,7 @@
 
 
 <script>
-import { IonPage, IonContent, IonButton, IonBadge, IonIcon, IonProgressBar} from '@ionic/vue';
+import { IonPage, IonContent, IonButton, IonBadge, IonProgressBar} from '@ionic/vue';
 import QuestionService from '../../api/QuestionService';
 import NotificationService from '../../api/NotificationService';
 import {arrowBackOutline} from 'ionicons/icons';
@@ -76,7 +75,6 @@ export default {
         IonContent,
         IonButton,
         IonBadge,
-        IonIcon,
         IonProgressBar
     },
     methods: {
@@ -105,9 +103,6 @@ export default {
             if(answer == rightAnswer) {
                 this.correctAnswers = this.correctAnswers + 1;
             }
-        },
-        LeaveGame() {
-            this.$router.push('/games');
         },
         TimedOut() {
             let rightAnswer = this.currentQuestion[0].answer;
@@ -200,7 +195,7 @@ export default {
                 this.currentQuestion.push(this.questions[this.currentQuestionIndex]);
 
                 var badgeNext = "badge" + String(this.currentQuestionIndex+1);
-                document.getElementById(badgeNext).style.background = "#56BE65";
+                document.getElementById(badgeNext).style.background = "#0BA360";
             }
 
             else {
@@ -361,9 +356,6 @@ export default {
   ionViewDidLeave() {
       document.getElementById("badge3").style.background = "#181A20";
   },
-
-  updated(){
-  }
 }
 </script>
 <style scoped>
@@ -375,18 +367,9 @@ ion-button {
     box-shadow: 4px;
 }
 
-ion-icon {
-    color: white;
-}
-
 #quiz {
     display: inline-block;
-}
-
-#icon {
-    display: inline-block;
-    margin-right: 29%;
-    margin-left: 6%;
+    font-weight: bold;
 }
 
 li { 
@@ -482,8 +465,9 @@ ion-progress-bar {
 
 #subheader {
     margin-top: 4%;
-    display: flex;
-    align-items: center;
+    text-align: center;
+    font-weight: bold;
+    
 }
 
 

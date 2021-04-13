@@ -3,12 +3,13 @@
     <ion-header>
       <ion-toolbar>
         <img src="../../assets/settings.svg" alt="settings" v-on:click="GoToSettings()" id="settings" slot="start">
-        <ion-title id="title">QuizNord</ion-title>
+        <ion-title id="title">Quiz Nord</ion-title>
         <img v-on:click="GoToFindOpponent()" src="../../assets/plus.png" alt="add" id="add" slot="end">
       </ion-toolbar>
     </ion-header>
     <ion-content>
-          <ion-spinner name="dots" v-if="lookingForRandomOpponent == true"></ion-spinner>
+      <h1>{{lookingForRandomOpponent}}</h1>
+          <ion-spinner name="dots" v-if="lookingForRandomOpponent != 0"></ion-spinner>
           <div v-if="currentUser != undefined">
             <div v-if="currentUser.invites != undefined && currentUser.invites.length != 0">
                 <div id="invites">
@@ -158,6 +159,7 @@ export default {
       await this.$store.dispatch('setOngoingGames');
       await this.$store.dispatch('setPreviousGames');
       await this.$store.dispatch('setCurrentTime');
+      this.$store.dispatch('setLookingForRandomOpponent', 0);
       this.timer = setInterval(() => {
         this.$store.dispatch('setOngoingGames');
         this.$store.dispatch('setPreviousGames');

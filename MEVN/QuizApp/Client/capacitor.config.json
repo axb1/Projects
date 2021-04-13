@@ -1,5 +1,5 @@
 {
-  "appId": "info.arcane",
+  "appId": "quiz.manifestation",
   "appName": "Client",
   "bundledWebRuntime": false,
   "npmClient": "npm",
