@@ -1,6 +1,6 @@
 import {createStore} from 'vuex';
 import UserService from '../api/UserService';
-import GameService from '../api/GameService';
+import LookingForGameService from '../api/LookingForGameService';
 
 import firebase from 'firebase';
 
@@ -214,127 +214,12 @@ export default createStore({
 
         },
 
-        async lookForGameAgainstRandomOpponent(state) {
-            // Check if any games are available
-            var games = await GameService.getAvailableGames();
-
-            // Get user
-            var firebaseUser = firebase.auth().currentUser;
-            var user = await UserService.getUserByEmail(firebaseUser.email);
-            var ongoingGames = user[0].ongoingGames;
-            var date = new Date();
-            // If there is a game, set player2 and update game
-            if (games.length != 0 && games[0].player1.username != user[0].username) {
-                // Find and update available game
-                var availableGame = games[0];
-                var player2 = {username: user[0].username, correctAnswers: [], goFirst: false, dateOfLastTurn: date, myTurn: false, img: user[0].img, roundsPlayed: 0, token: user[0].token};
-                var update = {player2: player2, isFull: true};
-                availableGame.player2 = player2;
-                availableGame.isFull = true;
-                await GameService.updateGame(availableGame.gameId, update);
-                
-
-                // Add game to users ongoing games
-                ongoingGames.push(availableGame);
-                await UserService.updateOngoingGames(user[0].username, ongoingGames);
-
-                // No longer looking for opponent
-                await UserService.setSearchingForGame(user[0].username, false);
-                
-                // Updating ongoing games in app
-                state.commit('setOngoingGames', ongoingGames);
-                state.commit('setLookingForRandomOpponent', false);
-            }
-            // If there isn't a game, make one and wait for opponent
-            else {
-                var player1 = {
-                    username: user[0].username,
-                    correctAnswers: [],
-                    goFirst: true,
-                    dateOfLastTurn: date,
-                    myTurn: true,
-                    img: user[0].img,
-                    roundsPlayed: 0,
-                    token: user[0].token
-                }
-
-                var emptyPlayer2 = {
-                    username: "",
-                    correctAnswers: [],
-                    goFirst: false,
-                    dateOfLastTurn: date,
-                    myTurn: false,
-                    img: "",
-                    roundsPlayed: 0,
-                    token: ""
-                }
-
-                // Create the new game
-                var gameId = "id" + Math.random().toString(16).slice(2);
-                var newGame = {player1: player1, player2: emptyPlayer2, gameIsOver: false, roundNumber: 1, isFull: false, gameId: gameId};
-                await GameService.createGame(newGame);
-                state.commit('setLookingForRandomOpponent', true);
-
-                // Look to see if game has been updated every 5 seconds for a total of 60 seconds
-                var timesRun = 0;
-                var interval = setInterval(async function(){
-                    // I don't know why this is needed. Something to do with scope of setInterval?
-                    var ongoingGames2 = user[0].ongoingGames;
-                    var game = await GameService.getGameByGameId(gameId);
-                    timesRun +=1;
-                    
-                    // If the game has been updated (ie an opponent has joined)
-                    if(game[0].player2.username != "") {
-                        
-                        // Add game to users ongoing games
-                        ongoingGames2.push(game[0]);
-                        await UserService.updateOngoingGames(user[0].username, ongoingGames2);
-
-                        // No longer looking for opponent
-                        await UserService.setSearchingForGame(user[0].username, false);
-                
-                        // Updating ongoing games in app
-                        state.commit('setOngoingGames', ongoingGames2);
-                        state.commit('setLookingForRandomOpponent', false)
-
-                        // Stop running
-                        clearInterval(interval);
-                    }
-                    if(timesRun === 6) {
-                        // If no opponent found, set admin as opponent
-                        var player2 = {username: "QuizNordTeamet", correctAnswers: [], goFirst: false, dateOfLastTurn: date, myTurn: false, img: 'https://cdn.bulbagarden.net/upload/0/02/009Blastoise.png', roundsPlayed: 0, token: ""};
-                        var update = {player2: player2, isFull: true};
-                        await GameService.updateGame(gameId, update);
-
-
-                        // Update and ddd game to users ongoing games
-                        user = await UserService.getUserByEmail(firebaseUser.email);
-                        var ongoingGames = user[0].ongoingGames;
-                        game[0].player2 = player2;
-                        game[0].isFull = true;
-                        ongoingGames.push(game[0]);
-                        await UserService.updateOngoingGames(user[0].username, ongoingGames);
-                        // No longer looking for opponent
-                        await UserService.setSearchingForGame(user[0].username, false);
-
-
-                        // Add game to opponent ongoing games
-                        var opponent = await UserService.getUserByUsername('QuizNordTeamet');
-                        var opponentOngoingGames = opponent[0].ongoingGames;
-                        opponentOngoingGames.push(game[0]);
-
-                        await UserService.updateOngoingGames(opponent[0].username, opponentOngoingGames);
-                        
-                        // Updating ongoing games in app
-                        state.commit('setOngoingGames', ongoingGames);
-                        state.commit('setLookingForRandomOpponent', false);
-                        clearInterval(interval);
-                    }
-                }, 5000);
-            }
+        async lookForGameAgainstRandomOpponent(state, username) {
+            await LookingForGameService.createLookingForGame(username);
+            state.commit("setLookingForRandomOpponent", true);
         },
 
-        async createGameAgainstFriend(state, invite) {
+        async createGameAgainstFriend(invite) {
             // Get user
             var firebaseUser = firebase.auth().currentUser;
             var user = await UserService.getUserByEmail(firebaseUser.email);
@@ -362,24 +247,8 @@ export default createStore({
                 token: ""
             }
 
-            // Create the new game
-            var gameId = "id" + Math.random().toString(16).slice(2);
-            var newGame = {player1: player1, player2: player2, gameIsOver: false, roundNumber: 1, isFull: true, gameId: gameId};
+            var newGame = {player1: player1, player2: player2, gameIsOver: false, roundNumber: 1, isFull: true};
             await GameService.createGame(newGame);
-
-            // Add game to users ongoing games
-            var ongoingGames = user[0].ongoingGames;
-            ongoingGames.push(newGame);
-            await UserService.updateOngoingGames(user[0].username, ongoingGames);
-
-            // Add game to opponent ongoing games
-            var opponent = await UserService.getUserByUsername(invite.username);
-            var opponentOngoingGames = opponent[0].ongoingGames;
-            opponentOngoingGames.push(newGame);
-            await UserService.updateOngoingGames(opponent[0].username, opponentOngoingGames);
-
-             // Updating ongoing games in app
-             state.commit('setOngoingGames', ongoingGames);
         },
 
         async updatePreviousQuestionsAfterRound(state, updatedPreviousQuestions) {

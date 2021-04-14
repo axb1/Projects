@@ -11,6 +11,7 @@
             <h3 class="forgot-txt"><router-link to="/forgotpassword">Glemt password?</router-link></h3>
 
             <ion-button v-on:click="login">Login</ion-button>
+            <ion-spinner name="crescent" v-if="shouldLoad == true"></ion-spinner>
             <div id="footer">
                 <p id="noaccount">Har du ikke en konto?</p>
                 <p id="signup"><router-link to="/register">Opret konto</router-link></p>
@@ -20,7 +21,7 @@
 </template>
 
 <script>
-import { IonPage, IonIcon, IonContent, IonInput, IonLabel} from '@ionic/vue';
+import { IonPage, IonIcon, IonContent, IonInput, IonLabel, IonSpinner} from '@ionic/vue';
 import { arrowBackOutline } from 'ionicons/icons';
 import firebase from 'firebase';
 export default {
@@ -29,11 +30,13 @@ export default {
       return {
           email: '',
           password: '',
-          arrowBackOutline
+          arrowBackOutline,
+          shouldLoad: false
       };  
     },
     methods: {
         login: function() {
+            this.shouldLoad = true;
             firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
             .then(() => {
                 firebase.auth().signInWithEmailAndPassword(this.email, this.password)
@@ -62,6 +65,10 @@ export default {
         IonIcon,
         IonInput,
         IonLabel,
+        IonSpinner
+    },
+    ionViewDidLeave() {
+        this.shouldLoad = false;
     }
 }
 </script>
@@ -153,6 +160,15 @@ h1 {
 
 #margin {
     margin-top: 10vh;
+}
+
+ion-spinner {
+  --color: white;
+  background: #181A20;
+  width: 100%;
+  transform: scale(2);
+  margin-top: 5vh;
+
 }
 
 

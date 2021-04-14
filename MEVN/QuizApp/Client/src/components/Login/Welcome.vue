@@ -15,13 +15,14 @@
                     <ion-label color="light">Login med Facebook</ion-label>
                     <ion-icon :icon="logoFacebook" slot="start"></ion-icon>
                 </ion-item>
+                <ion-spinner name="crescent" v-if="shouldLoad == true"></ion-spinner>
             </div>
         </ion-content>
     </ion-page>
 </template>
 
 <script>
-import { IonPage, IonContent, IonItem, IonLabel, IonIcon} from '@ionic/vue';
+import { IonPage, IonContent, IonItem, IonLabel, IonIcon, IonSpinner} from '@ionic/vue';
 import firebase from 'firebase';
 import UserService from '../../api/UserService'
 import {logoFacebook, mail, personCircle} from 'ionicons/icons';
@@ -32,7 +33,8 @@ export default {
       return {
           logoFacebook,
           mail,
-          personCircle
+          personCircle,
+          shouldLoad: false
       };  
     },
     methods: {
@@ -64,6 +66,7 @@ export default {
                     });
         },
         async SignInAsGuest() {
+            this.shouldLoad = true;
             // This isn't okay (but I'm still gonna do it)
             var guests = await UserService.getGuests();
             var amountOfGuests = guests.length;
@@ -83,12 +86,16 @@ export default {
             this.$router.push('/login');
         },
     },
+    ionViewDidLeave() {
+        this.shouldLoad = false;
+    },
     components: {
         IonPage,
         IonContent,
         IonItem,
         IonLabel,
-        IonIcon
+        IonIcon,
+        IonSpinner
     }
 }
 </script>
@@ -145,4 +152,18 @@ h1 {
 ion-icon {
     color: white;
 }
+
+ion-label {
+    --color: white;
+}
+
+ion-spinner {
+  --color: white;
+  background: #181A20;
+  width: 100%;
+  transform: scale(2);
+  margin-top: 5vh;
+
+}
+
 </style>

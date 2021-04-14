@@ -26,7 +26,6 @@ const userSchema = new Schema({
             token: String
         },
         isFull: Boolean,
-        gameId: String,
     }],
     previousGames: [{
         player1: {
@@ -48,7 +47,6 @@ const userSchema = new Schema({
             roundsPlayed: Number,
         },
         isFull: Boolean,
-        gameId: String,
     }],
     searchingForGame: Boolean,
     img: String,

@@ -312,6 +312,9 @@ ion-list {
   background-color: #181A20;
 }
 
+ion-label {
+  --color: white;
+}
 
 
 
