@@ -2,7 +2,9 @@ const mongoose = require('mongoose');
 
 
 const lookingForGameSchema = mongoose.Schema({
-    username: String
+    _id: mongoose.Schema.Types.ObjectId,
+    username: String,
+    waitedForHowLong: Number
 });
 
 module.exports = mongoose.model('lookingForGame', lookingForGameSchema);

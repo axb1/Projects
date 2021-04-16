@@ -219,36 +219,9 @@ export default createStore({
             state.commit("setLookingForRandomOpponent", true);
         },
 
-        async createGameAgainstFriend(invite) {
-            // Get user
-            var firebaseUser = firebase.auth().currentUser;
-            var user = await UserService.getUserByEmail(firebaseUser.email);
-            var date = new Date();
-            // Create players
-            var player1 = {
-                username: user[0].username,
-                correctAnswers: [],
-                goFirst: true,
-                dateOfLastTurn: date,
-                myTurn: true,
-                img: user[0].img,
-                roundsPlayed: 0,
-                token: user[0].token
-            }
+        async createGameAgainstFriend() {
 
-            var player2 = {
-                username: invite.username,
-                correctAnswers: [],
-                goFirst: false,
-                dateOfLastTurn: date,
-                myTurn: false,
-                img: invite.img,
-                roundsPlayed: 0,
-                token: ""
-            }
 
-            var newGame = {player1: player1, player2: player2, gameIsOver: false, roundNumber: 1, isFull: true};
-            await GameService.createGame(newGame);
         },
 
         async updatePreviousQuestionsAfterRound(state, updatedPreviousQuestions) {

@@ -11,6 +11,7 @@ const questionSchema = new Schema({
     option3: String,
     option4: String,
     answer: String,
+    language: String
 
 }, {timestamps: true});
 

@@ -55,6 +55,9 @@
                 },
                 "answer": {
                     "type": "string"
+                },
+                "language": {
+                    "type": "string"
                 }
 
             }

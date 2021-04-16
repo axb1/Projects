@@ -16,7 +16,8 @@ router.get('/', async (req, res) => {
 // Add looking for game
 router.post('/', async (req, res) => {
     const lookingForGame = new LookingForGame({
-        username: req.body.username
+        username: req.body.username,
+        waitedForHowLong: 0
     });
 
     try {
@@ -26,6 +27,8 @@ router.post('/', async (req, res) => {
         res.json({message: err})
     }
 });
+
+
 
 
 module.exports = router;

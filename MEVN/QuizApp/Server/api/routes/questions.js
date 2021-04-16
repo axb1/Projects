@@ -53,6 +53,7 @@ router.post('/', async (req, res) => {
         option3: req.body.option3,
         option4: req.body.option4,
         answer: req.body.answer,
+        language: req.body.language
         
     });
 
