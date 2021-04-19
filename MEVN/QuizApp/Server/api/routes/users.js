@@ -13,7 +13,8 @@ router.post('/', async (req, res) => {
         friends: req.body.friends,
         invites: req.body.invites,
         token: req.body.token,
-        previousQuestions: req.body.previousQuestions
+        previousQuestions: req.body.previousQuestions,
+        isBot: req.body.isBot
     });
 
     try {

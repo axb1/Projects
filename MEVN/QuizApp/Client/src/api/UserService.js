@@ -109,7 +109,8 @@ class UserService {
             searchingForGame: false,
             img: img,
             token: "",
-            previousQuestions: []
+            previousQuestions: [],
+            isBot: false
         });
     }
 

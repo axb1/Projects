@@ -126,7 +126,7 @@ async function matchPlayers() {
                 
                 let date = new Date();
                 let player1 = {username: user.username, correctAnswers: [], goFirst: true, dateOfLastTurn: date, myTurn: true, img: user.img, roundsPlayed: 0, token: user.token};
-                let player2 = {username: "Bot", correctAnswers: [], goFirst: false, dateOfLastTurn: date, myTurn: false, img: "https://cdn.bulbagarden.net/upload/2/21/001Bulbasaur.png", roundsPlayed: 0, token: "Token"};
+                let player2 = {username: "Bot60", correctAnswers: [], goFirst: false, dateOfLastTurn: date, myTurn: false, img: "https://cdn.bulbagarden.net/upload/2/21/001Bulbasaur.png", roundsPlayed: 0, token: "Token"};
                 let newGame = {player1: player1, player2: player2, gameIsOver: false, roundNumber: 1};
                 userOngoingGames.push(newGame);
 
@@ -148,6 +148,22 @@ async function matchPlayers() {
 
 
 }
-
+async function sendNotificationAndUpdateGamesFromBots() {
+    let bots = await User.find({isBot: true});
+    bots.forEach(bot => {
+        bot.ongoingGames.forEach(game => {
+            if(game.ongoingGames.player2.myTurn == true) {
+                // Update game for opponent
+                let opponent = await User.findOne({username: game.player1.username});
+                let opponentGame = opponent.ongoingGames.filter(obj => {
+                    return obj._id === game._id;
+                  })
+                console.log(opponentGame);
+            }
+            
+        });
+    });
+}
+setInterval(sendNotificationAndUpdateGamesFromBots, 5000);
 setInterval(matchPlayers, 10000);
 

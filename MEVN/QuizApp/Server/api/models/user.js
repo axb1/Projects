@@ -60,7 +60,8 @@ const userSchema = new Schema({
         token: String
     }],
     token: String,
-    previousQuestions: Array
+    previousQuestions: Array,
+    isBot: Boolean
     
 });
 

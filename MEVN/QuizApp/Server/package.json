@@ -1,5 +1,4 @@
 {
-  
   "name": "server",
   "version": "1.0.0",
   "description": "",
@@ -21,5 +20,4 @@
     "swagger-jsdoc": "^7.0.0-rc.6",
     "swagger-ui-express": "^4.1.6"
   }
-
 }
