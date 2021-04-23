@@ -82,7 +82,6 @@ module.exports = {
 
         // Increment time waited for no matches
         for(const item of noMatchArray) {
-            console.log(noMatchArray);
             // Match against bot if they have waited for 30 seconds
             if(item.waitedForHowLong >=6) {
                 let user = await User.findOne({username: item.username});
@@ -129,7 +128,6 @@ module.exports = {
             })
             for(const myTurnGame of myTurnGames) {
                 let opponent = await User.findOne({username: myTurnGame.player1.username});
-                console.log(opponent);
             }
         }
     }

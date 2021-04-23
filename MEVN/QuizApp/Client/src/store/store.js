@@ -219,8 +219,10 @@ export default createStore({
         },
 
         async lookForGameAgainstRandomOpponent(state, currentLookingForGameAgainstRandomOpponent) {
+            console.log(currentLookingForGameAgainstRandomOpponent);
             var firebaseUser = firebase.auth().currentUser;
             var user = await UserService.getUserByEmail(firebaseUser.email);
+            console.log(user);
             await LookingForGameService.createLookingForGame(user[0].username);
             let newValue = currentLookingForGameAgainstRandomOpponent + 1;
             state.commit("setLookingForRandomOpponent", newValue);
