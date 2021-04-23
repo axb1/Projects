@@ -4,23 +4,23 @@
           <ion-icon :icon="arrowBackOutline" @click="GoBack" id="arrow"></ion-icon>
           <h1>Hvem vil du spille mod?</h1>
             <ion-item @click="GoToRandomOpponent" lines="none">
-              <ion-label color="light" >Tilfældig modstander</ion-label>
+              <ion-label >Tilfældig modstander</ion-label>
               <ion-icon :icon="helpOutline" slot="start"></ion-icon>
             </ion-item>
             <ion-item lines="none">
-              <ion-label color="light" @click="GoToFriendslist">QuizNordven</ion-label>
+              <ion-label  @click="GoToFriendslist">QuizNordven</ion-label>
               <ion-icon :icon="personSharp" slot="start"></ion-icon>
             </ion-item>
             <ion-item @click="GoToFacebookFriendslist" lines="none">
-              <ion-label color="light">Facebookven</ion-label>
+              <ion-label >Facebookven</ion-label>
               <ion-icon :icon="logoFacebook" slot="start"></ion-icon>
             </ion-item>
             <ion-item @click="GoToFindPlayer" lines="none">
-              <ion-label color="light" >Find modstander</ion-label>
+              <ion-label >Find modstander</ion-label>
               <ion-icon :icon="search" slot="start"></ion-icon>
             </ion-item> 
             <ion-item class="invite" @click="BasicShare" lines="none">
-              <ion-label color="light" >Inviter venner til QuizNord</ion-label>
+              <ion-label >Inviter venner til QuizNord</ion-label>
               <ion-icon :icon="peopleSharp" slot="start"></ion-icon>
             </ion-item> 
         </ion-content>

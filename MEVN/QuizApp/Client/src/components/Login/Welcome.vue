@@ -4,15 +4,15 @@
             <h1>Velkommen til QuizNord</h1>
             <div class="container">
                 <ion-item @click="SignInAsGuest" id="person" lines="none">
-                    <ion-label color="light">Spil som gæst</ion-label>
+                    <ion-label >Spil som gæst</ion-label>
                     <ion-icon :icon="personCircle" slot="start"></ion-icon>
                 </ion-item>
                 <ion-item @click="GoToLogin" id="email" lines="none">
-                    <ion-label color="light">Login med email</ion-label>
+                    <ion-label >Login med email</ion-label>
                     <ion-icon :icon="mail" slot="start"></ion-icon>
                 </ion-item>
                 <ion-item @click="SignInWithFacebook" id="facebook" lines="none">
-                    <ion-label color="light">Login med Facebook</ion-label>
+                    <ion-label >Login med Facebook</ion-label>
                     <ion-icon :icon="logoFacebook" slot="start"></ion-icon>
                 </ion-item>
                 <ion-spinner name="crescent" v-if="shouldLoad == true"></ion-spinner>
