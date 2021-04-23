@@ -8,7 +8,7 @@
       </ion-toolbar>
     </ion-header>
     <ion-content>
-          <ion-spinner name="dots" v-if="lookingForRandomOpponent == true"></ion-spinner>
+          <ion-spinner name="dots" v-if="lookingForRandomOpponent != 0"></ion-spinner>
           <div v-if="currentUser != undefined">
             <div v-if="currentUser.invites != undefined && currentUser.invites.length != 0">
                 <div id="invites">
@@ -75,7 +75,7 @@ export default {
         },
         didRegisterForNotifications() {
           return this.$store.getters.getDidRegisterForNotifications;
-        }
+        },
     },
     data: function() {
       return {
@@ -159,7 +159,8 @@ export default {
       await this.$store.dispatch('setPreviousGames');
       await this.$store.dispatch('setCurrentTime');
       this.timer = setInterval(() => {
-        this.$store.dispatch('setOngoingGames');
+        let obj = {lookingForRandomOpponent: this.lookingForRandomOpponent, ongoingGamesLength: this.ongoingGames.length}
+        this.$store.dispatch('setOngoingGames', obj);
         this.$store.dispatch('setPreviousGames');
       }, 30000)
     

@@ -8,7 +8,7 @@ export default createStore({
     state: {
         ongoingGames: [],
         previousGames: [],
-        lookingForRandomOpponent: false,
+        lookingForRandomOpponent: 0,
         currentGame: {},
         currentUser: {},
         friends: [],
@@ -66,7 +66,7 @@ export default createStore({
         }
     },
     actions: {
-        async setOngoingGames(state) {
+        async setOngoingGames(state, obj) {
             var firebaseUser = firebase.auth().currentUser;
 
             var user = await UserService.getUserByEmail(firebaseUser.email);
@@ -75,6 +75,15 @@ export default createStore({
                 state.commit('setOngoingGames', games);
             } else {
                 state.commit('setOngoingGames', [])
+            }
+
+            if(obj != undefined) {
+                console.log(obj);
+                if(user[0].ongoingGames.length != obj.ongoingGamesLength) {
+                    let newValue = obj.lookingForRandomOpponent - (user[0].ongoingGames.length-obj.ongoingGamesLength)
+                    console.log(newValue);
+                    state.commit('setLookingForRandomOpponent', newValue)
+                }
             }
         },
         async setPreviousGames(state) {
@@ -131,11 +140,6 @@ export default createStore({
             state.commit('setPlayerSearchResult', searchResult);
         },
         
-
-        setLookingForRandomOpponent(state) {
-            state.commit('setLookingForRandomOpponent', true);
-        },
-
         setCurrentGame(state, game) {
             state.commit('setCurrentGame', game)
         },
@@ -214,9 +218,12 @@ export default createStore({
 
         },
 
-        async lookForGameAgainstRandomOpponent(state, username) {
-            await LookingForGameService.createLookingForGame(username);
-            state.commit("setLookingForRandomOpponent", true);
+        async lookForGameAgainstRandomOpponent(state, currentLookingForGameAgainstRandomOpponent) {
+            var firebaseUser = firebase.auth().currentUser;
+            var user = await UserService.getUserByEmail(firebaseUser.email);
+            await LookingForGameService.createLookingForGame(user[0].username);
+            let newValue = currentLookingForGameAgainstRandomOpponent + 1;
+            state.commit("setLookingForRandomOpponent", newValue);
         },
 
         async createGameAgainstFriend() {
@@ -247,6 +254,8 @@ export default createStore({
             else {
                 opponent = await UserService.getUserByUsername(updatedGame.player1.username);
             }
+            console.log(user);
+            console.log(opponent);
 
             // Set ongoing games for user and opponent
             var userOngoingGames = user[0].ongoingGames;
@@ -261,7 +270,7 @@ export default createStore({
 
                 // Move game from on going to previous games
                 for (var i = 0; i < userOngoingGames.length; i++) {
-                    if (userOngoingGames[i].gameId == updatedGame.gameId) {
+                    if (userOngoingGames[i]._id == updatedGame._id) {
                         // Add game to previous games. Remove from on going games
                         userPreviousGames.push(updatedGame);
                         userOngoingGames.splice([i], 1);
@@ -270,7 +279,7 @@ export default createStore({
 
                 // Move game from on going to previous games
                 for (var j = 0; j < opponentOngoingGames.length; j++) {
-                    if (opponentOngoingGames[j].gameId == updatedGame.gameId) {
+                    if (opponentOngoingGames[j]._id == updatedGame._id) {
                         // Add game to previous games. Remove from on going games
                         opponentPreviousGames.push(updatedGame);
                         opponentOngoingGames.splice(j, 1);
@@ -291,14 +300,14 @@ export default createStore({
             else {
             // Update ongoing games for user
                 for (var k = 0; k < userOngoingGames.length; k++) {
-                    if (userOngoingGames[k].gameId == updatedGame.gameId) {
+                    if (userOngoingGames[k]._id == updatedGame._id) {
                         userOngoingGames.splice(k, 1, updatedGame);
                     }
                 }
 
                 // Update ongoing games for opponent
                 for (var l = 0; l < opponentOngoingGames.length; l++) {
-                    if (opponentOngoingGames[l].gameId == updatedGame.gameId) {
+                    if (opponentOngoingGames[l]._id == updatedGame._id) {
                         opponentOngoingGames.splice(l, 1, updatedGame);
                     }
                 }

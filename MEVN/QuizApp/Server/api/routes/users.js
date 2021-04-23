@@ -141,7 +141,6 @@ router.get('/username/:username', async (req, res) => {
     User.find({username: username})
     .exec()
     .then(doc => {
-        console.log("From database", doc);
         if (doc) {
             res.status(200).json(doc);
         } else {
@@ -162,7 +161,6 @@ router.get('/:email', async (req, res) => {
     User.find({email: email})
     .exec()
     .then(doc => {
-        console.log("From database", doc);
         if (doc) {
             res.status(200).json(doc);
         } else {
@@ -181,7 +179,6 @@ router.get('/search/searchingforgame', async (req, res) => {
     User.find({searchingForGame: true})
     .exec()
     .then(doc => {
-        console.log("From database", doc);
         if (doc) {
             res.status(200).json(doc);
         } else {

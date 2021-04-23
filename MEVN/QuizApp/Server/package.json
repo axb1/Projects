@@ -17,6 +17,7 @@
     "firebase-admin": "^9.5.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.0",
+    "node-cron": "^3.0.0",
     "swagger-jsdoc": "^7.0.0-rc.6",
     "swagger-ui-express": "^4.1.6"
   }

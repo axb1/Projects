@@ -10,6 +10,11 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   components: { IonButton},
+  computed: {
+    lookingForRandomOpponent() {
+        return this.$store.getters.getLookingForRandomOpponent;
+    },
+  },
   methods: {
     async presentAlert() {
       const alert = await alertController
@@ -20,7 +25,7 @@ export default defineComponent({
             text: 'Ok',
             handler: blah => {
               console.log(blah);
-              this.$store.dispatch('lookForGameAgainstRandomOpponent');
+              this.$store.dispatch('lookForGameAgainstRandomOpponent', this.lookingForRandomOpponent);
               this.$router.push('/games')
             }
           }],

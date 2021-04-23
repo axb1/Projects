@@ -49,7 +49,7 @@ export default {
 
             await firebase.auth().createUserWithEmailAndPassword(this.email, this.password)
             .then(async()=>  {
-                await UserService.createUser(this.accountname, this.email, "https://cdn.bulbagarden.net/upload/1/17/025Pikachu-Original.png");
+                await UserService.createUser(this.accountname, this.email, "https://www.drupal.org/files/styles/grid-3/public/Novicell-logo-tagline-red-rgb-1000.png?itok=qfKcpY4N");
                 await this.$store.dispatch('setCurrentUser');
 
                 // Reset input fields

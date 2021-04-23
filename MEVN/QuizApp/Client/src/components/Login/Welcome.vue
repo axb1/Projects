@@ -166,4 +166,8 @@ ion-spinner {
 
 }
 
+ion-item {
+    --color: white;
+}
+
 </style>
